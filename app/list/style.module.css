@@ -1,0 +1,15 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.background {
+    margin: 10% 20% 10% 20%;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
