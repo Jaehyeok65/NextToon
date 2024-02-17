@@ -1,15 +1,14 @@
 import { QueryClient, HydrationBoundary } from '@tanstack/react-query';
 import { dehydrate } from '@tanstack/react-query';
-import { getFirstList, getNextList } from '@/services/firebase';
-import { SubmitPage } from '@/services/springboot';
-import Client2 from './Client2';
+import ClientComponent from './ClientComponent';
+import { getWebtoonList } from '@/services/API';
 
 export default async function page() {
     const queryClient = new QueryClient();
     await queryClient.prefetchInfiniteQuery({
-        queryKey: ['wuxia'],
+        queryKey: ['webtoon'],
         queryFn: ({ pageParam }) => {
-            return SubmitPage(pageParam);
+            return getWebtoonList(pageParam);
         },
         initialPageParam: 1,
     });
@@ -17,7 +16,7 @@ export default async function page() {
 
     return (
         <HydrationBoundary state={dehydratedState}>
-            <Client2 />
+            <ClientComponent />
         </HydrationBoundary>
     );
 }
