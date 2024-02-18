@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { getWebtoonList } from '@/services/API';
+import { getServiceWebtoonList } from '@/services/API';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import useObserver from '@/hooks/userObserver';
 import Card from '@/components/Card';
@@ -13,9 +13,9 @@ import { WebtoonInfo } from '@/types/type';
 export default function Client2() {
     const { fetchNextPage, hasNextPage, isFetchingNextPage, isPending, data } =
         useInfiniteQuery({
-            queryKey: ['webtoon'],
+            queryKey: ['kakaopagewebtoon'],
             queryFn: ({ pageParam = 1 }) => {
-                return getWebtoonList(pageParam);
+                return getServiceWebtoonList(pageParam,'kakaoPage');
             },
             getNextPageParam: (lastPage, allPages) => {
                 if(lastPage.length < 10) {

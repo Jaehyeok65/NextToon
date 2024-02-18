@@ -12,7 +12,7 @@ const useObserver = (hasNextPage: boolean, fetchNextPage: any) => {
                 if (!target.current) {
                     target.current = setTimeout(() => {
                         target.current = null;
-                    }, 1000);
+                    }, 300);
                     fetchNextPage();
                 }
             }
