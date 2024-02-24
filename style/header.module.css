@@ -1,19 +1,104 @@
-
-
 .header {
     position: sticky;
     display: flex;
     justify-content: space-between;
-    color : white;
-    top : 2%;
-    margin : 2% 15% 0% 15%;
+    color: white;
+    top: 2%;
+    margin: 2% 15% 0% 15%;
     z-index: 9999;
 }
 
+.headercontent {
+    line-height: 50px;
+}
+
+.headercontent:hover {
+  cursor: pointer;
+}
+
+/* CSS 스타일 시트 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.input-container {
+    position: relative;
+}
+
+.inputmount {
+    width: 40%;
+    padding: 8px;
+    margin-top: 2%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    animation: slideIn 0.5s ease-out;
+    min-width: 500px;
+}
+
+.inputunmount {
+    width: 40%;
+    padding: 8px;
+    margin-top: 2%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    animation: slideOut 0.5s ease-out;
+    min-width: 500px;
+}
+
+.icon {
+    animation: fadeIn 1s ease-out;
+}
 
 @media screen and (max-width: 600px) {
-    
     .header {
-        margin : 2%;
+        margin: 2%;
+    }
+
+    .headercontent {
+        line-height: 40px;
+    }
+
+    .inputmount {
+        min-width: 250px;
+    }
+
+    .inputunmount {
+        min-width: 250px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .inputmount {
+        min-width: 300px;
+    }
+
+    .inputunmount {
+        min-width: 300px;
     }
 }
