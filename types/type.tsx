@@ -4,4 +4,5 @@ export interface WebtoonInfo {
     title: string;
     author: string;
     service: string;
+    setWebtoons?:any;
 }

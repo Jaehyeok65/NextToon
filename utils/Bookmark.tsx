@@ -23,6 +23,7 @@ export const AddBookMark = (webtoon : WebtoonInfo) => { //북마크에 등록함
     if(prev) { //북마크가 이미 등록되어 있다면
         const current = JSON.parse(prev); //JSON으로 처리된 것을 parse해서 current에 대입
         const next = [...current,webtoon];
+
         window.localStorage.setItem('bookmark', JSON.stringify(next));
         window.alert("북마크에 등록되었습니다.");
     }
@@ -33,11 +34,14 @@ export const AddBookMark = (webtoon : WebtoonInfo) => { //북마크에 등록함
     }
 }
 
-export const RemoveBookMark = (webtoon : WebtoonInfo) => { //북마크에서 제거함
+export const RemoveBookMark = (webtoon : WebtoonInfo, setWebtoons ?: any) => { //북마크에서 제거함
     const prev = window.localStorage.getItem('bookmark');
     if(prev) {
         const current : any[] = JSON.parse(prev);
         const next = current.filter(item => item._id !== webtoon._id);
+        if(setWebtoons) {
+            setWebtoons(next);
+        }
         window.localStorage.setItem('bookmark', JSON.stringify(next));
         window.alert("북마크에서 제거되었습니다.");
     }

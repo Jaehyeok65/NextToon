@@ -8,7 +8,14 @@ import { FaHeart } from 'react-icons/fa6';
 import { CheckBookMark, AddBookMark, RemoveBookMark } from '@/utils/Bookmark';
 import { useRouter } from 'next/navigation';
 
-const Card: React.FC<WebtoonInfo> = ({ img, title, author, service, _id }) => {
+const Card: React.FC<WebtoonInfo> = ({
+    img,
+    title,
+    author,
+    service,
+    _id,
+    setWebtoons,
+}) => {
     const [isBookMark, setIsBookMark] = useState<boolean>(false); //카드가 북마크에 등록되어 있는지 확인
 
     useEffect(() => {
@@ -49,13 +56,16 @@ const Card: React.FC<WebtoonInfo> = ({ img, title, author, service, _id }) => {
     };
 
     const onRemoveClick = () => {
-        RemoveBookMark({
-            _id,
-            title,
-            author,
-            service,
-            img,
-        });
+        RemoveBookMark(
+            {
+                _id,
+                title,
+                author,
+                service,
+                img,
+            },
+            setWebtoons
+        );
         setIsBookMark((prev) => !prev);
     };
 
