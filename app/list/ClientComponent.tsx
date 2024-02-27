@@ -40,6 +40,7 @@ export default function Client2() {
                         page?.webtoons?.map((webtoon: WebtoonInfo) => (
                             <Card
                                 key={webtoon._id}
+                                _id={webtoon._id}
                                 img={webtoon.img}
                                 title={webtoon.title}
                                 author={webtoon.author}

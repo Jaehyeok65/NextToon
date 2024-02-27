@@ -1,5 +1,5 @@
 export interface WebtoonInfo {
-    _id?: string;
+    _id : string;
     img: string;
     title: string;
     author: string;
