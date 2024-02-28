@@ -4,30 +4,47 @@ import { useState, useEffect, useRef } from 'react';
 import styles from '@/style/header.module.css';
 import { FaSearch } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
+import { FaAngleDown } from 'react-icons/fa6';
+
+const navigate = [
+    { content: '홈으로', link: '/' },
+    { content: '전체보기', link: '/list' },
+    { content: '네이버웹툰', link: '/list/naver' },
+    { content: '카카오웹툰', link: '/list/kakao' },
+    { content: '카카오페이지', link: '/list/kakaopage' },
+    { content: '북마크', link: '/bookmark' },
+];
 
 export default function Header() {
     const [showSearch, setShowSearch] = useState(false);
-    const [animate, setAnimate] = useState<string>('inputmount'); //언마운트시 작동할 애니메이션이 필요
+    const [inputanimate, setInputAnimate] = useState<string>('inputmount'); //언마운트시 작동할 애니메이션이 필요
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [dropanimate, setDropAnimate] = useState<string>('dropmount');
 
+    const toggleDropdown = () => {
+        setShowDropdown(!showDropdown);
+    };
     const inputRef: any = useRef();
+
+    const dropRef: any = useRef();
 
     const router = useRouter();
 
     const toggleSearch = () => {
         setShowSearch(!showSearch);
-        //setTimeout(() => setAnimate('inputunmount'), 2000);
     };
 
-    const onNavigation = () => {
-        router.push('/');
-    }
+    const onNavigation = (link: string) => {
+        router.push(link);
+        toggleDropdown();
+    };
 
     useEffect(() => {
         const handleClickOutside = (event: any) => {
             if (inputRef.current && !inputRef.current.contains(event.target)) {
-                setAnimate('inputunmount');
+                setInputAnimate('inputunmount');
                 setTimeout(() => setShowSearch(false), 400);
-                setTimeout(() => setAnimate('inputmount'), 400);
+                setTimeout(() => setInputAnimate('inputmount'), 400);
             }
         };
         document.addEventListener('mousedown', handleClickOutside); //마운트시 이벤트리스너 추가
@@ -36,9 +53,43 @@ export default function Header() {
         };
     }, [inputRef]);
 
+    useEffect(() => {
+        const handleClickOutside = (event: any) => {
+            if (dropRef.current && !dropRef.current.contains(event.target)) {
+                setDropAnimate('dropunmount');
+                setTimeout(() => setShowDropdown(false), 400);
+                setTimeout(() => setDropAnimate('dropmount'), 400);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside); //마운트시 이벤트리스너 추가
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside); //언마운트시 이벤트리스너 제거
+        };
+    }, [dropRef]);
+
     return (
         <header className={styles.header}>
-            <div className={styles.headercontent} onClick={onNavigation}>NEXTTOON</div>
+            <div className={styles.innerheader}>
+                <div className={styles.headercontent}>NEXTTOON</div>
+                <div className={styles.menu} ref={dropRef}>
+                    <span onClick={toggleDropdown}>
+                        메뉴&nbsp;
+                        <FaAngleDown size={'12px'} />
+                    </span>
+                    {showDropdown && (
+                        <div className={styles[dropanimate]}>
+                            {navigate.map((item: any, index: number) => (
+                                <div
+                                    key={index}
+                                    onClick={() => onNavigation(item.link)}
+                                >
+                                    {item.content}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>
             <div className={styles.searchContainer}>
                 {!showSearch && (
                     <FaSearch
@@ -51,7 +102,7 @@ export default function Header() {
                     <input
                         type="text"
                         placeholder="검색할 작품을 입력하세요..."
-                        className={styles[animate]}
+                        className={styles[inputanimate]}
                         ref={inputRef}
                     />
                 )}

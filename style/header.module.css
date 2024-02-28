@@ -5,15 +5,68 @@
     color: white;
     top: 2%;
     margin: 2% 15% 0% 15%;
-    z-index: 9999;
+    z-index: 19999;
 }
 
+.innerheader {
+    display : grid;
+    grid-template-columns: 1fr 1fr;
+    gap : 20px;
+    line-height: 51px;
+}
+
+.menu {
+    font-size: 14px;
+    position: relative;
+    cursor: pointer;
+}
+
+
 .headercontent {
+    font-size: 18px;
     line-height: 50px;
 }
 
 .headercontent:hover {
   cursor: pointer;
+}
+
+.dropmount {
+    position: absolute;
+    top : 100%;
+    left : 0;
+    z-index: 1;
+    width : 100%;
+    text-decoration: none;
+    color : inherit;
+    animation: slideInY 0.5s ease-out;
+}
+
+.dropunmount {
+    position: absolute;
+    top : 100%;
+    left : 0;
+    z-index: 1;
+    width : 100%;
+    color : inherit;
+    text-decoration: none;
+    animation: slideOutY 0.5s ease-out;
+}
+
+.dropmount :hover {
+    color :black;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.dropunmount :hover {
+    color :black;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 4px;
+    font-weight: bold;
 }
 
 /* CSS 스타일 시트 */
@@ -36,6 +89,28 @@
     to {
         opacity: 0;
         transform: translateX(-100%);
+    }
+}
+
+@keyframes slideInY {
+    from {
+        opacity: 0;
+        transform: translateY(-30%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOutY {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-30%);
     }
 }
 
@@ -75,6 +150,17 @@
     animation: fadeIn 1s ease-out;
 }
 
+@media screen and (max-width: 1200px) {
+    .inputmount {
+        min-width: 300px;
+    }
+
+    .inputunmount {
+        min-width: 300px;
+    }
+}
+
+
 @media screen and (max-width: 600px) {
     .header {
         margin: 2%;
@@ -84,21 +170,16 @@
         line-height: 40px;
     }
 
+    .innerheader {
+        line-height: 40px;
+        gap : 20px;
+    }
+
     .inputmount {
-        min-width: 250px;
+        min-width: 230px;
     }
 
     .inputunmount {
-        min-width: 250px;
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    .inputmount {
-        min-width: 300px;
-    }
-
-    .inputunmount {
-        min-width: 300px;
+        min-width: 230px;
     }
 }
