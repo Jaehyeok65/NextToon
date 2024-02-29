@@ -20,6 +20,7 @@ export default function Header() {
     const [inputanimate, setInputAnimate] = useState<string>('inputmount'); //언마운트시 작동할 애니메이션이 필요
     const [showDropdown, setShowDropdown] = useState(false);
     const [dropanimate, setDropAnimate] = useState<string>('dropmount');
+    const [content, setContent] = useState<string>('');
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
@@ -37,6 +38,11 @@ export default function Header() {
     const onNavigation = (link: string) => {
         router.push(link);
         toggleDropdown();
+    };
+
+    const onSearchSubmit = (e: any) => {
+        e.preventDefault();
+        router.push(`/search/${content}`);
     };
 
     useEffect(() => {
@@ -70,7 +76,12 @@ export default function Header() {
     return (
         <header className={styles.header}>
             <div className={styles.innerheader}>
-                <div className={styles.headercontent}>NEXTTOON</div>
+                <div
+                    className={styles.headercontent}
+                    onClick={() => router.push('/')}
+                >
+                    NEXTTOON
+                </div>
                 <div className={styles.menu} ref={dropRef}>
                     <span onClick={toggleDropdown}>
                         메뉴&nbsp;
@@ -99,12 +110,18 @@ export default function Header() {
                     />
                 )}
                 {showSearch && (
-                    <input
-                        type="text"
-                        placeholder="검색할 작품을 입력하세요..."
-                        className={styles[inputanimate]}
-                        ref={inputRef}
-                    />
+                    <form onSubmit={onSearchSubmit}>
+                        {' '}
+                        {/* 폼 엘리먼트 추가 */}
+                        <input
+                            type="text"
+                            placeholder="검색할 작품을 입력하세요..."
+                            className={styles[inputanimate]}
+                            ref={inputRef}
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                        />
+                    </form>
                 )}
             </div>
         </header>
