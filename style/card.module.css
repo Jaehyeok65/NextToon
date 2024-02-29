@@ -1,3 +1,12 @@
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
 .card {
     position: relative;
     border: 1px solid #fff;
@@ -9,6 +18,7 @@
     min-width : 200px;
     max-height: 280px;
     min-height: 280px;
+    
   }
   
   .card > img {
@@ -24,6 +34,8 @@
   .card:hover .textoverlay {
     opacity: 1;
   }
+
+
 
   .textoverlay {
     position: absolute;
@@ -47,7 +59,17 @@
     font-size: 12px;
   }
 
+  .textoverlay > div:nth-child(1) {
+    position: absolute;
+    top : 0;
+    right : 0;
+    color : red;
+    margin : 3% 3% 0% 0%;
+    z-index: 9999;
+    cursor: pointer;
+  }
+
   .textoverlay > h4 {
     margin : 10%
   }
-  
+
