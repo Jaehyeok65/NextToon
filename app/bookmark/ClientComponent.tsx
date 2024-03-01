@@ -1,22 +1,26 @@
-import { API } from '@/services/API';
+'use client';
+
+import { useState, useEffect } from 'react';
 import Card from '@/components/Card';
 import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
 
-async function getWebtoonTitle(title: string) {
-    const res = await fetch(`${API}/search?keyword=${title}`);
-    return res.json();
-}
+export default function ClientComponent() {
+    const [webtoons, setWebtoons] = useState<WebtoonInfo[]>([]);
 
-export default async function Page({ params }: { params: { title: string } }) {
-    const data = await getWebtoonTitle(params.title);
+    useEffect(() => {
+        const prev = window.localStorage.getItem('bookmark');
+        if (prev) {
+            //prev가 null이 아니라는 것은 데이터가 있다는 것
+            setWebtoons(JSON.parse(prev));
+        }
+    }, []);
 
-    if (data?.webtoons.length === 0) {
+    if (webtoons?.length === 0) {
         return (
             <div className={styles.background}>
                 <h2 className={styles.searchcontent}>
-                    {'"' + decodeURI(params.title) + '"'} 검색된 작품이
-                    없습니다.
+                    북마크에 등록된 작품이 없습니다.
                 </h2>
             </div>
         );
@@ -25,7 +29,7 @@ export default async function Page({ params }: { params: { title: string } }) {
     return (
         <div className={styles.background}>
             <div className={styles.container}>
-                {data?.webtoons.map((webtoon: WebtoonInfo) => (
+                {webtoons.map((webtoon: WebtoonInfo) => (
                     <Card
                         key={webtoon._id}
                         _id={webtoon._id}
@@ -33,6 +37,7 @@ export default async function Page({ params }: { params: { title: string } }) {
                         title={webtoon.title}
                         author={webtoon.author}
                         service={webtoon.service}
+                        setWebtoons={setWebtoons}
                     />
                 ))}
             </div>
