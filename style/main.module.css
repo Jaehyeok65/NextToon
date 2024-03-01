@@ -1,0 +1,30 @@
+
+
+.background {
+    margin : 5% 30% 5% 30%;
+    color : white;
+}
+
+.background > div {
+    border: 1px solid white;
+    padding : 12px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom : 5%;
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width : 600px) {
+
+    .background {
+        margin : 20% 25% 20% 25%;
+        color : white;
+    }
+
+    .background > div {
+        margin-bottom: 10%;
+    }
+    
+}
