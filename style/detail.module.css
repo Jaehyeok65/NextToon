@@ -21,6 +21,15 @@
     align-self: center;
 }
 
+.loading {
+    text-align: center;
+    color : white;
+}
+
+.textcontainer > div {
+    margin-bottom: 10%;
+}
+
 
 @media screen and (max-width: 1000px) {
     .container > div >  img {
@@ -44,6 +53,14 @@
         width: 100%;
         height: 100%;
         border-radius: 8px;
+    }
+
+    .textcontainer {
+        font-size: 16px;
+    }
+
+    .textcontainer > div {
+
     }
 }
 
