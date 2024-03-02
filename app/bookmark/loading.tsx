@@ -1,3 +1,9 @@
+import style from '@/style/list.module.css'
+
 export default function loading() {
-    return <h2>Loading...</h2>;
+    return (
+        <div className={style.background}>
+            <h2 className={style.searchcontent}>Loading...</h2>
+        </div>
+    )
 }
