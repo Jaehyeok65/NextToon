@@ -6,7 +6,8 @@ import { WebtoonInfo } from '@/types/type';
 import { FaRegHeart } from 'react-icons/fa6';
 import { FaHeart } from 'react-icons/fa6';
 import { CheckBookMark, AddBookMark, RemoveBookMark } from '@/utils/Bookmark';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+import { getServiceName } from '@/utils/Bookmark';
 
 const Card: React.FC<WebtoonInfo> = ({
     img,
@@ -17,6 +18,7 @@ const Card: React.FC<WebtoonInfo> = ({
     setWebtoons,
 }) => {
     const [isBookMark, setIsBookMark] = useState<boolean>(false); //카드가 북마크에 등록되어 있는지 확인
+    const router = useRouter();
 
     useEffect(() => {
         setIsBookMark(
@@ -30,21 +32,13 @@ const Card: React.FC<WebtoonInfo> = ({
         );
     }, []); //초기 렌더링시 북마크에 등록되어있는지 확인하는 용도
 
-    const getServiceName = (service: string) => {
-        switch (service) {
-            case 'naver':
-                return '네이버 웹툰';
-                break;
-            case 'kakao':
-                return '카카오 웹툰';
-                break;
-            case 'kakaoPage':
-                return '카카오페이지 웹툰';
-                break;
-        }
+
+    const onDetailNavigation = (title: string) => {
+        router.push(`/detail/${title}`);
     };
 
-    const onAddClick = () => {
+    const onAddClick = (event: React.MouseEvent) => {
+        event.stopPropagation();
         AddBookMark({
             _id,
             title,
@@ -55,7 +49,8 @@ const Card: React.FC<WebtoonInfo> = ({
         setIsBookMark((prev) => !prev);
     };
 
-    const onRemoveClick = () => {
+    const onRemoveClick = (event: React.MouseEvent) => {
+        event.stopPropagation();
         RemoveBookMark(
             {
                 _id,
@@ -70,7 +65,7 @@ const Card: React.FC<WebtoonInfo> = ({
     };
 
     return (
-        <div className={styles.card}>
+        <div className={styles.card} onClick={() => onDetailNavigation(title)}>
             <img src={img} alt={title} />
             <div className={styles.textoverlay}>
                 <div>

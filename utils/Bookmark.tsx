@@ -46,3 +46,17 @@ export const RemoveBookMark = (webtoon : WebtoonInfo, setWebtoons ?: any) => { /
         window.alert("북마크에서 제거되었습니다.");
     }
 }
+
+export const getServiceName = (service: string) => {
+    switch (service) {
+        case 'naver':
+            return '네이버 웹툰';
+            break;
+        case 'kakao':
+            return '카카오 웹툰';
+            break;
+        case 'kakaoPage':
+            return '카카오페이지 웹툰';
+            break;
+    }
+};
