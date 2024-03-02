@@ -6,7 +6,7 @@ import { WebtoonInfo } from '@/types/type';
 import { FaRegHeart } from 'react-icons/fa6';
 import { FaHeart } from 'react-icons/fa6';
 import { CheckBookMark, AddBookMark, RemoveBookMark } from '@/utils/Bookmark';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { getServiceName } from '@/utils/Bookmark';
 
 const Card: React.FC<WebtoonInfo> = ({
