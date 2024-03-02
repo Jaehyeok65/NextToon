@@ -5,6 +5,7 @@ import styles from '@/style/header.module.css';
 import { FaSearch } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { FaAngleDown } from 'react-icons/fa6';
+import { usePathname } from 'next/navigation';
 
 const navigate = [
     { content: '홈으로', link: '/' },
@@ -21,6 +22,8 @@ export default function Header() {
     const [showDropdown, setShowDropdown] = useState(false);
     const [dropanimate, setDropAnimate] = useState<string>('dropmount');
     const [content, setContent] = useState<string>('');
+
+    const path = usePathname();
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
@@ -43,6 +46,28 @@ export default function Header() {
     const onSearchSubmit = (e: any) => {
         e.preventDefault();
         router.push(`/search/${content}`);
+    };
+
+    const getMenuName = () => {
+        switch (path) {
+            case '/list':
+                return '전체보기';
+                break;
+            case '/list/naver':
+                return '네이버웹툰';
+                break;
+            case '/list/kakao':
+                return '카카오웹툰';
+                break;
+            case '/list/kakaopage':
+                return '카카오페이지';
+                break;
+            case '/bookmark':
+                return '북마크';
+                break;
+            default:
+                return '메뉴';
+        };
     };
 
     useEffect(() => {
@@ -84,7 +109,7 @@ export default function Header() {
                 </div>
                 <div className={styles.menu} ref={dropRef}>
                     <span onClick={toggleDropdown}>
-                        메뉴&nbsp;
+                        {getMenuName()}&nbsp;
                         <FaAngleDown size={'12px'} />
                     </span>
                     {showDropdown && (
