@@ -5,10 +5,7 @@
     border-radius: 8px;
     overflow: hidden;
     position: relative;
-    max-width: 200px;
-    max-height: 300px;
     margin-top: 20px;
-    min-width: 200px;
     min-height: 280px;
 }
 

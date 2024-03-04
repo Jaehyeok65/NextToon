@@ -12,11 +12,8 @@
     border: 1px solid #fff;
     border-radius: 8px;
     overflow: hidden;
-    height: 100%;
     width: 100%;
-    max-width: 200px;
-    min-width : 200px;
-    max-height: 280px;
+    height : auto;
     min-height: 280px;
     
   }
