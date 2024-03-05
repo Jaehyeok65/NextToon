@@ -7,6 +7,10 @@ async function getWebtoonTitle(title: string) {
     return res.json();
 }
 
+export const metadata = {
+    title : "NextToon | 상세보기",
+}
+
 export default async function Detail({
     params,
 }: {

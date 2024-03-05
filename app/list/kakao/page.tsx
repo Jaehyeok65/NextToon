@@ -3,12 +3,16 @@ import { dehydrate } from '@tanstack/react-query';
 import ClientComponent from './ClientComponent';
 import { getServiceWebtoonList } from '@/services/API';
 
+export const metadata = {
+    title: 'NextToon | 카카오웹툰',
+};
+
 export default async function page() {
     const queryClient = new QueryClient();
     await queryClient.prefetchInfiniteQuery({
         queryKey: ['kakaowebtoon'],
         queryFn: ({ pageParam }) => {
-            return getServiceWebtoonList(pageParam,'kakao');
+            return getServiceWebtoonList(pageParam, 'kakao');
         },
         initialPageParam: 1,
     });

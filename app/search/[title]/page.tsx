@@ -3,6 +3,10 @@ import Card from '@/components/Card';
 import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
 
+export const metadata = {
+    title: 'NextToon | 검색결과',
+};
+
 async function getWebtoonTitle(title: string) {
     const res = await fetch(`${API}/search?keyword=${title}`);
     return res.json();
