@@ -27,7 +27,8 @@ export default function Client2() {
             },
             initialPageParam: 1,
             refetchOnWindowFocus : false,
-            refetchIntervalInBackground : false
+            refetchIntervalInBackground : false,
+            staleTime : 600000
         });
 
     const ref = useObserver(hasNextPage, fetchNextPage);
