@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { getServiceWebtoonList } from '@/services/API';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import useObserver from '@/hooks/userObserver';
@@ -7,6 +7,8 @@ import Card from '@/components/Card';
 import Skeleton from '@/utils/Skeleton';
 import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
+import useScroll from '@/hooks/useScroll';
+import { usePathname } from 'next/navigation';
 
 
 export default function Client2() {
@@ -26,10 +28,14 @@ export default function Client2() {
             },
             initialPageParam: 1,
             refetchOnWindowFocus : false,
-            refetchIntervalInBackground : false
+            refetchIntervalInBackground : false,
         });
 
+
     const ref = useObserver(hasNextPage, fetchNextPage);
+    //const scroll = useScroll(); //스크롤 높이 저장용
+    const pathname = usePathname();
+   
 
     return (
         <>
