@@ -30,6 +30,7 @@ export default function Client2() {
             refetchIntervalInBackground : false
         });
 
+
     const ref = useObserver(hasNextPage, fetchNextPage);
 
     return (

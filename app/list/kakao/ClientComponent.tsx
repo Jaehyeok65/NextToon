@@ -28,13 +28,13 @@ export default function Client2() {
             },
             initialPageParam: 1,
             refetchOnWindowFocus : false,
-            refetchIntervalInBackground : false,
+            refetchIntervalInBackground : false
         });
 
 
     const ref = useObserver(hasNextPage, fetchNextPage);
     //const scroll = useScroll(); //스크롤 높이 저장용
-    const pathname = usePathname();
+    //const pathname = usePathname();
    
 
     return (
