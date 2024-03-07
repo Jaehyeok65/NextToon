@@ -67,6 +67,8 @@ export default function Client2() {
                                 title={webtoon.title}
                                 author={webtoon.author}
                                 service={webtoon.service}
+                                updateDays={webtoon.updateDays}
+                                fanCount={webtoon.fanCount}
                             />
                         ))
                     )}

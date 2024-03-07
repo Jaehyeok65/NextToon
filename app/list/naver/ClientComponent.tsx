@@ -35,6 +35,8 @@ export default function Client2() {
     const scroll = useScroll(); //스크롤 높이 저장용
     const pathname = usePathname();
 
+    console.log(data);
+
     useEffect(() => {
         if (scroll) {
             //scrorll이 0임을 방지
@@ -67,6 +69,8 @@ export default function Client2() {
                                 title={webtoon.title}
                                 author={webtoon.author}
                                 service={webtoon.service}
+                                updateDays={webtoon.updateDays}
+                                fanCount={webtoon.fanCount}
                             />
                         ))
                     )}

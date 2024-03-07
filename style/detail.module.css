@@ -9,7 +9,7 @@
 
 .container > div >  img {
     max-width: 300px;
-    max-height: 400px;
+    max-height: 300px;
     width: 100%;
     height: 100%;
     border-radius: 8px;
@@ -17,7 +17,7 @@
 
 .textcontainer {
     color : white;
-    font-size : 20px;
+    font-size : 17px;
     align-self: center;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .textcontainer > div {
-    margin-bottom: 10%;
+    margin-bottom: 5%;
 }
 
 
@@ -48,7 +48,7 @@
         margin : 20% 10% 20% 10%;
     }
     .container > div >  img {
-        min-width: 250px;
+        min-width: 200px;
         min-height: 250px;
         width: 100%;
         height: 100%;
@@ -56,11 +56,7 @@
     }
 
     .textcontainer {
-        font-size: 16px;
-    }
-
-    .textcontainer > div {
-
+        font-size: 13px;
     }
 }
 

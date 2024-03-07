@@ -60,3 +60,33 @@ export const getServiceName = (service: string) => {
             break;
     }
 };
+
+export const getSerialDay = (updateDays: string[]) => {
+    const converter: any = {
+        mon: '월',
+        tue: '화',
+        wed: '수',
+        thu: '목',
+        fri: '금',
+        sat: '토',
+        sun: '일',
+        naverDaily: '네이버 Daily+',
+        finished: '완결',
+    };
+
+    if (updateDays[0] === 'finished' || updateDays[0] === 'naverDaily') {
+        return <div>{converter[updateDays[0]]}</div>;
+    }
+    return (
+        <div>
+            {updateDays.map((item: string, index: number) =>
+                index < updateDays.length - 1 ? (
+                    <span key={index}>{converter[item]},</span>
+                ) : (
+                    <span key={index}>{converter[item]}</span>
+                )
+            )}
+            &nbsp;연재
+        </div>
+    );
+};

@@ -8,6 +8,7 @@ import { FaHeart } from 'react-icons/fa6';
 import { CheckBookMark, AddBookMark, RemoveBookMark } from '@/utils/Bookmark';
 import { useRouter } from 'next/navigation';
 import { getServiceName } from '@/utils/Bookmark';
+import { getSerialDay } from '@/utils/Bookmark';
 
 const Card: React.FC<WebtoonInfo> = ({
     img,
@@ -16,6 +17,8 @@ const Card: React.FC<WebtoonInfo> = ({
     service,
     _id,
     setWebtoons,
+    updateDays,
+    fanCount,
 }) => {
     const [isBookMark, setIsBookMark] = useState<boolean>(false); //카드가 북마크에 등록되어 있는지 확인
     const router = useRouter();
@@ -28,10 +31,11 @@ const Card: React.FC<WebtoonInfo> = ({
                 author,
                 service,
                 img,
+                updateDays,
+                fanCount,
             })
         );
     }, []); //초기 렌더링시 북마크에 등록되어있는지 확인하는 용도
-
 
     const onDetailNavigation = (title: string) => {
         router.push(`/detail/${title}`);
@@ -45,6 +49,8 @@ const Card: React.FC<WebtoonInfo> = ({
             author,
             service,
             img,
+            updateDays,
+            fanCount,
         });
         setIsBookMark((prev) => !prev);
     };
@@ -75,9 +81,11 @@ const Card: React.FC<WebtoonInfo> = ({
                         <FaRegHeart size={'30px'} onClick={onAddClick} />
                     )}
                 </div>
+                <div>{updateDays && getSerialDay(updateDays)}</div>
                 <h4>{title}</h4>
                 <div>{author}</div>
                 <div>{getServiceName(service)}</div>
+                <div>{fanCount && fanCount + '만++'}</div>
             </div>
         </div>
     );

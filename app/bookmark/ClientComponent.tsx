@@ -38,6 +38,8 @@ export default function ClientComponent() {
                         author={webtoon.author}
                         service={webtoon.service}
                         setWebtoons={setWebtoons}
+                        updateDays={webtoon.updateDays}
+                        fanCount={webtoon.fanCount}
                     />
                 ))}
             </div>

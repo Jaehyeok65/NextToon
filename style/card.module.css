@@ -67,6 +67,17 @@
     cursor: pointer;
   }
 
+  .textoverlay > div:nth-child(2) {
+    position : absolute;
+    top : 0;
+    left : 0;
+    color : white;
+    font-size: 13px;
+    font-weight: bold;
+    margin : 4% 0% 0% 4%;
+    z-index: 9999;
+  }
+
   .textoverlay > h4 {
     margin : 10%
   }

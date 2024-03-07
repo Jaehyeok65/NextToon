@@ -37,6 +37,8 @@ export default async function Page({ params }: { params: { title: string } }) {
                         title={webtoon.title}
                         author={webtoon.author}
                         service={webtoon.service}
+                        updateDays={webtoon.updateDays}
+                        fanCount={webtoon.fanCount}
                     />
                 ))}
             </div>
