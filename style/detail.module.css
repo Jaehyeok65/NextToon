@@ -30,6 +30,12 @@
     margin-bottom: 5%;
 }
 
+.textcontainer > button {
+    border-radius: 8px;
+    padding : 8px;
+    font-size: 12px;
+}
+
 
 @media screen and (max-width: 1000px) {
     .container > div >  img {

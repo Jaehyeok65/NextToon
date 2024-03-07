@@ -1,7 +1,5 @@
 import { API } from '@/services/API';
-import styles from '@/style/detail.module.css';
-import { getServiceName, getSerialDay } from '@/utils/Bookmark';
-import { FaHeart } from 'react-icons/fa6';
+import ClientComponent from './ClientComponent';
 
 async function getWebtoonTitle(title: string) {
     const res = await fetch(`${API}/search?keyword=${title}`);
@@ -9,8 +7,8 @@ async function getWebtoonTitle(title: string) {
 }
 
 export const metadata = {
-    title : "NextToon | 상세보기",
-}
+    title: 'NextToon | 상세보기',
+};
 
 export default async function Detail({
     params,
@@ -19,20 +17,14 @@ export default async function Detail({
 }) {
     const data = await getWebtoonTitle(params.title);
     return (
-        <div className={styles.container}>
-            <div>
-                <img
-                    src={data?.webtoons[0]?.img}
-                    alt={data?.webtoons[0]?.title}
-                />
-            </div>
-            <div className={styles.textcontainer}>
-                <div>{data?.webtoons[0]?.title}</div>
-                <div>{data?.webtoons[0]?.author}</div>
-                <div>{getServiceName(data?.webtoons[0]?.service)}</div>
-                <div>{getSerialDay(data?.webtoons[0]?.updateDays)}</div>
-                <div><FaHeart color='red' /> {data?.webtoons[0]?.fanCount+"만++"}</div>
-            </div>
-        </div>
+        <ClientComponent
+            title={data?.webtoons[0]?.title}
+            author={data?.webtoons[0]?.author}
+            service={data?.webtoons[0]?.service}
+            img={data?.webtoons[0]?.img}
+            updateDays={data?.webtoons[0]?.updateDays}
+            fanCount={data?.webtoons[0]?.fanCount}
+            _id={data?.webtoons[0]?._id}
+        />
     );
 }
