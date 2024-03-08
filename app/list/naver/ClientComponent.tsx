@@ -35,8 +35,6 @@ export default function Client2() {
     const scroll = useScroll(); //스크롤 높이 저장용
     const pathname = usePathname();
 
-    console.log(data);
-
     useEffect(() => {
         if (scroll) {
             //scrorll이 0임을 방지
