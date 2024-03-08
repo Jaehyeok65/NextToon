@@ -18,7 +18,7 @@ export default function Client2() {
                 return getWebtoonList(pageParam);
             },
             getNextPageParam: (lastPage, allPages) => {
-                if (lastPage.length < 12) {
+                if (lastPage?.webtoons?.length < 12) {
                     return undefined;
                 } else {
                     return allPages.length + 1;
