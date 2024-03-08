@@ -6,7 +6,7 @@ import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
 
 export default function ClientComponent() {
-    const [webtoons, setWebtoons] = useState<WebtoonInfo[]>([]);
+    const [webtoons, setWebtoons] = useState<WebtoonInfo[]>();
 
     useEffect(() => {
         const prev = window.localStorage.getItem('bookmark');
@@ -14,7 +14,18 @@ export default function ClientComponent() {
             //prev가 null이 아니라는 것은 데이터가 있다는 것
             setWebtoons(JSON.parse(prev));
         }
+        else { //prev가 null이라면 빈 배열을 렌더링
+            setWebtoons([]);
+        }
     }, []);
+
+    if (!webtoons) {
+        return (
+            <div className={styles.background}>
+                <h2 className={styles.searchcontent}>Loading...</h2>
+            </div>
+        );
+    }
 
     if (webtoons?.length === 0) {
         return (
@@ -29,7 +40,7 @@ export default function ClientComponent() {
     return (
         <div className={styles.background}>
             <div className={styles.container}>
-                {webtoons.map((webtoon: WebtoonInfo) => (
+                {webtoons?.map((webtoon: WebtoonInfo) => (
                     <Card
                         key={webtoon._id}
                         _id={webtoon._id}

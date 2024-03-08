@@ -18,7 +18,7 @@ export default function Client2() {
                 return getServiceWebtoonList(pageParam, 'naver');
             },
             getNextPageParam: (lastPage, allPages) => {
-                if (lastPage.length < 10) {
+                if (lastPage.length < 12) {
                     return undefined;
                 } else {
                     return allPages.length + 1;
