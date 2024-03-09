@@ -12,6 +12,12 @@
     color : white;
 }
 
+.selectbox {
+    padding : 4px;
+    border: 1px solid white;
+    border-radius: 8px;
+}
+
 @media screen and (max-width: 1000px) {
     .container {
         grid-template-columns: repeat(3, 1fr);

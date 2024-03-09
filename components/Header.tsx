@@ -13,6 +13,7 @@ const navigate = [
     { content: '네이버웹툰', link: '/list/naver' },
     { content: '카카오웹툰', link: '/list/kakao' },
     { content: '카카오페이지', link: '/list/kakaopage' },
+    { content : '인기웹툰', link : '/sortedlist'},
     { content: '북마크', link: '/bookmark' },
 ];
 
@@ -61,6 +62,9 @@ export default function Header() {
                 break;
             case '/list/kakaopage':
                 return '카카오페이지';
+                break;
+            case '/sortedlist' :
+                return '인기웹툰';
                 break;
             case '/bookmark':
                 return '북마크';
