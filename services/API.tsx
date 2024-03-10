@@ -21,7 +21,7 @@ export const getTotalList = async (page: number) => {
 };
 
 export const getServiceTotalList = async (page: number, service : string) => {
-    const res = await fetch(`${API}/?perPage=500&page=${page}&service=${service}`);
+    const res = await fetch(`${API}/?perPage=1000&page=${page}&service=${service}`);
     const data = await res.json();
     return data;
 };

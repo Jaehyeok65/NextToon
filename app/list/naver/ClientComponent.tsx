@@ -21,10 +21,10 @@ export default function Client2() {
                 if (lastPage?.webtoons?.length < 12) {
                     return undefined;
                 } else {
-                    return allPages.length + 1;
+                    return allPages.length;
                 }
             },
-            initialPageParam: 1,
+            initialPageParam: 0,
             refetchOnWindowFocus: false,
             refetchIntervalInBackground: false,
             staleTime: 600000,

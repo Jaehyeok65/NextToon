@@ -14,7 +14,7 @@ export default async function page() {
         queryFn: ({ pageParam }) => {
             return getServiceWebtoonList(pageParam, 'naver');
         },
-        initialPageParam: 1,
+        initialPageParam: 0,
     });
     const dehydratedState = JSON.parse(JSON.stringify(dehydrate(queryClient)));
 
