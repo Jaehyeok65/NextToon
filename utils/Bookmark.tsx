@@ -22,7 +22,10 @@ export const AddBookMark = (webtoon : WebtoonInfo) => { //북마크에 등록함
     //이전에 북마크가 있는 것과 없는 것을 분기해서 처리
     if(prev) { //북마크가 이미 등록되어 있다면
         const current = JSON.parse(prev); //JSON으로 처리된 것을 parse해서 current에 대입
-        const next = [...current,webtoon];
+        const next = [webtoon, ...current];
+        /*const nextArray = next.sort(
+            (a: any, b: any) => b.fanCount - a.fanCount
+        );*/
 
         window.localStorage.setItem('bookmark', JSON.stringify(next));
         window.alert("북마크에 등록되었습니다.");
