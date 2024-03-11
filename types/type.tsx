@@ -7,4 +7,5 @@ export interface WebtoonInfo {
     setWebtoons?: any;
     updateDays?: string[];
     fanCount?: number | null;
+    kakaopage?:boolean;
 }

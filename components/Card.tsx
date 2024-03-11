@@ -9,6 +9,7 @@ import { CheckBookMark, AddBookMark, RemoveBookMark } from '@/utils/Bookmark';
 import { useRouter } from 'next/navigation';
 import { getServiceName } from '@/utils/Bookmark';
 import { getSerialDay } from '@/utils/Bookmark';
+import Image from 'next/image';
 
 const Card: React.FC<WebtoonInfo> = ({
     img,
@@ -19,9 +20,14 @@ const Card: React.FC<WebtoonInfo> = ({
     setWebtoons,
     updateDays,
     fanCount,
+    kakaopage
 }) => {
     const [isBookMark, setIsBookMark] = useState<boolean>(false); //카드가 북마크에 등록되어 있는지 확인
     const router = useRouter();
+
+    if(kakaopage) {
+        img = 'https:' + img;
+    }
 
     useEffect(() => {
         setIsBookMark(
@@ -70,9 +76,13 @@ const Card: React.FC<WebtoonInfo> = ({
         setIsBookMark((prev) => !prev);
     };
 
+    console.log(img);
+
+
+
     return (
         <div className={styles.card} onClick={() => onDetailNavigation(title,service)}>
-            <img src={img} alt={title} />
+            <Image src={img} alt={title}  width={300} height={200}/>
             <div className={styles.textoverlay}>
                 <div>
                     {isBookMark ? (

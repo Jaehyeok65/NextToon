@@ -69,6 +69,7 @@ export default function Client2() {
                                 service={webtoon.service}
                                 updateDays={webtoon.updateDays}
                                 fanCount={webtoon.fanCount}
+                                kakaopage={true}
                             />
                         ))
                     )}
