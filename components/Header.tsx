@@ -13,7 +13,7 @@ const navigate = [
     { content: '네이버웹툰', link: '/list/naver' },
     { content: '카카오웹툰', link: '/list/kakao' },
     { content: '카카오페이지', link: '/list/kakaopage' },
-    { content : '인기웹툰', link : '/sortedlist'},
+    { content: '인기웹툰', link: '/sortedlist' },
     { content: '북마크', link: '/bookmark' },
 ];
 
@@ -63,7 +63,10 @@ export default function Header() {
             case '/list/kakaopage':
                 return '카카오페이지';
                 break;
-            case '/sortedlist' :
+            case '/sortedlist':
+            case '/sortedlist/kakaoPage':
+            case '/sortedlist/kakao':
+            case '/sortedlist/naver':
                 return '인기웹툰';
                 break;
             case '/bookmark':
@@ -71,7 +74,7 @@ export default function Header() {
                 break;
             default:
                 return '메뉴';
-        };
+        }
     };
 
     useEffect(() => {
