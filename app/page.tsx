@@ -19,7 +19,9 @@ export default function Home() {
             <div onClick={() => router.push('/list/kakaopage')}>
                 카카오페이지 웹툰 바로가기
             </div>
-            <div onClick={() => router.push('/sortedlist')}>인기 웹툰 바로가기</div>
+            <div onClick={() => router.push('/sortedlist')}>
+                인기 웹툰 바로가기
+            </div>
             <div onClick={() => router.push('/bookmark')}>북마크 바로가기</div>
         </div>
     );

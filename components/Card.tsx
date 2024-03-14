@@ -39,7 +39,7 @@ const Card: React.FC<WebtoonInfo> = ({
     }, []); //초기 렌더링시 북마크에 등록되어있는지 확인하는 용도
 
     const onDetailNavigation = (title: string, service : string) => {
-        router.push(`/detail/${title}?service=${service}`);
+        router.push(`/detail/${title}/${service}`);
     };
 
     const onAddClick = (event: React.MouseEvent) => {
