@@ -67,6 +67,7 @@ export default function Header() {
             case '/sortedlist/kakaoPage':
             case '/sortedlist/kakao':
             case '/sortedlist/naver':
+            case '/sortedlist/finish':
                 return '인기웹툰';
                 break;
             case '/bookmark':

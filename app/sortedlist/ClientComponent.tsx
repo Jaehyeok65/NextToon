@@ -9,6 +9,7 @@ const flatform: any = {
     카카오: 'kakao',
     네이버: 'naver',
     카카오페이지: 'kakaoPage',
+    완결 : 'finish'
 };
 
 export default function Client2() {
