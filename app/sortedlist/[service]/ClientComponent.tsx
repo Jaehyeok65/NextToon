@@ -8,14 +8,15 @@ import { WebtoonInfo } from '@/types/type';
 import useScroll from '@/hooks/useScroll';
 
 export default function ClientComponent({ service }: { service: string }) {
+    const perPage = 1000;
     const { fetchNextPage, hasNextPage, isFetchingNextPage, isPending, data } =
         useInfiniteQuery({
             queryKey: ['total', service],
             queryFn: ({ pageParam = 0 }) => {
-                return getServiceTotalList(pageParam, service);
+                return getServiceTotalList(pageParam, perPage, service);
             },
             getNextPageParam: (lastPage, allPages) => {
-                if (lastPage?.webtoons?.length < 1000) {
+                if (lastPage?.webtoons?.length < perPage) {
                     return undefined;
                 } else {
                     return allPages.length;
@@ -57,7 +58,9 @@ export default function ClientComponent({ service }: { service: string }) {
     }, [scroll, service]);
 
     useEffect(() => {
-        const scrolly = window.sessionStorage.getItem(`sortedlist/${service}_scroll`);
+        const scrolly = window.sessionStorage.getItem(
+            `sortedlist/${service}_scroll`
+        );
         if (scrolly && webtoons) {
             window.scrollTo({
                 top: Number(scrolly),

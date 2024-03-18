@@ -6,22 +6,28 @@ export const getWebtoonList = async (page: number) => {
     return data;
 };
 
-
-export const getServiceWebtoonList = async (page: number, service : string) => {
-    const res = await fetch(`${API}/?perPage=12&page=${page}&service=${service}`);
+export const getServiceWebtoonList = async (page: number, service: string) => {
+    const res = await fetch(
+        `${API}/?perPage=12&page=${page}&service=${service}`
+    );
     const data = await res.json();
     return data;
 };
 
-
-export const getTotalList = async (page: number) => {
-    const res = await fetch(`${API}/?perPage=5000&page=${page}`);
+export const getTotalList = async (page: number, perPage: number) => {
+    const res = await fetch(`${API}/?perPage=${perPage}&page=${page}`);
     const data = await res.json();
     return data;
 };
 
-export const getServiceTotalList = async (page: number, service : string) => {
-    const res = await fetch(`${API}/?perPage=1000&page=${page}&service=${service}`);
+export const getServiceTotalList = async (
+    page: number,
+    perPage: number,
+    service: string
+) => {
+    const res = await fetch(
+        `${API}/?perPage=${perPage}&page=${page}&service=${service}`
+    );
     const data = await res.json();
     return data;
 };

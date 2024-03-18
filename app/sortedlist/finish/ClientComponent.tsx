@@ -8,14 +8,15 @@ import { WebtoonInfo } from '@/types/type';
 import useScroll from '@/hooks/useScroll';
 
 export default function ClientComponent() {
+    const perPage = 5000;
     const { fetchNextPage, hasNextPage, isFetchingNextPage, isPending, data } =
         useInfiniteQuery({
             queryKey: ['total'],
             queryFn: ({ pageParam = 0 }) => {
-                return getTotalList(pageParam);
+                return getTotalList(pageParam, perPage);
             },
             getNextPageParam: (lastPage, allPages) => {
-                if (lastPage?.webtoons?.length < 5000) {
+                if (lastPage?.webtoons?.length < perPage) {
                     return undefined;
                 } else {
                     return allPages.length;
@@ -57,7 +58,9 @@ export default function ClientComponent() {
     }, [scroll]);
 
     useEffect(() => {
-        const scrolly = window.sessionStorage.getItem(`sortedlist/finish_scroll`);
+        const scrolly = window.sessionStorage.getItem(
+            `sortedlist/finish_scroll`
+        );
         if (scrolly && webtoons) {
             window.scrollTo({
                 top: Number(scrolly),
@@ -69,20 +72,21 @@ export default function ClientComponent() {
         fetchNextPage();
     };
 
-    const getFilterByFinished = (data : any) => {
+    const getFilterByFinished = (data: any) => {
         let array: any = [];
         data.map((item: any) => (array = [...array, item.webtoons]));
         const Array = array.reduce(
             (acc: any, curr: number) => acc.concat(curr),
             []
         );
-        const finishedArray = Array.filter((item : any) => item.updateDays[0] === 'finished');
+        const finishedArray = Array.filter(
+            (item: any) => item.updateDays[0] === 'finished'
+        );
         const sortedArray = finishedArray.sort(
             (a: any, b: any) => b.fanCount - a.fanCount
         );
         return sortedArray;
-        
-    }
+    };
 
     const getSortByFanCount = (data: any) => {
         //데이터를 fanCount 내림차순으로 정렬
