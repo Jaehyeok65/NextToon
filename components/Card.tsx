@@ -19,7 +19,6 @@ const Card: React.FC<WebtoonInfo> = ({
     setWebtoons,
     updateDays,
     fanCount,
-    kakaopage
 }) => {
     const [isBookMark, setIsBookMark] = useState<boolean>(false); //카드가 북마크에 등록되어 있는지 확인
     const router = useRouter();
@@ -38,7 +37,7 @@ const Card: React.FC<WebtoonInfo> = ({
         );
     }, []); //초기 렌더링시 북마크에 등록되어있는지 확인하는 용도
 
-    const onDetailNavigation = (title: string, service : string) => {
+    const onDetailNavigation = (title: string, service: string) => {
         router.push(`/detail/${title}/${service}`);
     };
 
@@ -71,10 +70,12 @@ const Card: React.FC<WebtoonInfo> = ({
         setIsBookMark((prev) => !prev);
     };
 
-
     return (
-        <div className={styles.card} onClick={() => onDetailNavigation(title,service)}>
-            <img src={img} alt={title} loading='lazy'/>
+        <div
+            className={styles.card}
+            onClick={() => onDetailNavigation(title, service)}
+        >
+            <img src={img} alt={title} loading="lazy" />
             <div className={styles.textoverlay}>
                 <div>
                     {isBookMark ? (
