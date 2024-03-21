@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import style from '@/style/main.module.css';
 
+
 export default function Home() {
     const router = useRouter();
 
