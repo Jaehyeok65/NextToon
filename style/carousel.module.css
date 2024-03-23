@@ -1,0 +1,74 @@
+
+
+
+.carousel {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: default;
+    z-index: 100000;
+  }
+
+  .button2 {
+    position: absolute;
+    top: 50%;
+    right : 10px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: default;
+    z-index: 100000;
+  }
+
+.innercarousel {
+    display : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap : 20px;
+}
+
+.innercarousel > img {
+    max-width: 300px;
+}
+
+.maincarousel {
+    margin : 5% 20% 5% 20%;
+    color: white;
+}
+
+.maininner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.maininner > a {
+    line-height: 70px;
+    color: inherit;
+    text-decoration: none;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .innercarousel {
+        display : grid;
+        grid-template-columns: 1fr 1fr;
+        gap : 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .innercarousel {
+        display : grid;
+        grid-template-columns: 1fr;
+        gap : 20px;
+    }
+}
+
+
