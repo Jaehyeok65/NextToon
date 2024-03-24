@@ -3,7 +3,7 @@
 
 .carousel {
     height: 100%;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
 }
 
@@ -13,25 +13,31 @@
     transform: translateY(-50%);
     background: transparent;
     border: none;
-    cursor: default;
+    cursor: pointer;
     z-index: 100000;
+    left : -40px;
+    font-size: 20px;
+    color: lightgray;
   }
 
   .button2 {
     position: absolute;
     top: 50%;
-    right : 10px;
+    right : -40px;
     transform: translateY(-50%);
     background: transparent;
     border: none;
-    cursor: default;
+    cursor: pointer;
     z-index: 100000;
+    font-size: 20px;
+    color: lightgray;
   }
 
 .innercarousel {
     display : grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap : 20px;
+    padding : 4px;
 }
 
 .innercarousel > img {
