@@ -33,8 +33,10 @@ const Carousel = ({ list }: { list: any[] }) => {
             setDepth(1);
         } else if (windowWidth < 1000) {
             setDepth(2);
-        } else {
+        } else if (windowWidth < 1400) {
             setDepth(3);
+        } else {
+            setDepth(4);
         }
 
         // 5초마다 getNextPage 함수 호출

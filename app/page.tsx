@@ -3,25 +3,25 @@ import { API } from '@/services/API';
 import MainCarousel from '@/components/MainCarousel';
 
 const getEntireDataFetch = async() => {
-    const res = await fetch(`${API}/?perPage=12&page=1`);
+    const res = await fetch(`${API}/?perPage=100&page=0`);
     const data = await res.json();
     return data;
 }
 
 const getNaverDataFetch = async() => {
-    const res = await fetch(`${API}/?perPage=12&page=1&service=naver`);
+    const res = await fetch(`${API}/?perPage=100&page=0&service=naver`);
     const data = await res.json();
     return data;
 }
 
 const getKakaoDataFetch = async() => {
-    const res = await fetch(`${API}/?perPage=12&page=1&service=kakao`);
+    const res = await fetch(`${API}/?perPage=100&page=0&service=kakao`);
     const data = await res.json();
     return data;
 }
 
 const getKakaoPageDataFetch = async() => {
-    const res = await fetch(`${API}/?perPage=12&page=1&service=kakaoPage`);
+    const res = await fetch(`${API}/?perPage=100&page=0&service=kakaoPage`);
     const data = await res.json();
     return data;
 }

@@ -35,7 +35,7 @@
 
 .innercarousel {
     display : grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap : 20px;
     padding : 4px;
 }
@@ -60,6 +60,14 @@
     text-decoration: none;
 }
 
+
+@media screen and (max-width: 1400px) {
+    .innercarousel {
+        display : grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap : 20px;
+    }
+}
 
 @media screen and (max-width: 1000px) {
     .innercarousel {
