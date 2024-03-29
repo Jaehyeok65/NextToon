@@ -28,6 +28,9 @@ export default async function Page({ params }: { params: { title: string } }) {
 
     return (
         <div className={styles.background}>
+              <h2 className={styles.searchcontent}>
+                    {'"' + decodeURI(params.title) + '"'} 검색 결과 {data?.webtoons.length}개
+                </h2>
             <div className={styles.container}>
                 {data?.webtoons.map((webtoon: WebtoonInfo) => (
                     <Card
