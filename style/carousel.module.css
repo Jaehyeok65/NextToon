@@ -1,4 +1,33 @@
 
+@keyframes slideInX {
+    from {
+        opacity: 0;
+        transform: translateX(-30%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes DeskTopSlideX {
+    from {
+        transform: translateX(50%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes MobileSlideX {
+    from {
+        transform: translateX(30%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
 
 
 .carousel {
@@ -10,12 +39,11 @@
 .button {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
     background: transparent;
     border: none;
     cursor: pointer;
-    z-index: 100000;
     left : -40px;
+    z-index: 100000;
     font-size: 20px;
     color: lightgray;
   }
@@ -23,22 +51,29 @@
   .button2 {
     position: absolute;
     top: 50%;
-    right : -40px;
-    transform: translateY(-50%);
     background: transparent;
     border: none;
     cursor: pointer;
     z-index: 100000;
     font-size: 20px;
+    right : -40px;
     color: lightgray;
   }
+
+
+.carouselmount {
+    animation: DeskTopSlideX 0.5s ease-in-out;
+}
 
 .innercarousel {
     display : grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap : 20px;
     padding : 4px;
+    
 }
+
+
 
 .innercarousel > img {
     max-width: 300px;
@@ -83,6 +118,11 @@
         grid-template-columns: 1fr;
         gap : 20px;
     }
+
+    .carouselmount {
+        animation: MobileSlideX 0.5s ease-in-out;
+    }
+    
 }
 
 

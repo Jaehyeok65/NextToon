@@ -14,6 +14,7 @@ const Carousel = ({ list }: { list: any[] }) => {
     const [depth, setDepth] = useState(1); //default값을 1
     const end = list.length - 1;
     const lastindex = end - depth + 1;
+    const [animate, setAnimate] = useState<string>('carouselmount');
 
     const handleResize = () => {
         setWindowWidth(window.innerWidth);
@@ -43,6 +44,7 @@ const Carousel = ({ list }: { list: any[] }) => {
         const intervalId = setInterval(() => {
             const nextPage = getNextPage(current);
             +setCurrent(nextPage);
+            setAnimate('carouselmount');
         }, 5000);
 
         // 컴포넌트가 언마운트되면 clearInterval 호출하여 타이머 제거
@@ -52,7 +54,7 @@ const Carousel = ({ list }: { list: any[] }) => {
     }, [windowWidth, current]);
 
     const getNextPage = (page: number) => {
-        return page + 1 > lastindex ? 0 : page + 1;
+        return page + depth > lastindex ? 0 : page + depth;
     };
 
     const getPrevPage = (page: number) => {
@@ -61,12 +63,18 @@ const Carousel = ({ list }: { list: any[] }) => {
 
     const handleNextClick = () => {
         const nextPage = getNextPage(current);
+        setAnimate('carouselmount');
         setCurrent(nextPage);
     };
 
     const handlePrevClick = () => {
         const prevPage = getPrevPage(current);
+        setAnimate('carouselmount');
         setCurrent(prevPage);
+    };
+
+    const handleAnimationEnd = () => {
+        setAnimate('');
     };
 
     return (
@@ -78,14 +86,19 @@ const Carousel = ({ list }: { list: any[] }) => {
                 {list
                     .slice(current, current + depth)
                     .map((item: any, index: number) => (
-                        <Card
+                        <div
                             key={index}
-                            _id={item._id}
-                            img={item.img}
-                            title={item.title}
-                            author={item.author}
-                            service={item.service}
-                        />
+                            className={styles[animate]}
+                            onAnimationEnd={handleAnimationEnd}
+                        >
+                            <Card
+                                _id={item._id}
+                                img={item.img}
+                                title={item.title}
+                                author={item.author}
+                                service={item.service}
+                            />
+                        </div>
                     ))}
             </div>
             <button className={styles.button2} onClick={handleNextClick}>

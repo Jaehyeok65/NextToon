@@ -27,6 +27,12 @@
     .background {
         margin: 10% 15% 10% 15%;
     }
+
+    .searchcontent {
+        color : white;
+        margin-bottom: 7%;
+    }
+    
     
 }
 
@@ -38,5 +44,11 @@
     .background {
         margin: 10% 6% 10% 6%;
     }
+
+    .searchcontent {
+        color : white;
+        margin-bottom: 10%;
+    }
+    
 }
 
