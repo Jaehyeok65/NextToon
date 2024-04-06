@@ -35,7 +35,7 @@ const Card: React.FC<WebtoonInfo> = ({
                 fanCount,
             })
         );
-    }, []); //초기 렌더링시 북마크에 등록되어있는지 확인하는 용도
+    }, [img, title, author, service, _id, fanCount, updateDays]); //초기 렌더링시 북마크에 등록되어있는지 확인하는 용도
 
     const onDetailNavigation = (title: string, service: string) => {
         router.push(`/detail/${title}/${service}`);

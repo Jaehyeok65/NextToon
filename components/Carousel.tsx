@@ -85,6 +85,7 @@ const Carousel = ({ list }: { list: any[] }) => {
                             title={item.title}
                             author={item.author}
                             service={item.service}
+                            fanCount={item.fanCount}
                         />
                     ))}
             </div>

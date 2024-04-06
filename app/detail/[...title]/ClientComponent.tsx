@@ -19,14 +19,10 @@ export default function ClientComponent({
     const onAddClick = () => {
         if (data) {
             if (CheckBookMark(data)) {
-                //이미 북마크에 등록되어 있다면
-                window.alert('이미 북마크에 등록된 작품입니다.');
-                return;
-            } else {
                 AddBookMark(data);
             }
-        }
     };
+}
 
     return (
         <div className={styles.container}>
