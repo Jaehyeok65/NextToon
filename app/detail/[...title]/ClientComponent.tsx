@@ -18,9 +18,7 @@ export default function ClientComponent({
 }) {
     const onAddClick = () => {
         if (data) {
-            if (CheckBookMark(data)) {
-                AddBookMark(data);
-            }
+            AddBookMark(data);
     };
 }
 
