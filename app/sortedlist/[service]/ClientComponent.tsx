@@ -6,9 +6,11 @@ import Card from '@/components/Card';
 import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
 import useScroll from '@/hooks/useScroll';
+import { getCurrentDepth, setCurrentDepth } from '@/utils/SortedUtil';
 
 export default function ClientComponent({ service }: { service: string }) {
     const perPage = 1000;
+    const defaultdepth = 300;
     const { fetchNextPage, hasNextPage, isFetchingNextPage, isPending, data } =
         useInfiniteQuery({
             queryKey: ['total', service],
@@ -31,12 +33,20 @@ export default function ClientComponent({ service }: { service: string }) {
     const scroll = useScroll();
 
     const [webtoons, setWebtoons] = useState<any>();
+    const [depth, setDepth] = useState<number>(defaultdepth); //default는 300
 
     useEffect(() => {
         if (hasNextPage) {
             getTotalWebtoons();
         }
     }, [hasNextPage, data]);
+
+    useEffect(() => {
+        const current = getCurrentDepth(service);
+        if (current) {
+            setDepth(current);
+        }
+    }, [service]);
 
     useEffect(() => {
         if (!hasNextPage) {
@@ -85,7 +95,23 @@ export default function ClientComponent({ service }: { service: string }) {
         );
         return sortedArray;
     };
-    //console.log(data?.pages);
+
+    const getNextWebtoons = () => {
+        //다음 웹툰 리스트를 가져옴
+        if (depth === webtoons.length) {
+            //depth와 length가 같다면 더이상 가져올 다음 데이터가 없다는 뜻
+            window.alert('마지막 페이지입니다.');
+            return;
+        }
+
+        if (depth + defaultdepth > webtoons.length) {
+            setDepth(webtoons.length);
+            setCurrentDepth(service, webtoons.length);
+        } else {
+            setDepth((prev) => prev + defaultdepth);
+            setCurrentDepth(service, depth + defaultdepth);
+        }
+    };
 
     if (!webtoons) {
         return (
@@ -98,7 +124,7 @@ export default function ClientComponent({ service }: { service: string }) {
     return (
         <div className={styles.background}>
             <div className={styles.container}>
-                {webtoons?.slice(0, 300).map((webtoon: WebtoonInfo) => (
+                {webtoons?.slice(0, depth).map((webtoon: WebtoonInfo) => (
                     <Card
                         key={webtoon._id}
                         _id={webtoon._id}
@@ -111,6 +137,11 @@ export default function ClientComponent({ service }: { service: string }) {
                         fanCount={webtoon.fanCount}
                     />
                 ))}
+            </div>
+            <div>
+                <button onClick={getNextWebtoons} className={styles.flexbtn}>
+                    더 보기
+                </button>
             </div>
         </div>
     );
