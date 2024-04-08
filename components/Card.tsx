@@ -9,7 +9,6 @@ import { CheckBookMark, AddBookMark, RemoveBookMark } from '@/utils/Bookmark';
 import { useRouter } from 'next/navigation';
 import { getServiceName } from '@/utils/Bookmark';
 import { getSerialDay } from '@/utils/Bookmark';
-import Image from 'next/image';
 
 const Card: React.FC<WebtoonInfo> = ({
     img,
@@ -23,10 +22,6 @@ const Card: React.FC<WebtoonInfo> = ({
 }) => {
     const [isBookMark, setIsBookMark] = useState<boolean>(false); //카드가 북마크에 등록되어 있는지 확인
     const router = useRouter();
-
-    if (service === 'kakaoPage') { //Next.js의 이미지 컴포넌트는 절대 경로이어야 하므로 https:를 소스에 추가해줌
-        img = 'https:' + img;
-    }
 
     useEffect(() => {
         setIsBookMark(
@@ -80,11 +75,7 @@ const Card: React.FC<WebtoonInfo> = ({
             className={styles.card}
             onClick={() => onDetailNavigation(title, service)}
         >
-            {service === 'naver' ? (
-                <img src={img} alt={title} loading="lazy" />
-            ) : (
-                <Image src={img} alt={title} width={500} height={500} loading='lazy' />
-            )}
+            <img src={img} alt={title} loading="lazy" />
             <div className={styles.textoverlay}>
                 <div>
                     {isBookMark ? (
