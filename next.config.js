@@ -2,14 +2,28 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-      remotePatterns : [
-        {
-          hostname : 'firebasestorage.googleapis.com'
-        }
-      ]
-    }
-  };
-  
-  module.exports = nextConfig;
+        remotePatterns: [
+            {
+                hostname: 'image-comic.pstatic.net',
+            },
+            {
+                hostname: 'localhost:3000',
+                port : '3000'
+            },
+            {
+                hostname : 'kr-a.kakaopagecdn.com'
+            },
+            {
+                hostname : 'dn-img-page.kakao.com'
+            },
+            { 
+                hostname : 'next-toon.vercel.app'
+            }
+        ],
+    },
+    devIndicators: {
+        autoPrerender: false,
+      },
+};
 
-  //domains: ['firebasestorage.googleapis.com'],
+module.exports = nextConfig;
