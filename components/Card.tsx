@@ -83,7 +83,7 @@ const Card: React.FC<WebtoonInfo> = ({
             {service === 'naver' ? (
                 <img src={img} alt={title} loading="lazy" />
             ) : (
-                <Image src={img} alt={title} width={500} height={500} priority />
+                <Image src={img} alt={title} width={500} height={500} loading='lazy' />
             )}
             <div className={styles.textoverlay}>
                 <div>
