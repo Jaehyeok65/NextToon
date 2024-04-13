@@ -101,3 +101,15 @@ export const getSerialDay = (updateDays: string[]) => {
         </div>
     );
 };
+
+export const getFanCount = (fanCount: number) => {
+    if (fanCount > 10000) {
+        return (
+            Math.floor(fanCount / 10000) + '억 ' + (fanCount % 10000) + '만++'
+        );
+    } else if (fanCount === 10000) {
+        return Math.floor(fanCount / 10000) + '억++';
+    } else {
+        return fanCount + '만++';
+    }
+};

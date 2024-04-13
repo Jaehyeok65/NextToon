@@ -5,7 +5,7 @@ import styles from '@/style/card.module.css';
 import { WebtoonInfo } from '@/types/type';
 import { FaRegHeart } from 'react-icons/fa6';
 import { FaHeart } from 'react-icons/fa6';
-import { CheckBookMark, AddBookMark, RemoveBookMark } from '@/utils/Bookmark';
+import { CheckBookMark, AddBookMark, RemoveBookMark, getFanCount } from '@/utils/Bookmark';
 import { useRouter } from 'next/navigation';
 import { getServiceName } from '@/utils/Bookmark';
 import { getSerialDay } from '@/utils/Bookmark';
@@ -88,7 +88,7 @@ const Card: React.FC<WebtoonInfo> = ({
                 <h4>{title}</h4>
                 <div>{author}</div>
                 <div>{getServiceName(service)}</div>
-                <div>{fanCount && fanCount + '만++'}</div>
+                <div>{fanCount && getFanCount(fanCount)}</div>
             </div>
         </div>
     );
