@@ -5,7 +5,12 @@ import styles from '@/style/card.module.css';
 import { WebtoonInfo } from '@/types/type';
 import { FaRegHeart } from 'react-icons/fa6';
 import { FaHeart } from 'react-icons/fa6';
-import { CheckBookMark, AddBookMark, RemoveBookMark, getFanCount } from '@/utils/Bookmark';
+import {
+    CheckBookMark,
+    AddBookMark,
+    RemoveBookMark,
+    getFanCount,
+} from '@/utils/Bookmark';
 import { useRouter } from 'next/navigation';
 import { getServiceName } from '@/utils/Bookmark';
 import { getSerialDay } from '@/utils/Bookmark';
@@ -79,9 +84,17 @@ const Card: React.FC<WebtoonInfo> = ({
             <div className={styles.textoverlay}>
                 <div>
                     {isBookMark ? (
-                        <FaHeart size={'30px'} onClick={onRemoveClick} />
+                        <FaHeart
+                            size={'30px'}
+                            onClick={onRemoveClick}
+                            data-testid="RedHeart"
+                        />
                     ) : (
-                        <FaRegHeart size={'30px'} onClick={onAddClick} />
+                        <FaRegHeart
+                            size={'30px'}
+                            onClick={onAddClick}
+                            data-testid="EmptyHeart"
+                        />
                     )}
                 </div>
                 <div>{updateDays && getSerialDay(updateDays)}</div>
