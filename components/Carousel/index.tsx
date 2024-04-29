@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from '@/style/carousel.module.css';
-import Card from './Card';
+import Card from '../Card';
 import { FaArrowRight } from 'react-icons/fa';
 import { FaArrowLeft } from 'react-icons/fa';
 
 const Carousel = ({ list }: { list: any[] }) => {
-    const [current, setCurrent] = useState(5); //현재 페이지
+    const [current, setCurrent] = useState(0); //현재 페이지
     const [windowWidth, setWindowWidth] = useState(
         typeof window !== 'undefined' ? window.innerWidth : 0
     );
@@ -71,7 +71,7 @@ const Carousel = ({ list }: { list: any[] }) => {
 
     return (
         <div className={styles.carousel}>
-            <button className={styles.button} onClick={handlePrevClick}>
+            <button className={styles.button} onClick={handlePrevClick} data-testid="left">
                 <FaArrowLeft />
             </button>
             <div className={styles.innercarousel}>
@@ -89,7 +89,7 @@ const Carousel = ({ list }: { list: any[] }) => {
                         />
                     ))}
             </div>
-            <button className={styles.button2} onClick={handleNextClick}>
+            <button className={styles.button2} onClick={handleNextClick} data-testid="right">
                 <FaArrowRight />
             </button>
         </div>
