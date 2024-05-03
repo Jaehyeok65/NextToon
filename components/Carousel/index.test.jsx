@@ -205,6 +205,10 @@ describe('캐러셀 컴포넌트 테스트', () => {
 
         render(<Carousel list={testlist} />);
 
+        const titleElement = screen.getByText('제목1');
+
+        expect(titleElement).toBeInTheDocument();
+
         const rightbutton = screen.getByTestId('right');
 
         fireEvent.click(rightbutton);

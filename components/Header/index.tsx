@@ -140,12 +140,12 @@ export default function Header() {
                         className={styles.icon}
                         size={'28px'}
                         onClick={toggleSearch}
+                        data-testid='searchicon'
                     />
                 )}
                 {showSearch && (
                     <form onSubmit={onSearchSubmit}>
                         {' '}
-                        {/* 폼 엘리먼트 추가 */}
                         <input
                             type="text"
                             placeholder="검색할 작품을 입력하세요..."
