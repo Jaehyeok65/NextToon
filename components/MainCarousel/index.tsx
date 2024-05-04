@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Carousel from './Carousel';
+import Carousel from '../Carousel';
 import styles from '@/style/carousel.module.css';
 
 const MainCarousel = ({
