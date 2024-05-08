@@ -69,6 +69,8 @@ const Card: React.FC<WebtoonInfo> = ({
                 author,
                 service,
                 img,
+                fanCount,
+                updateDays
             },
             setWebtoons
         );
