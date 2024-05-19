@@ -19,8 +19,8 @@ export default async function Page({ params }: { params: { title: string } }) {
         return (
             <div className={styles.background}>
                 <h2 className={styles.searchcontent}>
-                    {'"' + decodeURI(params.title) + '"'} 검색된 작품이
-                    없습니다.
+                    <span>{'"' + decodeURI(params.title) + '"'}</span>{' '}
+                    <span>검색된 작품이 없습니다.</span>
                 </h2>
             </div>
         );
@@ -28,9 +28,10 @@ export default async function Page({ params }: { params: { title: string } }) {
 
     return (
         <div className={styles.background}>
-              <h2 className={styles.searchcontent}>
-                    {'"' + decodeURI(params.title) + '"'} 검색 결과 {data?.webtoons.length}개
-                </h2>
+            <h2 className={styles.searchcontent}>
+                <span>{'"' + decodeURI(params.title) + '"'}</span> 검색 결과{' '}
+                {data?.webtoons.length}개
+            </h2>
             <div className={styles.container}>
                 {data?.webtoons.map((webtoon: WebtoonInfo) => (
                     <Card

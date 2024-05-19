@@ -20,7 +20,7 @@ const useObserver = (hasNextPage: boolean, fetchNextPage: any) => {
         [hasNextPage]
     );
 
-    const option = { threshold: 0.25, rootMargin: '80px' };
+    const option = { threshold: 0.25, rootMargin: '80px'};
 
     useEffect(() => {
         if (!ref.current) return;
@@ -30,7 +30,7 @@ const useObserver = (hasNextPage: boolean, fetchNextPage: any) => {
 
         return () => observer.disconnect();
     }, [ref, option, useCallback]);
-
+    
     return ref;
 };
 

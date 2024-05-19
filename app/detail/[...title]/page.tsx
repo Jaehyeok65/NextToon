@@ -8,8 +8,8 @@ async function getWebtoonTitle(title: string) {
 }
 
 const getWebtoonData = (data: WebtoonInfo[], service: string) => {
-    const current = data.filter((item) => item.service === service);
-    return current.length > 0 ? current[0] : undefined;
+    const current = data?.filter((item) => item.service === service);
+    return current?.length > 0 ? current[0] : undefined;
 };
 
 export const metadata = {

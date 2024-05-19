@@ -12,7 +12,7 @@ const Carousel = ({ list }: { list: any[] }) => {
         typeof window !== 'undefined' ? window.innerWidth : 0
     );
     const [depth, setDepth] = useState(1); //default값을 1
-    const end = list.length - 1;
+    const end = list?.length - 1;
     const lastindex = end - depth + 1;
 
     const handleResize = () => {
@@ -76,7 +76,7 @@ const Carousel = ({ list }: { list: any[] }) => {
             </button>
             <div className={styles.innercarousel}>
                 {list
-                    .slice(current, current + depth)
+                    ?.slice(current, current + depth)
                     .map((item: any, index: number) => (
                         <Card
                             key={index}

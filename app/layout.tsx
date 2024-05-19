@@ -3,6 +3,7 @@ import Providers from '@/utils/provider';
 import './globals.css';
 import Header from '@/components/Header';
 import React from 'react';
+import MockProvider from '@/mock/MockProvider';
 
 export const metadata: Metadata = {
     title: 'NextToon | 메인페이지',

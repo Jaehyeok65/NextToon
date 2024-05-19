@@ -26,7 +26,6 @@ const getKakaoPageDataFetch = async() => {
     return data;
 }
 
-
 const Page = async() => {
 
     const entire = await getEntireDataFetch();

@@ -90,7 +90,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         expect(HeartElement).toBeInTheDocument();
     });
 
-    it('빈 하트표시 아이콘을 클릭하면 북마크에 등록되어 꽉 찬 하트 아이콘이 렌더링된다.', async () => {
+    it('빈 하트표시 아이콘을 클릭하면 AddBookMark 함수가 호출되면서 북마크에 등록되어 꽉 찬 하트 아이콘이 렌더링된다.', async () => {
         CheckBookMark.mockReturnValue(false);
 
         render(
@@ -107,6 +107,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         expect(EmptyElement).toBeInTheDocument();
 
         fireEvent.click(EmptyElement);
+        expect(AddBookMark).toHaveBeenCalled();
 
         await waitFor(() => {
             const HeartElement = screen.getByTestId('RedHeart');
@@ -114,7 +115,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         });
     });
 
-    it('꽉 찬 하트표시 아이콘을 클릭하면 북마크에서 제거되어 빈 하트 아이콘이 렌더링된다.', async () => {
+    it('꽉 찬 하트표시 아이콘을 클릭하면 RemoveBookMark 함수가 호출되면서 북마크에서 제거되어 빈 하트 아이콘이 렌더링된다.', async () => {
         CheckBookMark.mockReturnValue(true);
 
         render(
@@ -131,6 +132,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         expect(HeartElement).toBeInTheDocument();
 
         fireEvent.click(HeartElement);
+        expect(RemoveBookMark).toHaveBeenCalled();
 
         await waitFor(() => {
             const EmptyElement = screen.getByTestId('EmptyHeart');

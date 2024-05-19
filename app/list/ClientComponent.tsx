@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { getWebtoonList } from '@/services/API';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import useObserver from '@/hooks/userObserver';
+import useObserver from '@/hooks/useObserver';
 import Card from '@/components/Card';
 import Skeleton from '@/utils/Skeleton';
 import styles from '@/style/list.module.css';
@@ -14,7 +14,7 @@ export default function Client2() {
     const { fetchNextPage, hasNextPage, isFetchingNextPage, isPending, data } =
         useInfiniteQuery({
             queryKey: ['webtoon'],
-            queryFn: ({ pageParam = 0}) => {
+            queryFn: ({ pageParam = 0 }) => {
                 return getWebtoonList(pageParam);
             },
             getNextPageParam: (lastPage, allPages) => {

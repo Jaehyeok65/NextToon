@@ -19,8 +19,12 @@ export default function ClientComponent({
     const onAddClick = () => {
         if (data) {
             AddBookMark(data);
+        }
     };
-}
+
+    if(data === undefined) {
+        return <div>데이터가 올바르지 않습니다.</div>
+    }
 
     return (
         <div className={styles.container}>
