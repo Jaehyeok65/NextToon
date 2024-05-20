@@ -1,7 +1,9 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import SortedListPage from '@/app/sortedlist/page';
+import SortedListService from '@/app/sortedlist/[service]/ClientComponent';
 import { useRouter } from 'next/navigation';
+import { RenderWithQuery } from '@/utils/RenderWithQuery';
 
 // useRouter 모의 설정
 jest.mock('next/navigation', () => ({
@@ -58,5 +60,52 @@ describe('SortedList Component Test', () => {
         fireEvent.change(selectElement, { target: { value: '완결' } });
 
         expect(pushMock).toHaveBeenCalledWith('/sortedlist/finish');
+    });
+
+    it('이동한 페이지에서 모든 데이터를 가져오기 전에는 Loading... Text가 렌더링되며 모든 데이터를 가져온 후에 데이터가 렌더링된다.', async () => {
+        render(
+            <RenderWithQuery>
+                <SortedListService
+                    params={{
+                        service: 'kakao',
+                    }}
+                    defaultdepth={12}
+                    perPage={12}
+                />
+            </RenderWithQuery>
+        );
+
+        expect(screen.getByText('Loading...')).toBeInTheDocument();
+
+        await waitFor(() => {
+            expect(screen.getByText('제목14')).toBeInTheDocument();
+        });
+    });
+
+    it('데이터가 렌더링 된 후 더 보기 버튼을 클릭하면 다음 데이터가 추가로 렌더링된다.', async () => {
+        render(
+            <RenderWithQuery>
+                <SortedListService
+                    params={{
+                        service: 'kakao',
+                    }}
+                    defaultdepth={12}
+                    perPage={12}
+                />
+            </RenderWithQuery>
+        );
+        expect(screen.getByText('Loading...')).toBeInTheDocument();
+
+        await waitFor(() => {
+            expect(screen.getByText('제목14')).toBeInTheDocument();
+            expect(screen.queryByText('제목13')).not.toBeInTheDocument();
+        });
+
+        expect(screen.getByText('더 보기')).toBeInTheDocument(); // 더 보기 버튼
+        fireEvent.click(screen.getByText('더 보기'));
+
+        await waitFor(() => {
+            expect(screen.getByText('제목13')).toBeInTheDocument();
+        });
     });
 });

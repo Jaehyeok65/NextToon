@@ -2,6 +2,7 @@ import { http, HttpResponse } from 'msw';
 import {
     mockreturn1,
     mockreturn2,
+    mockreturn3,
     searchmockreturn1,
     searchmockreturn2,
 } from './testExample';
@@ -15,6 +16,8 @@ export const ListPagehandlers = [
         let data = mockreturn1;
         if (page === '1') {
             data = mockreturn2;
+        } else if (page === '2') {
+            data = mockreturn3;
         }
         return HttpResponse.json(data);
     }),
@@ -23,7 +26,7 @@ export const ListPagehandlers = [
         const keyword = url.searchParams.get('keyword');
 
         let data = {
-            webtoons : []
+            webtoons: [],
         };
 
         if (keyword === '백련') {

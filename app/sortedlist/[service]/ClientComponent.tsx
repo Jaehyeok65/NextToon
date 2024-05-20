@@ -8,9 +8,15 @@ import { WebtoonInfo } from '@/types/type';
 import useScroll from '@/hooks/useScroll';
 import { getCurrentDepth, setCurrentDepth } from '@/utils/SortedUtil';
 
-export default function ClientComponent({ service }: { service: string }) {
-    const perPage = 1000;
-    const defaultdepth = 300;
+export default function ClientComponent({
+    service,
+    defaultdepth,
+    perPage,
+}: {
+    service: string;
+    defaultdepth: number;
+    perPage: number;
+}) {
     const { fetchNextPage, hasNextPage, isFetchingNextPage, isPending, data } =
         useInfiniteQuery({
             queryKey: ['total', service],
@@ -55,7 +61,7 @@ export default function ClientComponent({ service }: { service: string }) {
                 setWebtoons(getSortByFanCount(data?.pages));
             }
         }
-    }, [hasNextPage]);
+    }, [hasNextPage, data]);
 
     useEffect(() => {
         if (scroll) {

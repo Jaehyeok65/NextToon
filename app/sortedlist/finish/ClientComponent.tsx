@@ -8,9 +8,13 @@ import { WebtoonInfo } from '@/types/type';
 import useScroll from '@/hooks/useScroll';
 import { getCurrentDepth, setCurrentDepth } from '@/utils/SortedUtil';
 
-export default function ClientComponent() {
-    const perPage = 5000;
-    const defaultdepth = 1000;
+export default function ClientComponent({
+    defaultdepth,
+    perPage,
+}: {
+    defaultdepth: number;
+    perPage: number;
+}) {
     const { fetchNextPage, hasNextPage, isFetchingNextPage, isPending, data } =
         useInfiniteQuery({
             queryKey: ['total'],
@@ -33,7 +37,7 @@ export default function ClientComponent() {
     const scroll = useScroll();
 
     const [webtoons, setWebtoons] = useState<any>();
-    const [depth, setDepth] = useState<number>(1000);
+    const [depth, setDepth] = useState<number>(defaultdepth);
 
     useEffect(() => {
         if (hasNextPage) {
@@ -95,20 +99,7 @@ export default function ClientComponent() {
         const sortedArray = finishedArray.sort(
             (a: any, b: any) => b.fanCount - a.fanCount
         );
-        return sortedArray;
-    };
 
-    const getSortByFanCount = (data: any) => {
-        //데이터를 fanCount 내림차순으로 정렬
-        let array: any = [];
-        data.map((item: any) => (array = [...array, item.webtoons]));
-        const Array = array.reduce(
-            (acc: any, curr: number) => acc.concat(curr),
-            []
-        );
-        const sortedArray = Array.sort(
-            (a: any, b: any) => b.fanCount - a.fanCount
-        );
         return sortedArray;
     };
 

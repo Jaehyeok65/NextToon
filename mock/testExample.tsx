@@ -230,6 +230,20 @@ export const mockreturn2 = {
     webtoons : testList2
 };
 
+export const mockreturn3 = {
+    webtoons : [
+        {
+            _id: '1234235',
+            img: '/public/img25.jpg',
+            title: '제목25',
+            author: '작가25',
+            service: '서비스25',
+            fanCount: 25,
+            updateDays : ['월']
+        }
+    ]
+}
+
 export const searchmockreturn1 = {
     webtoons : [{
         _id : '123456789',
