@@ -240,7 +240,24 @@ export const mockreturn3 = {
             service: '서비스25',
             fanCount: 25,
             updateDays : ['월']
-        }
+        },
+        {
+            _id: '1234265',
+            img: '/public/img26.jpg',
+            title: '완결1',
+            author: '작가26',
+            service: '서비스26',
+            fanCount: 25,
+            updateDays : ['finished']
+        },      {
+            _id: '1234235678',
+            img: '/public/img27.jpg',
+            title: '완결2',
+            author: '작가27',
+            service: '서비스27',
+            fanCount: 25,
+            updateDays : ['finished']
+        },
     ]
 }
 

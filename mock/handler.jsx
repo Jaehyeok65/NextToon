@@ -19,6 +19,7 @@ export const ListPagehandlers = [
         } else if (page === '2') {
             data = mockreturn3;
         }
+
         return HttpResponse.json(data);
     }),
     http.get(`${API}/search`, ({ request }) => {

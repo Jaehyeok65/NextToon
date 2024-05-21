@@ -39,7 +39,7 @@ describe('List Page 테스트', () => {
 
             expect(screen.getByAltText('제목1')).toHaveAttribute(
                 'src',
-                '/public/list1.jpg'
+                '/public/img1.jpg'
             );
         });
     });
@@ -56,7 +56,7 @@ describe('List Page 테스트', () => {
 
             expect(screen.getByAltText('제목1')).toHaveAttribute(
                 'src',
-                '/public/list1.jpg'
+                '/public/img1.jpg'
             );
         });
 
@@ -69,7 +69,7 @@ describe('List Page 테스트', () => {
             expect(screen.getByText('제목13')).toBeInTheDocument();
             expect(screen.getByAltText('제목13')).toHaveAttribute(
                 'src',
-                '/public/list13.jpg'
+                '/public/img13.jpg'
             );
         });
     });

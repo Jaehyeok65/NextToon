@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { getTotalList } from '@/services/API';
+import { getTotalList, getServiceTotalList } from '@/services/API';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import Card from '@/components/Card';
 import styles from '@/style/list.module.css';

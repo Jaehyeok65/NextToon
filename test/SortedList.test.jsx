@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import SortedListPage from '@/app/sortedlist/page';
 import SortedListService from '@/app/sortedlist/[service]/ClientComponent';
+import SortedListFinish from '@/app/sortedlist/finish/ClientComponent';
 import { useRouter } from 'next/navigation';
 import { RenderWithQuery } from '@/utils/RenderWithQuery';
 
@@ -78,7 +79,7 @@ describe('SortedList Component Test', () => {
         expect(screen.getByText('Loading...')).toBeInTheDocument();
 
         await waitFor(() => {
-            expect(screen.getByText('제목14')).toBeInTheDocument();
+            expect(screen.getByText('제목16')).toBeInTheDocument();
         });
     });
 
@@ -97,15 +98,30 @@ describe('SortedList Component Test', () => {
         expect(screen.getByText('Loading...')).toBeInTheDocument();
 
         await waitFor(() => {
-            expect(screen.getByText('제목14')).toBeInTheDocument();
-            expect(screen.queryByText('제목13')).not.toBeInTheDocument();
+            expect(screen.getByText('제목16')).toBeInTheDocument();
+            expect(screen.queryByText('제목15')).not.toBeInTheDocument();
         });
 
         expect(screen.getByText('더 보기')).toBeInTheDocument(); // 더 보기 버튼
         fireEvent.click(screen.getByText('더 보기'));
 
         await waitFor(() => {
-            expect(screen.getByText('제목13')).toBeInTheDocument();
+            expect(screen.getByText('제목15')).toBeInTheDocument();
+        });
+    });
+
+    it('SortedListFinish 컴포넌트를 렌더링하면 완결 웹툰만 렌더링된다.', async () => {
+        render(
+            <RenderWithQuery>
+                <SortedListFinish defaultdepth={12} perPage={12} />
+            </RenderWithQuery>
+        );
+
+        expect(screen.getByText('Loading...')).toBeInTheDocument();
+
+        await waitFor(() => {
+            expect(screen.getByText('완결1')).toBeInTheDocument();
+            expect(screen.getByText('완결2')).toBeInTheDocument();
         });
     });
 });
