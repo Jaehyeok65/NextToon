@@ -1,10 +1,15 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import { useRouter } from 'next/navigation';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import DetailPage from '@/app/detail/[...title]/page';
+import { AddBookMark } from '@/utils/Bookmark';
 
 // useRouter 모의 설정
 jest.mock('next/navigation', () => ({
     useRouter: jest.fn(),
+}));
+
+jest.mock('@/utils/BookMark', () => ({
+    ...jest.requireActual('@/utils/BookMark'), // 원래 모듈을 불러옵니다.
+    AddBookMark: jest.fn(),
 }));
 
 describe('Detail Component Test', () => {
@@ -46,5 +51,22 @@ describe('Detail Component Test', () => {
         expect(
             screen.getByText('데이터가 올바르지 않습니다.')
         ).toBeInTheDocument();
+    });
+
+    it('북마크 추가하기 버튼을 클릭하면 북마크에 추가된다.', async () => {
+        render(
+            await DetailPage({
+                params: {
+                    title: ['무련', '카카오페이지'],
+                },
+            })
+        );
+
+        const addbookmark = screen.getByText('북마크 추가하기');
+        expect(addbookmark).toBeInTheDocument();
+
+        fireEvent.click(addbookmark);
+
+        expect(AddBookMark).toHaveBeenCalled();
     });
 });

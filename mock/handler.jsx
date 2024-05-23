@@ -12,7 +12,6 @@ export const ListPagehandlers = [
     http.get(`${API}`, ({ request }) => {
         const url = new URL(request.url);
         const page = url.searchParams.get('page');
-
         let data = mockreturn1;
         if (page === '1') {
             data = mockreturn2;

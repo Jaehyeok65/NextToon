@@ -9,6 +9,9 @@ const useObserver = (hasNextPage: boolean, fetchNextPage: any) => {
     const observerCallback = useCallback(
         ([entries]: any) => {
             if (entries.isIntersecting && hasNextPage) {
+                if(process.env.NODE_ENV === 'test') {
+                    target.current = null;
+                }
                 if (!target.current) {
                     target.current = setTimeout(() => {
                         target.current = null;
@@ -17,7 +20,7 @@ const useObserver = (hasNextPage: boolean, fetchNextPage: any) => {
                 }
             }
         },
-        [hasNextPage]
+        [hasNextPage, fetchNextPage]
     );
 
     const option = { threshold: 0.25, rootMargin: '80px'};

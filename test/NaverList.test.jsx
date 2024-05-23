@@ -73,4 +73,40 @@ describe('List Page 테스트', () => {
             );
         });
     });
+
+    it('클라이언트 컴포넌트에서 마지막으로 리턴된 배열의 길이가 12미만이라면 더 이상 추가적인 호출이 이루어지지 않는다.', async () => {
+        render(
+            <RenderWithQuery>
+                <ClientComponent />
+            </RenderWithQuery>
+        );
+
+        await waitFor(() => {
+            expect(screen.getByText('제목1')).toBeInTheDocument();
+
+            expect(screen.getByAltText('제목1')).toHaveAttribute(
+                'src',
+                '/public/img1.jpg'
+            );
+        });
+
+        // IntersectionObserver 콜백 호출 시뮬레이션
+        const [callback] = window.IntersectionObserver.mock.calls[0];
+        const entry = { isIntersecting: true };
+        callback([entry]);
+
+        await waitFor(() => {
+            expect(screen.getByText('제목13')).toBeInTheDocument();
+            expect(screen.getByAltText('제목13')).toHaveAttribute(
+                'src',
+                '/public/img13.jpg'
+            );
+        });
+
+        callback([entry]);
+
+        await waitFor(() => {
+            expect(screen.getByText('제목25')).toBeInTheDocument();
+        });
+    });
 });

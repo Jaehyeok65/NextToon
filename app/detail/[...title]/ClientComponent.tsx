@@ -6,7 +6,6 @@ import {
     getServiceName,
     getSerialDay,
     AddBookMark,
-    CheckBookMark,
 } from '@/utils/Bookmark';
 import { FaHeart } from 'react-icons/fa6';
 import { WebtoonInfo } from '@/types/type';
