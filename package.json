@@ -9,7 +9,8 @@
     "lint": "next lint",
     "test": "jest",
     "cypress": "cypress open",
-    "mock" : "npx tsx watch ./mock/http.js"
+    "mock" : "npx tsx watch ./mock/http.js",
+    "coverage" : "jest --coverage"
   },
   "dependencies": {
     "@tanstack/query-core": "^5.18.1",

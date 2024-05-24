@@ -1,12 +1,16 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import ClientComponent from '@/app/list/ClientComponent';
 import { RenderWithQuery } from '../utils/RenderWithQuery';
+import { usePathname } from 'next/navigation';
 
 // useRouter 모의 설정
 jest.mock('next/navigation', () => ({
     useRouter: jest.fn(),
     usePathname: jest.fn(),
 }));
+
+// Jest 테스트 파일 상단에 다음과 같은 코드를 추가하여 window.scrollTo 함수를 모킹합니다.
+window.scrollTo = jest.fn();
 
 const observe = jest.fn();
 const unobserve = jest.fn();
@@ -28,6 +32,8 @@ describe('List Page 테스트', () => {
             disconnect,
         });
         window.IntersectionObserver = mockIntersectionObserver;
+
+        sessionStorage.clear();
     });
 
     it('List Page 초기 렌더링 및 모킹 테스트', async () => {
@@ -111,5 +117,38 @@ describe('List Page 테스트', () => {
         await waitFor(() => {
             expect(screen.getByText('제목25')).toBeInTheDocument();
         });
+    });
+
+    it('브라우저 환경에서 스크롤시 세션 스토리지에 스크롤 위치가 저장된다.', async () => {
+        usePathname.mockReturnValue('list');
+        render(
+            <RenderWithQuery>
+                <ClientComponent />
+            </RenderWithQuery>
+        );
+
+        // fireEvent로 사용자 이벤트를 트리거합니다
+        fireEvent.scroll(window, { target: { scrollY: 200 } });
+
+        await waitFor(() => {
+            expect(JSON.parse(sessionStorage.getItem('list_scroll'))).toEqual(
+                200
+            );
+        });
+    });
+
+    it('세션 스토리지에 저장된 스크롤 위치가 있을 시 렌더링 시에 스크롤 위치가 복원된다.', () => {
+        usePathname.mockReturnValue('list');
+        sessionStorage.setItem('list_scroll', '200');
+
+        render(
+            <RenderWithQuery>
+                <ClientComponent />
+            </RenderWithQuery>
+        );
+
+        expect(window.scrollTo).toHaveBeenCalled();
+
+        expect(JSON.parse(sessionStorage.getItem('list_scroll'))).toEqual(200);
     });
 });

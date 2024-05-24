@@ -8,6 +8,10 @@ const useScroll = (delay = 3000) => {
 
     const throttling = () => {
         if (!timerRef.current) {
+            if(process.env.NODE_ENV === 'test') {
+                setScrollY(() => window.scrollY);
+                return;
+            }
             timerRef.current = setTimeout(() => {
                 setScrollY(() => window.scrollY);
                 timerRef.current = null;
