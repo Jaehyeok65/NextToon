@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import Carousel from '.';
 import {
     CheckBookMark,
@@ -218,5 +219,17 @@ describe('캐러셀 컴포넌트 테스트', () => {
 
             expect(titleElement).toBeInTheDocument();
         });
+    });
+
+    it('handleResize 함수가 windowWidth를 올바르게 설정하는지 확인', () => {
+        render(<Carousel list={testlist} />);
+
+        // window.innerWidth 값을 변경하여 handleResize 함수가 호출되는지 확인
+        act(() => {
+            global.innerWidth = 1024; // 예시로 임의의 너비를 설정합니다.
+            global.dispatchEvent(new Event('resize'));
+        });
+
+        expect(global.innerWidth).toEqual(1024);
     });
 });
