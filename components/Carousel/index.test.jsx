@@ -221,15 +221,100 @@ describe('캐러셀 컴포넌트 테스트', () => {
         });
     });
 
-    it('handleResize 함수가 windowWidth를 올바르게 설정하는지 확인', () => {
+    it('handleResize 함수가 windowWidth를 올바르게 설정하는지 확인하며 올바른 depth가 설정되는지 확인한다.', async () => {
         render(<Carousel list={testlist} />);
 
         // window.innerWidth 값을 변경하여 handleResize 함수가 호출되는지 확인
         act(() => {
-            global.innerWidth = 1024; // 예시로 임의의 너비를 설정합니다.
+            global.innerWidth = 599; // 예시로 임의의 너비를 설정합니다.
             global.dispatchEvent(new Event('resize'));
         });
 
-        expect(global.innerWidth).toEqual(1024);
+        await waitFor(() => {
+            expect(global.innerWidth).toEqual(599);
+
+            const titleElement = screen.getByText('제목1');
+
+            expect(titleElement).toBeInTheDocument();
+
+            const title2Element = screen.queryByText('제목2');
+
+            expect(title2Element).not.toBeInTheDocument();
+        });
+
+        act(() => {
+            global.innerWidth = 999; // 예시로 임의의 너비를 설정합니다.
+            global.dispatchEvent(new Event('resize'));
+        });
+
+        await waitFor(() => {
+            expect(global.innerWidth).toEqual(999);
+
+            const titleElement = screen.getByText('제목1');
+
+            expect(titleElement).toBeInTheDocument();
+
+            const title2Element = screen.getByText('제목2');
+
+            expect(title2Element).toBeInTheDocument();
+
+            const title3Element = screen.queryByText('제목3');
+
+            expect(title3Element).not.toBeInTheDocument();
+        });
+
+        act(() => {
+            global.innerWidth = 1399; // 예시로 임의의 너비를 설정합니다.
+            global.dispatchEvent(new Event('resize'));
+        });
+
+        await waitFor(() => {
+            expect(global.innerWidth).toEqual(1399);
+
+            const titleElement = screen.getByText('제목1');
+
+            expect(titleElement).toBeInTheDocument();
+
+            const title2Element = screen.getByText('제목2');
+
+            expect(title2Element).toBeInTheDocument();
+
+            const title3Element = screen.getByText('제목3');
+
+            expect(title3Element).toBeInTheDocument();
+
+            const title4Element = screen.queryByText('제목4');
+
+            expect(title4Element).not.toBeInTheDocument();
+        });
+
+        act(() => {
+            global.innerWidth = 1401; // 예시로 임의의 너비를 설정합니다.
+            global.dispatchEvent(new Event('resize'));
+        });
+
+        await waitFor(() => {
+            expect(global.innerWidth).toEqual(1401);
+
+            const titleElement = screen.getByText('제목1');
+
+            expect(titleElement).toBeInTheDocument();
+
+            const title2Element = screen.getByText('제목2');
+
+            expect(title2Element).toBeInTheDocument();
+
+            const title3Element = screen.getByText('제목3');
+
+            expect(title3Element).toBeInTheDocument();
+
+            const title4Element = screen.getByText('제목4');
+
+            expect(title4Element).toBeInTheDocument();
+
+            const title5Element = screen.queryByText('제목5');
+
+            expect(title5Element).not.toBeInTheDocument();
+        });
     });
 });
