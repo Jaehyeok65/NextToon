@@ -42,7 +42,6 @@ const Carousel = ({ list }: { list: any[] }) => {
         // 5초마다 getNextPage 함수 호출
         const intervalId = setInterval(() => {
             const nextPage = getNextPage(current);
-            
             +setCurrent(nextPage);
         }, 5000);
 
