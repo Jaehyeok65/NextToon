@@ -1,16 +1,12 @@
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import DetailPage from '@/app/detail/[...title]/page';
-import { AddBookMark } from '@/utils/Bookmark';
 
 // useRouter 모의 설정
 jest.mock('next/navigation', () => ({
     useRouter: jest.fn(),
 }));
 
-jest.mock('@/utils/BookMark', () => ({
-    ...jest.requireActual('@/utils/BookMark'), // 원래 모듈을 불러옵니다.
-    AddBookMark: jest.fn(),
-}));
+window.alert = jest.fn();
 
 describe('Detail Component Test', () => {
     it('모킹된 데이터와 params의 Title과 Service가 정확하게 일치할 때 Detail Page가 정상적으로 렌더링된다.', async () => {
@@ -67,6 +63,8 @@ describe('Detail Component Test', () => {
 
         fireEvent.click(addbookmark);
 
-        expect(AddBookMark).toHaveBeenCalled();
+        await waitFor(() => {
+            expect(window.alert).toHaveBeenCalledWith('북마크에 등록되었습니다.');
+        })
     });
 });
