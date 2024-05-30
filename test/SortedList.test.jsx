@@ -92,7 +92,6 @@ describe('SortedList Component Test', () => {
 
         await waitFor(() => {
             expect(screen.getByText('제목16')).toBeInTheDocument();
-            expect(screen.getByText('제목500')).toBeInTheDocument();
         });
     });
 

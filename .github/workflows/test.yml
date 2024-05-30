@@ -1,7 +1,10 @@
-name: CI
+name: CI and PR checks
 
 on:
   push:
+    branches:
+      - develop
+  pull_request:
     branches:
       - develop
 
