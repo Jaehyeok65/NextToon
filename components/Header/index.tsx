@@ -84,7 +84,6 @@ export default function Header() {
                 setInputAnimate('inputunmount');
                 setTimeout(() => setShowSearch(false), 400);
                 setTimeout(() => setInputAnimate('inputmount'), 400);
-
             }
         };
         document.addEventListener('mousedown', handleClickOutside); //마운트시 이벤트리스너 추가
