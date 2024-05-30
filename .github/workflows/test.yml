@@ -1,4 +1,4 @@
-name: CI
+name: CI and PR checks
 
 on:
   push:
@@ -22,3 +22,18 @@ jobs:
       
       - name: Run tests
         run: npm test
+
+  create-pr:
+    runs-on: ubuntu-latest
+    needs: test
+    if: ${{ github.event_name == 'push' && success() }}
+    steps:
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: 'Automatic Pull Request from CI'
+          labels: 'automated'
+          branch: 'main'
+          base: 'develop'
+          body: |
+            This is an automatic Pull Request created by CI when tests passed on the `develop` branch.
