@@ -82,7 +82,7 @@ const Card: React.FC<WebtoonInfo> = ({
             className={styles.card}
             onClick={() => onDetailNavigation(title, service)}
         >
-            <img src={img} alt={title} loading="lazy" />
+            <img src={img} alt={title} />
             <div className={styles.textoverlay}>
                 <div>
                     {isBookMark ? (
