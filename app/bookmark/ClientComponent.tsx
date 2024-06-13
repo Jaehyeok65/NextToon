@@ -13,8 +13,8 @@ export default function ClientComponent() {
         if (prev) {
             //prev가 null이 아니라는 것은 데이터가 있다는 것
             setWebtoons(JSON.parse(prev));
-        }
-        else { //prev가 null이라면 빈 배열을 렌더링
+        } else {
+            //prev가 null이라면 빈 배열을 렌더링
             setWebtoons([]);
         }
     }, []);

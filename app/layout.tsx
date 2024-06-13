@@ -3,7 +3,13 @@ import Providers from '@/utils/provider';
 import './globals.css';
 import Header from '@/components/Header';
 import React from 'react';
-import MockProvider from '@/mock/MockProvider';
+import { Inter } from 'next/font/google'
+ 
+// If loading a variable font, you don't need to specify the font weight
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
     title: 'NextToon | 메인페이지',
@@ -16,7 +22,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" className={inter.className}>
             <body>
                 <Providers>
                     <Header />

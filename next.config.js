@@ -20,6 +20,7 @@ const nextConfig = {
                 hostname: 'next-toon.vercel.app',
             },
         ],
+        formats: ['image/avif', 'image/webp'],
     },
     devIndicators: {
         autoPrerender: false,

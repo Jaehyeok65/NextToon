@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/Carousel/index.test.jsx", "components/Card/index.test.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/Carousel/index.test.jsx", "components/Card/index.test.jsx", "jest.setup.js", "mock/handler.jsx", "app/api/optimize/page.jsx", "app/api/optimize/page.jsx", "app/api/optimize/page.jsx"],
   "exclude": ["node_modules"]
 }

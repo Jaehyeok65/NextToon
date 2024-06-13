@@ -1,10 +1,9 @@
-
 // 환경 변수에서 API 주소 가져오기
 export const API = process.env.NEXT_PUBLIC_API;
 
 export const getWebtoonList = async (page: number) => {
     const res = await fetch(`${API}/?perPage=12&page=${page}`, {
-        method : 'get'
+        method: 'get',
     });
     const data = await res.json();
     return data;
