@@ -17,5 +17,5 @@ export default async function Page() {
 
     const data = await Promise.all([firstdata, seconddata, thirddata]);
 
-    return <ClientComponent2 data={data} />;
+    return <ClientComponent2 data={data} defaultdepth={1000} />;
 }

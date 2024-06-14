@@ -8,20 +8,28 @@ import { getCurrentDepth, setCurrentDepth } from '@/utils/SortedUtil';
 
 export default function ClientComponent({
     data,
+    service,
     defaultdepth,
 }: {
     data: any;
+    service: string;
     defaultdepth: number;
 }) {
-
     const scroll = useScroll();
 
     const [webtoons, setWebtoons] = useState<any>();
     const [depth, setDepth] = useState<number>(defaultdepth);
 
     useEffect(() => {
+        const current = getCurrentDepth(service);
+        if (current) {
+            setDepth(current);
+        }
+    }, [service]);
+
+    useEffect(() => {
         if (data) {
-            setWebtoons(getFilterByFinished(data));
+            setWebtoons(getSortByFanCount(data));
         }
     }, [data]);
 
@@ -29,44 +37,41 @@ export default function ClientComponent({
         if (scroll) {
             //scrorll이 0임을 방지
             window.sessionStorage.setItem(
-                `sortedlist/finish_scroll`,
+                `sortedlist/${service}_scroll`,
                 scroll.toString()
             );
         }
-    }, [scroll]);
+    }, [scroll, service]);
 
     useEffect(() => {
         const scrolly = window.sessionStorage.getItem(
-            `sortedlist/finish_scroll`
+            `sortedlist/${service}_scroll`
         );
         if (scrolly && webtoons) {
             window.scrollTo({
                 top: Number(scrolly),
             });
         }
-    }, [webtoons]);
+    }, [webtoons, service]);
 
     useEffect(() => {
-        const current = getCurrentDepth('finish');
+        const current = getCurrentDepth(service);
         if (current) {
             setDepth(current);
         }
-    }, []);
+    }, [service]);
 
-    const getFilterByFinished = (data: any) => {
+    const getSortByFanCount = (data: any) => {
+        //데이터를 fanCount 내림차순으로 정렬
         let array: any = [];
         data.map((item: any) => (array = [...array, item.webtoons]));
         const Array = array.reduce(
             (acc: any, curr: number) => acc.concat(curr),
             []
         );
-        const finishedArray = Array.filter(
-            (item: any) => item.updateDays[0] === 'finished'
-        );
-        const sortedArray = finishedArray.sort(
+        const sortedArray = Array.sort(
             (a: any, b: any) => b.fanCount - a.fanCount
         );
-
         return sortedArray;
     };
 
@@ -80,10 +85,10 @@ export default function ClientComponent({
 
         if (depth + defaultdepth > webtoons.length) {
             setDepth(webtoons.length);
-            setCurrentDepth('finish', webtoons.length);
+            setCurrentDepth(service, webtoons.length);
         } else {
             setDepth((prev) => prev + defaultdepth);
-            setCurrentDepth('finish', depth + defaultdepth);
+            setCurrentDepth(service, depth + defaultdepth);
         }
     };
 
