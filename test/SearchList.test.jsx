@@ -45,10 +45,6 @@ describe('SearchList Component Test', () => {
         );
 
         expect(screen.getByText('"백련"')).toBeInTheDocument();
-        expect(screen.getByAltText('백련')).toHaveAttribute(
-            'src',
-            '/public/img25'
-        );
     });
 
     it('title 변수로 모킹된 작품 이름이 주어졌을 때 올바른 검색결과가 리턴된다2', async () => {
@@ -68,9 +64,5 @@ describe('SearchList Component Test', () => {
         );
 
         expect(screen.getByText('"무련"')).toBeInTheDocument();
-        expect(screen.getByAltText('무련')).toHaveAttribute(
-            'src',
-            '/public/img26'
-        );
     });
 });

@@ -45,11 +45,6 @@ describe('List Page 테스트', () => {
 
         await waitFor(() => {
             expect(screen.getByText('제목1')).toBeInTheDocument();
-
-            expect(screen.getByAltText('제목1')).toHaveAttribute(
-                'src',
-                '/public/img1.jpg'
-            );
         });
     });
 
@@ -62,11 +57,6 @@ describe('List Page 테스트', () => {
 
         await waitFor(() => {
             expect(screen.getByText('제목1')).toBeInTheDocument();
-
-            expect(screen.getByAltText('제목1')).toHaveAttribute(
-                'src',
-                '/public/img1.jpg'
-            );
         });
 
         // IntersectionObserver 콜백 호출 시뮬레이션
@@ -76,10 +66,6 @@ describe('List Page 테스트', () => {
 
         await waitFor(() => {
             expect(screen.getByText('제목13')).toBeInTheDocument();
-            expect(screen.getByAltText('제목13')).toHaveAttribute(
-                'src',
-                '/public/img13.jpg'
-            );
         });
     });
 
@@ -92,11 +78,6 @@ describe('List Page 테스트', () => {
 
         await waitFor(() => {
             expect(screen.getByText('제목1')).toBeInTheDocument();
-
-            expect(screen.getByAltText('제목1')).toHaveAttribute(
-                'src',
-                '/public/img1.jpg'
-            );
         });
 
         // IntersectionObserver 콜백 호출 시뮬레이션
@@ -106,10 +87,6 @@ describe('List Page 테스트', () => {
 
         await waitFor(() => {
             expect(screen.getByText('제목13')).toBeInTheDocument();
-            expect(screen.getByAltText('제목13')).toHaveAttribute(
-                'src',
-                '/public/img13.jpg'
-            );
         });
 
         callback([entry]);

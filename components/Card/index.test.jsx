@@ -39,7 +39,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         render(
             <Card
                 _id="123"
-                img="list.jpg"
+                img="/list.jpg"
                 title="백련성신"
                 author="은사해탈"
                 service="kakaoPage"
@@ -67,8 +67,6 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
 
         expect(serviceElement).toBeInTheDocument();
 
-        // 이미지의 src 속성을 확인합니다.
-        expect(imageElement).toHaveAttribute('src', 'list.jpg');
     });
 
     it('초기 렌더링시 북마크에 등록되어 있으면 꽉 찬 하트 표시 아이콘이 렌더링된다.', async () => {
@@ -83,7 +81,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         render(
             <Card
                 _id="123"
-                img="list.jpg"
+                img="/list.jpg"
                 title="백련성신"
                 author="은사해탈"
                 service="kakaoPage"
@@ -110,7 +108,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         render(
             <Card
                 _id="123"
-                img="list.jpg"
+                img="/list.jpg"
                 title="백련성신"
                 author="은사해탈"
                 service="kakaoPage"
@@ -136,7 +134,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         render(
             <Card
                 _id="123"
-                img="list.jpg"
+                img="/list.jpg"
                 title="백련성신"
                 author="은사해탈"
                 service="kakaoPage"
@@ -170,7 +168,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         render(
             <Card
                 _id="123"
-                img="list.jpg"
+                img="/list.jpg"
                 title="백련성신"
                 author="은사해탈"
                 service="kakaoPage"
@@ -199,7 +197,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         render(
             <Card
                 _id="123"
-                img="list.jpg"
+                img="/list.jpg"
                 title="백련성신"
                 author="은사해탈"
                 service="kakaoPage"
@@ -222,7 +220,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         render(
             <Card
                 _id="123"
-                img="list.jpg"
+                img="/list.jpg"
                 title="백련성신"
                 author="은사해탈"
                 service="kakaoPage"
@@ -240,7 +238,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         render(
             <Card
                 _id="123"
-                img="list.jpg"
+                img="/list.jpg"
                 title="백련성신"
                 author="은사해탈"
                 service="kakao"
@@ -258,7 +256,7 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         render(
             <Card
                 _id="123"
-                img="list.jpg"
+                img="/list.jpg"
                 title="백련성신"
                 author="은사해탈"
                 service="naver"

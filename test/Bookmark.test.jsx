@@ -9,7 +9,7 @@ jest.mock('next/navigation', () => ({
 const testlist = [
     {
         _id: '12345',
-        img: 'list1.png',
+        img: '/list1.png',
         title: '제목1',
         author: '작가1',
         service: '서비스1',
@@ -17,7 +17,7 @@ const testlist = [
     },
     {
         _id: '12346',
-        img: 'list2.png',
+        img: '/list2.png',
         title: '제목2',
         author: '작가2',
         service: '서비스2',
@@ -25,7 +25,7 @@ const testlist = [
     },
     {
         _id: '12347',
-        img: 'list3.png',
+        img: '/list3.png',
         title: '제목3',
         author: '작가3',
         service: '서비스3',
@@ -33,7 +33,7 @@ const testlist = [
     },
     {
         _id: '12348',
-        img: 'list4.png',
+        img: '/list4.png',
         title: '제목4',
         author: '작가4',
         service: '서비스4',
@@ -41,7 +41,7 @@ const testlist = [
     },
     {
         _id: '12349',
-        img: 'list5.png',
+        img: '/list5.png',
         title: '제목5',
         author: '작가5',
         service: '서비스5',

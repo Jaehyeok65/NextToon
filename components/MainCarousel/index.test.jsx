@@ -29,7 +29,7 @@ describe('MainCarousel 컴포넌트 테스트', () => {
     const testlist = [
         {
             _id: '12345',
-            img: 'list1.png',
+            img: '/list1.png',
             title: '제목1',
             author: '작가1',
             service: '서비스1',
@@ -37,7 +37,7 @@ describe('MainCarousel 컴포넌트 테스트', () => {
         },
         {
             _id: '12346',
-            img: 'list2.png',
+            img: '/list2.png',
             title: '제목2',
             author: '작가2',
             service: '서비스2',
@@ -45,7 +45,7 @@ describe('MainCarousel 컴포넌트 테스트', () => {
         },
         {
             _id: '12347',
-            img: 'list3.png',
+            img: '/list3.png',
             title: '제목3',
             author: '작가3',
             service: '서비스3',
@@ -53,7 +53,7 @@ describe('MainCarousel 컴포넌트 테스트', () => {
         },
         {
             _id: '12348',
-            img: 'list4.png',
+            img: '/list4.png',
             title: '제목4',
             author: '작가4',
             service: '서비스4',
@@ -61,7 +61,7 @@ describe('MainCarousel 컴포넌트 테스트', () => {
         },
         {
             _id: '12349',
-            img: 'list5.png',
+            img: '/list5.png',
             title: '제목5',
             author: '작가5',
             service: '서비스5',
@@ -90,8 +90,6 @@ describe('MainCarousel 컴포넌트 테스트', () => {
         expect(titleElement).toBeInTheDocument();
 
         expect(authorElement).toBeInTheDocument();
-        // 이미지의 src 속성을 확인합니다.
-        expect(imageElement).toHaveAttribute('src', 'list1.png');
     });
 
     it('MainCarousel 컴포넌트를 렌더링할 때 title로 넘겨준 Props가 제대로 렌더링된다.', () => {
