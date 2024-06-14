@@ -1,38 +1,13 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { getTotalList } from '@/services/API';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import Card from '@/components/Card';
 import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
 import useScroll from '@/hooks/useScroll';
 import { getCurrentDepth, setCurrentDepth } from '@/utils/SortedUtil';
 
-export default function ClientComponent({
-    defaultdepth,
-    perPage,
-}: {
-    defaultdepth: number;
-    perPage: number;
-}) {
-    const { fetchNextPage, hasNextPage, isFetchingNextPage, isPending, data } =
-        useInfiniteQuery({
-            queryKey: ['total'],
-            queryFn: ({ pageParam = 0 }) => {
-                return getTotalList(pageParam, perPage);
-            },
-            getNextPageParam: (lastPage, allPages) => {
-                if (lastPage?.webtoons?.length < perPage) {
-                    return undefined;
-                } else {
-                    return allPages.length;
-                }
-            },
-            initialPageParam: 0,
-            refetchOnWindowFocus: false,
-            refetchIntervalInBackground: false,
-            staleTime: 600000,
-        });
+export default function ClientComponent({ data }: { data: any }) {
+    const defaultdepth = 1000;
 
     const scroll = useScroll();
 
@@ -40,19 +15,10 @@ export default function ClientComponent({
     const [depth, setDepth] = useState<number>(defaultdepth);
 
     useEffect(() => {
-        if (hasNextPage) {
-            getTotalWebtoons();
+        if (data) {
+            setWebtoons(getFilterByFinished(data));
         }
-    }, [hasNextPage, data]);
-
-    useEffect(() => {
-        if (!hasNextPage) {
-            if (data) {
-                //데이터가 있을 때만 처리하도록 로직 설계
-                setWebtoons(getFilterByFinished(data?.pages));
-            }
-        }
-    }, [hasNextPage]);
+    }, [data]);
 
     useEffect(() => {
         if (scroll) {
@@ -81,10 +47,6 @@ export default function ClientComponent({
             setDepth(current);
         }
     }, []);
-
-    const getTotalWebtoons = () => {
-        fetchNextPage();
-    };
 
     const getFilterByFinished = (data: any) => {
         let array: any = [];
