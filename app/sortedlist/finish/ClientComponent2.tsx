@@ -13,7 +13,6 @@ export default function ClientComponent({
     data: any;
     defaultdepth: number;
 }) {
-
     const scroll = useScroll();
 
     const [webtoons, setWebtoons] = useState<any>();
@@ -71,13 +70,6 @@ export default function ClientComponent({
     };
 
     const getNextWebtoons = () => {
-        //다음 웹툰 리스트를 가져옴
-        if (depth === webtoons.length) {
-            //depth와 length가 같다면 더이상 가져올 다음 데이터가 없다는 뜻
-            window.alert('마지막 페이지입니다.');
-            return;
-        }
-
         if (depth + defaultdepth > webtoons.length) {
             setDepth(webtoons.length);
             setCurrentDepth('finish', webtoons.length);
@@ -112,11 +104,16 @@ export default function ClientComponent({
                     />
                 ))}
             </div>
-            <div>
-                <button onClick={getNextWebtoons} className={styles.flexbtn}>
-                    더 보기
-                </button>
-            </div>
+            {depth < webtoons.length && (
+                <div>
+                    <button
+                        onClick={getNextWebtoons}
+                        className={styles.flexbtn}
+                    >
+                        더 보기
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
