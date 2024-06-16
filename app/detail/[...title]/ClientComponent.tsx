@@ -35,7 +35,13 @@ export default function ClientComponent({
                 <div>
                     <FaHeart color="red" /> {data?.fanCount + '만++'}
                 </div>
-                <div>{data?.url && <Link href={data?.url}>바로가기</Link>}</div>
+                <div>
+                    {data?.url && (
+                        <Link href={data?.url} target="_blank">
+                            바로가기
+                        </Link>
+                    )}
+                </div>
                 <button onClick={onAddClick}>북마크 추가하기</button>
             </div>
         </div>
