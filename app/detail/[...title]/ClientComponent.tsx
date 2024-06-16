@@ -2,13 +2,10 @@
 
 import React from 'react';
 import styles from '@/style/detail.module.css';
-import {
-    getServiceName,
-    getSerialDay,
-    AddBookMark,
-} from '@/utils/Bookmark';
+import { getServiceName, getSerialDay, AddBookMark } from '@/utils/Bookmark';
 import { FaHeart } from 'react-icons/fa6';
 import { WebtoonInfo } from '@/types/type';
+import Link from 'next/link';
 
 export default function ClientComponent({
     data,
@@ -21,8 +18,8 @@ export default function ClientComponent({
         }
     };
 
-    if(data === undefined) {
-        return <div>데이터가 올바르지 않습니다.</div>
+    if (data === undefined) {
+        return <div>데이터가 올바르지 않습니다.</div>;
     }
 
     return (
@@ -38,6 +35,7 @@ export default function ClientComponent({
                 <div>
                     <FaHeart color="red" /> {data?.fanCount + '만++'}
                 </div>
+                <div>{data?.url && <Link href={data?.url}>바로가기</Link>}</div>
                 <button onClick={onAddClick}>북마크 추가하기</button>
             </div>
         </div>

@@ -8,4 +8,5 @@ export interface WebtoonInfo {
     updateDays: string[];
     fanCount: number | null;
     kakaopage?:boolean;
+    url?:string;
 }
