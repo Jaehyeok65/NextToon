@@ -28,11 +28,25 @@
     margin-bottom: 5%;
 }
 
+.textcontainer > div:nth-child(1) {
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.textcontainer > div > a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+    color: #FF82FF;
+}
+
 .textcontainer > button {
     border-radius: 8px;
     padding: 8px;
     font-size: 12px;
+    cursor: pointer;
 }
+
 
 @media screen and (max-width: 1000px) {
     .container {
@@ -47,6 +61,10 @@
     }
     .textcontainer {
         font-size: 15px;
+    }
+    .textcontainer > div:nth-child(1) {
+        font-weight: bold;
+        font-size: 18px;
     }
 }
 
@@ -64,5 +82,10 @@
 
     .textcontainer {
         font-size: 13px;
+    }
+
+    .textcontainer > div:nth-child(1) {
+        font-weight: bold;
+        font-size: 17px;
     }
 }
