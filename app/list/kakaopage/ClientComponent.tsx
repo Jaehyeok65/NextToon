@@ -9,26 +9,36 @@ import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
 import useScroll from '@/hooks/useScroll';
 import { usePathname } from 'next/navigation';
+import Error from '@/utils/Error';
 
 export default function Client2() {
-    const { fetchNextPage, hasNextPage, isFetchingNextPage, isPending, data } =
-        useInfiniteQuery({
-            queryKey: ['kakaopagewebtoon'],
-            queryFn: ({ pageParam = 0 }) => {
-                return getServiceWebtoonList(pageParam, 'kakaoPage');
-            },
-            getNextPageParam: (lastPage, allPages) => {
-                if (lastPage?.webtoons?.length < 12) {
-                    return undefined;
-                } else {
-                    return allPages.length;
-                }
-            },
-            initialPageParam: 0,
-            refetchOnWindowFocus: false,
-            refetchIntervalInBackground: false,
-            staleTime: 600000,
-        });
+    const {
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+        isPending,
+        data,
+        isError,
+        error,
+        refetch,
+    } = useInfiniteQuery({
+        queryKey: ['kakaopagewebtoon'],
+        queryFn: ({ pageParam = 0 }) => {
+            return getServiceWebtoonList(pageParam, 'kakaoPage');
+        },
+        getNextPageParam: (lastPage, allPages) => {
+            if (lastPage?.webtoons?.length < 12) {
+                return undefined;
+            } else {
+                return allPages.length;
+            }
+        },
+        initialPageParam: 0,
+        refetchOnWindowFocus: false,
+        refetchIntervalInBackground: false,
+        retry: false,
+        staleTime: 600000,
+    });
 
     const ref = useObserver(hasNextPage, fetchNextPage);
 
@@ -53,6 +63,10 @@ export default function Client2() {
             });
         }
     }, [pathname]);
+
+    if (isError) {
+        return <Error error={error} reset={refetch} />;
+    }
 
     return (
         <>
