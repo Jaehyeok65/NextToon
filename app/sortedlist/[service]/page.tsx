@@ -7,8 +7,12 @@ export const metadata = {
 };
 
 const getDataFetch = async (page: number, perPage: number, service: string) => {
-    const data = await getServiceTotalList(page, perPage, service);
-    return data;
+    try {
+        const data = await getServiceTotalList(page, perPage, service);
+        return data;
+    } catch (error) {
+        throw new Error('Failed to fetch data from getDataFetch');
+    }
 };
 
 export default async function Page({

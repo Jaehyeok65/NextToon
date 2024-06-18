@@ -3,8 +3,17 @@ import ClientComponent from './ClientComponent';
 import { WebtoonInfo } from '@/types/type';
 
 async function getWebtoonTitle(title: string) {
-    const res = await fetch(`${API}/search?keyword=${title}`);
-    return res.json();
+    try {
+        const res = await fetch(`${API}/search?keyword=${title}`);
+        if (!res.ok) {
+            throw new Error('Something went wrong');
+        }
+
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
 }
 
 const getWebtoonData = (data: WebtoonInfo[], service: string) => {
