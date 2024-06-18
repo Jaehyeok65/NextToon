@@ -1,5 +1,6 @@
 import { API } from '@/services/API';
 import MainCarousel from '@/components/MainCarousel';
+import ErrorComponent from '@/utils/ErrorComponent';
 
 const getEntireDataFetch = async () => {
     try {
@@ -11,7 +12,7 @@ const getEntireDataFetch = async () => {
         const data = await res.json();
         return data;
     } catch (error) {
-        throw error;
+        return '에러 발생';
     }
 };
 
@@ -25,7 +26,7 @@ const getNaverDataFetch = async () => {
         const data = await res.json();
         return data;
     } catch (error) {
-        throw error;
+        return '에러 발생';
     }
 };
 
@@ -39,7 +40,7 @@ const getKakaoDataFetch = async () => {
         const data = await res.json();
         return data;
     } catch (error) {
-        throw error;
+        return '에러 발생';
     }
 };
 
@@ -53,7 +54,7 @@ const getKakaoPageDataFetch = async () => {
         const data = await res.json();
         return data;
     } catch (error) {
-        throw error;
+        return '에러 발생';
     }
 };
 
@@ -62,6 +63,15 @@ const Page = async () => {
     const naver = await getNaverDataFetch();
     const kakao = await getKakaoDataFetch();
     const kakaoPage = await getKakaoPageDataFetch();
+
+    if (
+        entire === '에러 발생' ||
+        naver === '에러 발생' ||
+        kakao === '에러 발생' ||
+        kakaoPage === '에러 발생'
+    ) {
+        return <ErrorComponent />;
+    }
 
     return (
         <>

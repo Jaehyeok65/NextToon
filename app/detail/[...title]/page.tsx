@@ -1,6 +1,7 @@
 import { API } from '@/services/API';
 import ClientComponent from './ClientComponent';
 import { WebtoonInfo } from '@/types/type';
+import ErrorComponent from '@/utils/ErrorComponent';
 
 async function getWebtoonTitle(title: string) {
     try {
@@ -12,7 +13,7 @@ async function getWebtoonTitle(title: string) {
         const data = await res.json();
         return data;
     } catch (error) {
-        throw error;
+        return '에러 발생';
     }
 }
 
@@ -31,6 +32,9 @@ export default async function Detail({
     params: { title: string[] };
 }) {
     const prev = await getWebtoonTitle(params.title[0]);
+    if (prev === '에러 발생') {
+        return <ErrorComponent />;
+    }
     const next = getWebtoonData(prev.webtoons, params.title[1]);
     return <ClientComponent data={next} />;
 }

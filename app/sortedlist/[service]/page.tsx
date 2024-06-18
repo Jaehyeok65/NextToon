@@ -1,6 +1,6 @@
-import ClientComponent from './ClientComponent';
 import ClientComponent2 from './ClientComponent2';
 import { getServiceTotalList } from '@/services/API';
+import ErrorComponent from '@/utils/ErrorComponent';
 
 export const metadata = {
     title: 'NextToon | 인기웹툰',
@@ -11,7 +11,7 @@ const getDataFetch = async (page: number, perPage: number, service: string) => {
         const data = await getServiceTotalList(page, perPage, service);
         return data;
     } catch (error) {
-        throw new Error('Failed to fetch data from getDataFetch');
+        return '에러 발생';
     }
 };
 
@@ -25,5 +25,15 @@ export default async function Page({
 
     const data = await Promise.all([firstdata, seconddata]);
 
-    return <ClientComponent2 data={data} service={params.service} defaultdepth={300}/>;
+    if (data.includes('에러 발생')) {
+        return <ErrorComponent />;
+    }
+
+    return (
+        <ClientComponent2
+            data={data}
+            service={params.service}
+            defaultdepth={300}
+        />
+    );
 }

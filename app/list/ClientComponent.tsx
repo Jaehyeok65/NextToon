@@ -9,7 +9,7 @@ import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
 import { usePathname } from 'next/navigation';
 import useScroll from '@/hooks/useScroll';
-import Error from '@/utils/Error';
+import Error from '@/utils/ErrorComponent';
 
 export default function Client2() {
     const {

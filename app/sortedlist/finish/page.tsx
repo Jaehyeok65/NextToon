@@ -1,3 +1,4 @@
+import ErrorComponent from '@/utils/ErrorComponent';
 import ClientComponent2 from './ClientComponent2';
 import { getTotalList } from '@/services/API';
 
@@ -10,7 +11,7 @@ const getDataFetch = async (page: number, perPage: number) => {
         const data = await getTotalList(page, perPage);
         return data;
     } catch (error) {
-        throw new Error('Failed to fetch data from getDataFetch');
+        return '에러 발생';
     }
 };
 
@@ -20,6 +21,10 @@ export default async function Page() {
     const thirddata = await getDataFetch(2, 3000);
 
     const data = await Promise.all([firstdata, seconddata, thirddata]);
+
+    if (data.includes('에러 발생')) {
+        return <ErrorComponent />;
+    }
 
     return <ClientComponent2 data={data} defaultdepth={1000} />;
 }
