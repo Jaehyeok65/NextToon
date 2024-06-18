@@ -2,27 +2,59 @@ import { API } from '@/services/API';
 import MainCarousel from '@/components/MainCarousel';
 
 const getEntireDataFetch = async () => {
-    const res = await fetch(`${API}/?perPage=100&page=0`);
-    const data = await res.json();
-    return data;
+    try {
+        const res = await fetch(`${API}/?perPage=100&page=0`);
+        if (!res.ok) {
+            throw new Error('Something went wrong');
+        }
+
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
 };
 
 const getNaverDataFetch = async () => {
-    const res = await fetch(`${API}/?perPage=100&page=0&service=naver`);
-    const data = await res.json();
-    return data;
+    try {
+        const res = await fetch(`${API}/?perPage=100&page=0&service=naver`);
+        if (!res.ok) {
+            throw new Error('Something went wrong');
+        }
+
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
 };
 
 const getKakaoDataFetch = async () => {
-    const res = await fetch(`${API}/?perPage=100&page=0&service=kakao`);
-    const data = await res.json();
-    return data;
+    try {
+        const res = await fetch(`${API}/?perPage=100&page=0&service=kakao`);
+        if (!res.ok) {
+            throw new Error('Something went wrong');
+        }
+
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
 };
 
 const getKakaoPageDataFetch = async () => {
-    const res = await fetch(`${API}/?perPage=100&page=0&service=kakaoPage`);
-    const data = await res.json();
-    return data;
+    try {
+        const res = await fetch(`${API}/?perPage=100&page=0&service=kakaoPage`);
+        if (!res.ok) {
+            throw new Error('Something went wrong');
+        }
+
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
 };
 
 const Page = async () => {
