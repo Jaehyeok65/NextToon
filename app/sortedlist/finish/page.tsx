@@ -6,8 +6,12 @@ export const metadata = {
 };
 
 const getDataFetch = async (page: number, perPage: number) => {
-    const data = await getTotalList(page, perPage);
-    return data;
+    try {
+        const data = await getTotalList(page, perPage);
+        return data;
+    } catch (error) {
+        throw new Error('Failed to fetch data from getDataFetch');
+    }
 };
 
 export default async function Page() {

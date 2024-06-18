@@ -8,8 +8,7 @@ export const getWebtoonList = async (page: number) => {
         });
 
         if (!res.ok) {
-            const errorData = await res.json();
-            throw new Error(errorData.message + 'Something went wrong');
+            throw new Error('Something went wrong');
         }
 
         const data = await res.json();
@@ -26,8 +25,7 @@ export const getServiceWebtoonList = async (page: number, service: string) => {
         );
 
         if (!res.ok) {
-            const errorData = await res.json();
-            throw new Error(errorData.message + 'Something went wrong');
+            throw new Error('Something went wrong');
         }
         const data = await res.json();
         return data;
@@ -40,8 +38,7 @@ export const getTotalList = async (page: number, perPage: number) => {
     try {
         const res = await fetch(`${API}/?perPage=${perPage}&page=${page}`);
         if (!res.ok) {
-            const errorData = await res.json();
-            throw new Error(errorData.message + 'Something went wrong');
+            throw new Error('Something went wrong');
         }
         const data = await res.json();
         return data;
@@ -60,8 +57,7 @@ export const getServiceTotalList = async (
             `${API}/?perPage=${perPage}&page=${page}&service=${service}`
         );
         if (!res.ok) {
-            const errorData = await res.json();
-            throw new Error(errorData.message + 'Something went wrong');
+            throw new Error('Something went wrong');
         }
         const data = await res.json();
         return data;

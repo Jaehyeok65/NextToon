@@ -8,8 +8,16 @@ export const metadata = {
 };
 
 async function getWebtoonTitle(title: string) {
-    const res = await fetch(`${API}/search?keyword=${title}`);
-    return res.json();
+    try {
+        const res = await fetch(`${API}/search?keyword=${title}`);
+        if(!res.ok) {
+            throw new Error('Something went wrong');
+        }
+        return res.json();
+    }
+    catch(error) {
+        throw error;
+    }
 }
 
 export default async function Page({ params }: { params: { title: string } }) {
