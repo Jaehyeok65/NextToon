@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import SortedListPage from '@/app/sortedlist/page';
-import SortedListService from '@/app/sortedlist/[service]/ClientComponent';
-import SortedListFinish from '@/app/sortedlist/finish/ClientComponent';
+import SortedListService from '@/app/sortedlist/[service]/ClientComponent2';
+import SortedListFinish from '@/app/sortedlist/finish/ClientComponent2';
 import { useRouter } from 'next/navigation';
 import { RenderWithQuery } from '@/utils/RenderWithQuery';
 import { getCurrentDepth, setCurrentDepth } from '@/utils/SortedUtil';
@@ -24,7 +24,7 @@ window.alert = jest.fn();
 describe('SortedList Component Test', () => {
 
     it('test', () => {
-        
+
     })
     /*const pushMock = jest.fn();
     useRouter.mockReturnValue({ push: pushMock });
