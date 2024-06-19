@@ -60,13 +60,10 @@ export default function ClientComponent({
             []
         );
         const finishedArray = Array.filter(
-            (item: any) => item.updateDays[0] === 'finished'
+            (item: any) => item.isEnd === true
         );
-        const sortedArray = finishedArray.sort(
-            (a: any, b: any) => b.fanCount - a.fanCount
-        );
-
-        return sortedArray;
+      
+        return finishedArray;
     };
 
     const getNextWebtoons = () => {

@@ -8,7 +8,7 @@ export const metadata = {
 
 const getDataFetch = async (page: number, perPage: number, service: string) => {
     try {
-        const data = await getServiceTotalList(page, perPage, service);
+        const data = await getServiceTotalList(page, perPage, service.toUpperCase());
         return data;
     } catch (error) {
         return '에러 발생';
@@ -20,8 +20,8 @@ export default async function Page({
 }: {
     params: { service: string };
 }) {
-    const firstdata = await getDataFetch(0, 1500, params.service);
-    const seconddata = await getDataFetch(1, 1500, params.service);
+    const firstdata = await getDataFetch(1, 100, params.service);
+    const seconddata = await getDataFetch(2, 100, params.service);
 
     const data = await Promise.all([firstdata, seconddata]);
 

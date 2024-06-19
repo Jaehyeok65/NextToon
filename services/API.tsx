@@ -37,7 +37,6 @@ export const getServiceWebtoonList = async (page: number, provider: string) => {
 export const getTotalList = async (page: number, perPage: number) => {
     try {
         const res = await fetch(`${API}?perPage=${perPage}&page=${page}`);
-        console.log(res.status);
         if (!res.ok) {
             throw new Error('Something went wrong');
         }

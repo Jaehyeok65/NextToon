@@ -16,9 +16,9 @@ const getDataFetch = async (page: number, perPage: number) => {
 };
 
 export default async function Page() {
-    const firstdata = await getDataFetch(0, 3000);
-    const seconddata = await getDataFetch(1, 3000);
-    const thirddata = await getDataFetch(2, 3000);
+    const firstdata = await getDataFetch(1, 100);
+    const seconddata = await getDataFetch(2, 100);
+    const thirddata = await getDataFetch(3, 100);
 
     const data = await Promise.all([firstdata, seconddata, thirddata]);
 

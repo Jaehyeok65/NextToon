@@ -69,10 +69,7 @@ export default function ClientComponent({
             (acc: any, curr: number) => acc.concat(curr),
             []
         );
-        const sortedArray = Array.sort(
-            (a: any, b: any) => b.fanCount - a.fanCount
-        );
-        return sortedArray;
+        return Array;
     };
 
     const getNextWebtoons = () => {
@@ -98,15 +95,16 @@ export default function ClientComponent({
             <div className={styles.container}>
                 {webtoons?.slice(0, depth).map((webtoon: WebtoonInfo) => (
                     <Card
-                        key={webtoon._id}
-                        _id={webtoon._id}
-                        img={webtoon.img}
+                        key={webtoon.id}
+                        id={webtoon.id}
+                        thumbnail={webtoon.thumbnail}
                         title={webtoon.title}
-                        author={webtoon.author}
-                        service={webtoon.service}
+                        authors={webtoon.authors}
+                        provider={webtoon.provider}
                         setWebtoons={setWebtoons}
                         updateDays={webtoon.updateDays}
                         fanCount={webtoon.fanCount}
+                        isEnd={webtoon.isEnd}
                     />
                 ))}
             </div>
