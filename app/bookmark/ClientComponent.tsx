@@ -33,7 +33,7 @@ export default function ClientComponent() {
                         ? webtoon.author
                         : [webtoon.author], // authors는 배열로 변환
                     provider: webtoon.service,
-                    updateDays: webtoon.updateDays,
+                    updateDays: webtoon.updateDays.map((day: string) => day.toUpperCase()), // updateDays를 대문자로 변환
                     fanCount: webtoon.fanCount ?? null,
                     kakaopage: webtoon.kakaopage ?? false,
                     url: webtoon.url ?? '',
