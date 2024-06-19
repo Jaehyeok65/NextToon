@@ -12,9 +12,9 @@ export default async function page() {
     await queryClient.prefetchInfiniteQuery({
         queryKey: ['kakaopagewebtoon'],
         queryFn: ({ pageParam }) => {
-            return getServiceWebtoonList(pageParam, 'kakaoPage');
+            return getServiceWebtoonList(pageParam, 'KAKAO_PAGE');
         },
-        initialPageParam: 0,
+        initialPageParam: 1,
     });
     const dehydratedState = JSON.parse(JSON.stringify(dehydrate(queryClient)));
 

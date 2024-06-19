@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import BookmarkPage from '@/app/bookmark/page'; // 북마크 페이지 파일 경로
 
+
 // useRouter 모의 설정
 jest.mock('next/navigation', () => ({
     useRouter: jest.fn(),
@@ -8,46 +9,56 @@ jest.mock('next/navigation', () => ({
 
 const testlist = [
     {
-        _id: '12345',
-        img: '/list1.png',
+        id: '12345',
+        thumbnail: ['/public/img1.jpg'],
         title: '제목1',
-        author: '작가1',
-        service: '서비스1',
+        authors: ['작가1'],
+        provider: '서비스1',
         fanCount: 1,
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '12346',
-        img: '/list2.png',
+        id: '12346',
+        thumbnail: ['/public/img2.jpg'],
         title: '제목2',
-        author: '작가2',
-        service: '서비스2',
+        authors: ['작가2'],
+        provider: '서비스2',
         fanCount: 2,
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '12347',
-        img: '/list3.png',
+        id: '12347',
+        thumbnail: ['/public/img3.jpg'],
         title: '제목3',
-        author: '작가3',
-        service: '서비스3',
+        authors: ['작가3'],
+        provider: '서비스3',
         fanCount: 3,
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '12348',
-        img: '/list4.png',
+        id: '12348',
+        thumbnail: ['/public/img4.jpg'],
         title: '제목4',
-        author: '작가4',
-        service: '서비스4',
+        authors: ['작가4'],
+        provider: '서비스4',
         fanCount: 4,
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '12349',
-        img: '/list5.png',
+        id: '12349',
+        thumbnail: ['/public/img5.jpg'],
         title: '제목5',
-        author: '작가5',
-        service: '서비스5',
+        authors: ['작가5'],
+        provider: '서비스5',
         fanCount: 5,
+        updateDays: ['월'],
+        isEnd: false,
     },
-];
+]
 
 describe('북마크 페이지 테스트', () => {
     it('북마크 페이지에 로컬스토리지에 저장된 작품이 없을 때는 "북마크에 등록된 작품이 없습니다." 텍스트가 렌더링된다.', () => {

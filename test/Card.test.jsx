@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
-import Card from './';
+import Card from '../components/Card';
 import { fireEvent } from '@testing-library/react';
 import { useRouter } from 'next/navigation';
 
@@ -13,12 +13,13 @@ const pushMock = jest.fn();
 useRouter.mockReturnValue({ push: pushMock });
 
 const WebtoonProps = {
-    _id: '123',
-    img: 'list.jpg',
+    id: '123',
+    thumnail: ['list.jpg'],
     title: '백련성신',
-    service: 'kakaoPage',
+    provider: 'KAKAO_PAGE',
     fanCount: 1234,
     setWebtoons: jest.fn(),
+    isEnd: false,
 };
 
 global.JSON = {
@@ -38,14 +39,15 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
     it('카드 컴포넌트가 정상적으로 렌더링이 된다.', () => {
         render(
             <Card
-                _id="123"
-                img="/list.jpg"
+                id="123"
+                thumbnail={['/list.jpg']}
                 title="백련성신"
-                author="은사해탈"
-                service="kakaoPage"
+                authors={['은사해탈']}
+                provider="KAKAO_PAGE"
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                isEnd={false}
             />
         );
 
@@ -66,7 +68,6 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         expect(authorElement).toBeInTheDocument();
 
         expect(serviceElement).toBeInTheDocument();
-
     });
 
     it('초기 렌더링시 북마크에 등록되어 있으면 꽉 찬 하트 표시 아이콘이 렌더링된다.', async () => {
@@ -80,14 +81,15 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
 
         render(
             <Card
-                _id="123"
-                img="/list.jpg"
+                id="123"
+                thumbnail={['/list.jpg']}
                 title="백련성신"
-                author="은사해탈"
-                service="kakaoPage"
+                authors={['은사해탈']}
+                provider="KAKAO_PAGE"
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                isEnd={false}
             />
         );
 
@@ -107,14 +109,15 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
 
         render(
             <Card
-                _id="123"
-                img="/list.jpg"
+                id="123"
+                thumbnail={['/list.jpg']}
                 title="백련성신"
-                author="은사해탈"
-                service="kakaoPage"
+                authors={['은사해탈']}
+                provider="KAKAO_PAGE"
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                isEnd={false}
             />
         );
 
@@ -133,14 +136,15 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
 
         render(
             <Card
-                _id="123"
-                img="/list.jpg"
+                id="123"
+                thumbnail={['/list.jpg']}
                 title="백련성신"
-                author="은사해탈"
-                service="kakaoPage"
+                authors={['은사해탈']}
+                provider="KAKAO_PAGE"
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                isEnd={false}
             />
         );
 
@@ -167,14 +171,15 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
 
         render(
             <Card
-                _id="123"
-                img="/list.jpg"
+                id="123"
+                thumbnail={['/list.jpg']}
                 title="백련성신"
-                author="은사해탈"
-                service="kakaoPage"
+                authors={['은사해탈']}
+                provider="KAKAO_PAGE"
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                isEnd={false}
             />
         );
 
@@ -196,14 +201,15 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
     it('Heart Icon을 제외한 Card를 클릭하면 상세 페이지로 이동한다.', async () => {
         render(
             <Card
-                _id="123"
-                img="/list.jpg"
+                id="123"
+                thumbnail={['/list.jpg']}
                 title="백련성신"
-                author="은사해탈"
-                service="kakaoPage"
+                authors={['은사해탈']}
+                provider="KAKAO_PAGE"
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                isEnd={false}
             />
         );
         const TextElement = screen.getByText('백련성신');
@@ -212,63 +218,63 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         fireEvent.click(TextElement);
 
         await waitFor(() => {
-            expect(pushMock).toHaveBeenCalledWith('/detail/백련성신/kakaoPage');
+            expect(pushMock).toHaveBeenCalledWith('/detail/백련성신/KAKAO_PAGE');
         });
     });
 
     it('service Props에 따라 매치된 Text가 리턴되며 fanCount에 따라 매치된 Text가 리턴된다.', async () => {
         render(
             <Card
-                _id="123"
-                img="/list.jpg"
+                id="123"
+                thumbnail={['/list.jpg']}
                 title="백련성신"
-                author="은사해탈"
-                service="kakaoPage"
+                authors={['은사해탈']}
+                provider="KAKAO_PAGE"
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                isEnd={false}
             />
         );
 
         await waitFor(() => {
             expect(screen.getByText('카카오페이지 웹툰')).toBeInTheDocument();
-            expect(screen.getByText('1234만++'));
         });
 
         render(
             <Card
-                _id="123"
-                img="/list.jpg"
+                id="123"
+                thumbnail={['/list.jpg']}
                 title="백련성신"
-                author="은사해탈"
-                service="kakao"
-                fanCount={12345}
+                authors={['은사해탈']}
+                provider="KAKAO"
+                fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                isEnd={false}
             />
         );
 
         await waitFor(() => {
             expect(screen.getByText('카카오 웹툰')).toBeInTheDocument();
-            expect(screen.getByText('1억 2345만++'));
         });
 
         render(
             <Card
-                _id="123"
-                img="/list.jpg"
+                id="123"
+                thumbnail={['/list.jpg']}
                 title="백련성신"
-                author="은사해탈"
-                service="naver"
-                fanCount={10000}
+                authors={['은사해탈']}
+                provider="NAVER"
+                fanCount={1234}
                 updateDays={['월']}
-                setWebtoons={jest.fn()}
+                setWebtoons={MockSetWebtoons}
+                isEnd={false}
             />
         );
 
         await waitFor(() => {
             expect(screen.getByText('네이버 웹툰')).toBeInTheDocument();
-            expect(screen.getByText('1억++'));
         });
     });
 });

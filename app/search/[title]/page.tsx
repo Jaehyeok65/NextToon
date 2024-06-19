@@ -10,7 +10,7 @@ export const metadata = {
 
 async function getWebtoonTitle(title: string) {
     try {
-        const res = await fetch(`${API}/search?keyword=${title}`);
+        const res = await fetch(`${API}?keyword=${title}`);
         if(!res.ok) {
             throw new Error('Something went wrong');
         }
@@ -47,14 +47,15 @@ export default async function Page({ params }: { params: { title: string } }) {
             <div className={styles.container}>
                 {data?.webtoons.map((webtoon: WebtoonInfo) => (
                     <Card
-                        key={webtoon._id}
-                        _id={webtoon._id}
-                        img={webtoon.img}
+                        key={webtoon.id}
+                        id={webtoon.id}
+                        thumbnail={webtoon.thumbnail}
                         title={webtoon.title}
-                        author={webtoon.author}
-                        service={webtoon.service}
+                        authors={webtoon.authors}
+                        provider={webtoon.provider}
                         updateDays={webtoon.updateDays}
                         fanCount={webtoon.fanCount}
+                        isEnd={webtoon.isEnd}
                     />
                 ))}
             </div>

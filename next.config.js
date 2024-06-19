@@ -28,10 +28,10 @@ const nextConfig = {
     env: {
         NEXT_PUBLIC_API:
             process.env.NODE_ENV === 'development'
-                ? 'https://korea-webtoon-api.herokuapp.com'
+                ? 'https://korea-webtoon-api-cc7dda2f0d77.herokuapp.com/webtoons'
                 : process.env.NODE_ENV === 'test'
                 ? 'http://localhost:9090'
-                : 'https://korea-webtoon-api.herokuapp.com',
+                : 'https://korea-webtoon-api-cc7dda2f0d77.herokuapp.com/webtoons',
     },
 };
 

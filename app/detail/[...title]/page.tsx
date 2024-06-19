@@ -5,7 +5,7 @@ import ErrorComponent from '@/utils/ErrorComponent';
 
 async function getWebtoonTitle(title: string) {
     try {
-        const res = await fetch(`${API}/search?keyword=${title}`);
+        const res = await fetch(`${API}?keyword=${title}`);
         if (!res.ok) {
             throw new Error('Something went wrong');
         }
@@ -17,8 +17,8 @@ async function getWebtoonTitle(title: string) {
     }
 }
 
-const getWebtoonData = (data: WebtoonInfo[], service: string) => {
-    const current = data?.filter((item) => item.service === service);
+const getWebtoonData = (data: WebtoonInfo[], provider: string) => {
+    const current = data?.filter((item) => item.provider === provider);
     return current?.length > 0 ? current[0] : undefined;
 };
 

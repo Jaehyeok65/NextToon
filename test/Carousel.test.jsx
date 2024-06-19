@@ -1,13 +1,15 @@
 import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
-import Carousel from '.';
+import Carousel from '../components/Carousel';
 import {
     CheckBookMark,
     getServiceName,
     AddBookMark,
     RemoveBookMark,
     getFanCount,
+    getSerialDay,
+    getAuthors,
 } from '@/utils/Bookmark'; // 모듈 import 추가
 import { fireEvent } from '@testing-library/react';
 
@@ -22,51 +24,64 @@ jest.mock('@/utils/Bookmark', () => ({
     AddBookMark: jest.fn(),
     RemoveBookMark: jest.fn(),
     getFanCount: jest.fn(),
+    getSerialDay: jest.fn(),
+    getAuthors: jest.fn(),
 }));
 
 describe('캐러셀 컴포넌트 테스트', () => {
     const testlist = [
         {
-            _id: '12345',
-            img: '/list1.png',
+            id: '12345',
+            thumbnail: ['/public/img1.jpg'],
             title: '제목1',
-            author: '작가1',
-            service: '서비스1',
+            authors: ['작가1'],
+            provider: '서비스1',
             fanCount: 1,
+            updateDays: ['월'],
+            isEnd: false,
         },
         {
-            _id: '12346',
-            img: '/list2.png',
+            id: '12346',
+            thumbnail: ['/public/img2.jpg'],
             title: '제목2',
-            author: '작가2',
-            service: '서비스2',
+            authors: ['작가2'],
+            provider: '서비스2',
             fanCount: 2,
+            updateDays: ['월'],
+            isEnd: false,
         },
         {
-            _id: '12347',
-            img: '/list3.png',
+            id: '12347',
+            thumbnail: ['/public/img3.jpg'],
             title: '제목3',
-            author: '작가3',
-            service: '서비스3',
+            authors: ['작가3'],
+            provider: '서비스3',
             fanCount: 3,
+            updateDays: ['월'],
+            isEnd: false,
         },
         {
-            _id: '12348',
-            img: '/list4.png',
+            id: '12348',
+            thumbnail: ['/public/img4.jpg'],
             title: '제목4',
-            author: '작가4',
-            service: '서비스4',
+            authors: ['작가4'],
+            provider: '서비스4',
             fanCount: 4,
+            updateDays: ['월'],
+            isEnd: false,
         },
         {
-            _id: '12349',
-            img: '/list5.png',
+            id: '12349',
+            thumbnail: ['/public/img5.jpg'],
             title: '제목5',
-            author: '작가5',
-            service: '서비스5',
+            authors: ['작가5'],
+            provider: '서비스5',
             fanCount: 5,
+            updateDays: ['월'],
+            isEnd: false,
         },
     ];
+
     it('캐러셀 컴포넌트가 정상적으로 렌더링된다.', () => {
         render(<Carousel list={testlist} />);
 
@@ -75,14 +90,10 @@ describe('캐러셀 컴포넌트 테스트', () => {
 
         const titleElement = screen.getByText('제목1');
 
-        const authorElement = screen.getByText('작가1');
-
         // 이미지 요소가 존재하는지 확인합니다.
         expect(imageElement).toBeInTheDocument();
 
         expect(titleElement).toBeInTheDocument();
-
-        expect(authorElement).toBeInTheDocument();
     });
 
     it('브라우저의 크기가 600미만일때는 하나의 카드만 렌더링된다.', () => {

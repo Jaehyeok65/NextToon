@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
-import Header from '.';
+import Header from '../components/Header';
 import { fireEvent } from '@testing-library/react';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -71,13 +71,6 @@ describe('Header Component Test', () => {
 
         expect(MenuText).toBeInTheDocument();
 
-        usePathname.mockReturnValue('/sortedlist');
-
-        render(<Header />);
-
-        MenuText = screen.getByText('인기웹툰');
-
-        expect(MenuText).toBeInTheDocument();
 
         usePathname.mockReturnValue('/bookmark');
 
@@ -149,7 +142,6 @@ describe('Header Component Test', () => {
             expect(screen.getByText('네이버웹툰')).toBeInTheDocument();
             expect(screen.getByText('카카오웹툰')).toBeInTheDocument();
             expect(screen.getByText('카카오페이지')).toBeInTheDocument();
-            expect(screen.getByText('인기웹툰')).toBeInTheDocument();
             expect(screen.getByText('북마크')).toBeInTheDocument();
         });
 

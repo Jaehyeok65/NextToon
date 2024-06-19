@@ -4,7 +4,7 @@ import ErrorComponent from '@/utils/ErrorComponent';
 
 const getEntireDataFetch = async () => {
     try {
-        const res = await fetch(`${API}/?perPage=100&page=0`);
+        const res = await fetch(`${API}?perPage=100&page=1`);
         if (!res.ok) {
             throw new Error('Something went wrong');
         }
@@ -18,7 +18,7 @@ const getEntireDataFetch = async () => {
 
 const getNaverDataFetch = async () => {
     try {
-        const res = await fetch(`${API}/?perPage=100&page=0&service=naver`);
+        const res = await fetch(`${API}?perPage=100&page=1&provider=NAVER`);
         if (!res.ok) {
             throw new Error('Something went wrong');
         }
@@ -32,7 +32,7 @@ const getNaverDataFetch = async () => {
 
 const getKakaoDataFetch = async () => {
     try {
-        const res = await fetch(`${API}/?perPage=100&page=0&service=kakao`);
+        const res = await fetch(`${API}?perPage=100&page=0&provider=KAKAO`);
         if (!res.ok) {
             throw new Error('Something went wrong');
         }
@@ -46,7 +46,7 @@ const getKakaoDataFetch = async () => {
 
 const getKakaoPageDataFetch = async () => {
     try {
-        const res = await fetch(`${API}/?perPage=100&page=0&service=kakaoPage`);
+        const res = await fetch(`${API}?perPage=100&page=1&provider=KAKAO_PAGE`);
         if (!res.ok) {
             throw new Error('Something went wrong');
         }

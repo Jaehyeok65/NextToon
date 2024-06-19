@@ -1,286 +1,320 @@
-import { WebtoonInfo } from '@/types/type'
+import { WebtoonInfo } from '@/types/type';
 
-export const testList1 : WebtoonInfo[] = [
+export const testList1: WebtoonInfo[] = [
     {
-        _id: '12345',
-        img: '/public/img1.jpg',
+        id: '12345',
+        thumbnail: ['/public/img1.jpg'],
         title: '제목1',
-        author: '작가1',
-        service: '서비스1',
+        authors: ['작가1'],
+        provider: '서비스1',
         fanCount: 1,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '12346',
-        img: '/public/img2.jpg',
+        id: '12346',
+        thumbnail: ['/public/img2.jpg'],
         title: '제목2',
-        author: '작가2',
-        service: '서비스2',
+        authors: ['작가2'],
+        provider: '서비스2',
         fanCount: 2,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '12347',
-        img: '/public/img3.jpg',
+        id: '12347',
+        thumbnail: ['/public/img3.jpg'],
         title: '제목3',
-        author: '작가3',
-        service: '서비스3',
+        authors: ['작가3'],
+        provider: '서비스3',
         fanCount: 3,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '12348',
-        img: '/public/img4.jpg',
+        id: '12348',
+        thumbnail: ['/public/img4.jpg'],
         title: '제목4',
-        author: '작가4',
-        service: '서비스4',
+        authors: ['작가4'],
+        provider: '서비스4',
         fanCount: 4,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123495',
-        img: '/public/img5.jpg',
+        id: '12349',
+        thumbnail: ['/public/img5.jpg'],
         title: '제목5',
-        author: '작가5',
-        service: '서비스5',
+        authors: ['작가5'],
+        provider: '서비스5',
         fanCount: 5,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '1234966',
-        img: '/public/img6.jpg',
+        id: '123440',
+        thumbnail: ['/public/img6.jpg'],
         title: '제목6',
-        author: '작가6',
-        service: '서비스6',
+        authors: ['작가6'],
+        provider: '서비스6',
         fanCount: 6,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123497',
-        img: '/public/img7.jpg',
+        id: '123410',
+        thumbnail: ['/public/img7.jpg'],
         title: '제목7',
-        author: '작가7',
-        service: '서비스7',
+        authors: ['작가7'],
+        provider: '서비스7',
         fanCount: 7,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123498',
-        img: '/public/img8.jpg',
+        id: '123411',
+        thumbnail: ['/public/img8.jpg'],
         title: '제목8',
-        author: '작가8',
-        service: '서비스8',
+        authors: ['작가8'],
+        provider: '서비스8',
         fanCount: 8,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123499',
-        img: '/public/img9.jpg',
+        id: '123412',
+        thumbnail: ['/public/img9.jpg'],
         title: '제목9',
-        author: '작가9',
-        service: '서비스9',
+        authors: ['작가9'],
+        provider: '서비스9',
         fanCount: 9,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123410',
-        img: '/public/img10.jpg',
+        id: '123413',
+        thumbnail: ['/public/img10.jpg'],
         title: '제목10',
-        author: '작가10',
-        service: '서비스10',
+        authors: ['작가10'],
+        provider: '서비스10',
         fanCount: 10,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123411',
-        img: '/public/img11.jpg',
+        id: '123414',
+        thumbnail: ['/public/img11.jpg'],
         title: '제목11',
-        author: '작가11',
-        service: '서비스11',
-        fanCount: 11,
-        updateDays : ['월']
+        authors: ['작가11'],
+        provider: '서비스12',
+        fanCount: 12,
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123412',
-        img:  '/public/img12.jpg',
+        id: '123415',
+        thumbnail: ['/public/img12.jpg'],
         title: '제목12',
-        author: '작가12',
-        service: '서비스12',
+        authors: ['작가12'],
+        provider: '서비스12',
         fanCount: 12,
-        updateDays : ['월']
-    }
+        updateDays: ['월'],
+        isEnd: false,
+    },
 ];
 
-export const testList2 : WebtoonInfo[] = [
+export const testList2: WebtoonInfo[] = [
     {
-        _id: '123413',
-        img: '/public/img13.jpg',
+        id: '123415',
+        thumbnail: ['/public/img13.jpg'],
         title: '제목13',
-        author: '작가13',
-        service: '서비스13',
+        authors: ['작가13'],
+        provider: '서비스13',
         fanCount: 13,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123414',
-        img:  '/public/img14.jpg',
+        id: '123416',
+        thumbnail: ['/public/img14.jpg'],
         title: '제목14',
-        author: '작가14',
-        service: '서비스14',
+        authors: ['작가14'],
+        provider: '서비스14',
         fanCount: 14,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123415',
-        img: '/public/img15.jpg',
+        id: '123417',
+        thumbnail: ['/public/img15.jpg'],
         title: '제목15',
-        author: '작가15',
-        service: '서비스15',
+        authors: ['작가15'],
+        provider: '서비스15',
         fanCount: 15,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123416',
-        img: '/public/img16.jpg',
-        title: '제목16',
-        author: '작가16',
-        service: '서비스16',
-        fanCount: 16,
-        updateDays : ['월']
+        id: '123418',
+        thumbnail: ['/public/img16.jpg'],
+        title: '제목4',
+        authors: ['작가4'],
+        provider: '서비스4',
+        fanCount: 4,
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123417',
-        img: '/public/img17.jpg',
+        id: '123419',
+        thumbnail: ['/public/img17.jpg'],
         title: '제목17',
-        author: '작가17',
-        service: '서비스17',
+        authors: ['작가17'],
+        provider: '서비스17',
         fanCount: 17,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123418',
-        img: '/public/img18.jpg',
+        id: '123420',
+        thumbnail: ['/public/img18.jpg'],
         title: '제목18',
-        author: '작가18',
-        service: '서비스18',
+        authors: ['작가18'],
+        provider: '서비스18',
         fanCount: 18,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123419',
-        img: '/public/img19.jpg',
+        id: '123421',
+        thumbnail: ['/public/img19.jpg'],
         title: '제목19',
-        author: '작가19',
-        service: '서비스19',
+        authors: ['작가19'],
+        provider: '서비스19',
         fanCount: 19,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123420',
-        img: '/public/img20.jpg',
+        id: '123422',
+        thumbnail: ['/public/img20.jpg'],
         title: '제목20',
-        author: '작가20',
-        service: '서비스20',
+        authors: ['작가20'],
+        provider: '서비스20',
         fanCount: 20,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123421',
-        img: '/public/img21.jpg',
+        id: '123423',
+        thumbnail: ['/public/img21.jpg'],
         title: '제목21',
-        author: '작가21',
-        service: '서비스21',
+        authors: ['작가21'],
+        provider: '서비스21',
         fanCount: 21,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123422',
-        img: '/public/img22.jpg',
+        id: '123424',
+        thumbnail: ['/public/img22.jpg'],
         title: '제목22',
-        author: '작가22',
-        service: '서비스22',
+        authors: ['작가22'],
+        provider: '서비스22',
         fanCount: 22,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '123423',
-        img: '/public/img23.jpg',
+        id: '123425',
+        thumbnail: ['/public/img23.jpg'],
         title: '제목23',
-        author: '작가23',
-        service: '서비스23',
+        authors: ['작가23'],
+        provider: '서비스23',
         fanCount: 23,
-        updateDays : ['월']
+        updateDays: ['월'],
+        isEnd: false,
     },
     {
-        _id: '1234234',
-        img: '/public/img24.jpg',
+        id: '123426',
+        thumbnail: ['/public/img24.jpg'],
         title: '제목24',
-        author: '작가24',
-        service: '서비스24',
+        authors: ['작가24'],
+        provider: '서비스24',
         fanCount: 24,
-        updateDays : ['월']
-    }
+        updateDays: ['월'],
+        isEnd: false,
+    },
 ];
 
 export const mockreturn1 = {
-    webtoons : testList1
+    webtoons: testList1,
 };
 
 export const mockreturn2 = {
-    webtoons : testList2
+    webtoons: testList2,
 };
 
 export const mockreturn3 = {
-    webtoons : [
+    webtoons: [
         {
-            _id: '1234235',
-            img: '/public/img25.jpg',
+            id: '123427',
+            thumbnail: ['/public/img25.jpg'],
             title: '제목25',
-            author: '작가25',
-            service: '서비스25',
+            authors: ['작가25'],
+            provider: '서비스25',
             fanCount: 25,
-            updateDays : ['월']
+            updateDays: ['월'],
+            isEnd: false,
         },
         {
-            _id: '1234265',
-            img: '/public/img26.jpg',
-            title: '완결1',
-            author: '작가26',
-            service: '서비스26',
-            fanCount: 25,
-            updateDays : ['finished']
-        },      {
-            _id: '1234235678',
-            img: '/public/img27.jpg',
-            title: '완결2',
-            author: '작가27',
-            service: '서비스27',
-            fanCount: 25,
-            updateDays : ['finished']
+            id: '123428',
+            thumbnail: ['/public/img26.jpg'],
+            title: '제목26',
+            authors: ['작가26'],
+            provider: '서비스26',
+            fanCount: 26,
+            updateDays: ['월'],
+            isEnd: false,
         },
-    ]
-}
+        {
+            id: '123429',
+            thumbnail: ['/public/img27.jpg'],
+            title: '제목27',
+            authors: ['작가27'],
+            provider: '서비스27',
+            fanCount: 27,
+            updateDays: ['월'],
+            isEnd: false,
+        },
+    ],
+};
 
 export const searchmockreturn1 = {
-    webtoons : [{
-        _id : '123456789',
-        img : '/public/img25',
-        title : '백련',
-        author : '백련작가',
-        service : '카카오페이지',
-        fanCount : 25,
-        updateDays : ['월']        
-    }]
+    webtoons: [
+        {
+            id: '123430',
+            thumbnail: ['/public/img28.jpg'],
+            title: '백련',
+            authors: ['작가28'],
+            provider: 'KAKAO_PAGE',
+            fanCount: 28,
+            updateDays: ['월'],
+            isEnd: false,
+        },
+    ],
 };
 
 export const searchmockreturn2 = {
-    webtoons : [{
-        _id : '12345678910',
-        img : '/public/img26',
-        title : '무련',
-        author : '무련작가',
-        service : '카카오페이지',
-        fanCount : 26,
-        updateDays : ['월']        
-    }]
+    webtoons: [
+        {
+            id: '123431',
+            thumbnail: ['/public/img29.jpg'],
+            title: '무련',
+            authors: ['작가29'],
+            provider: 'KAKAO_PAGE',
+            fanCount: 29,
+            updateDays: ['월'],
+            isEnd: false,
+        },
+    ],
 };

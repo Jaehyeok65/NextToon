@@ -12,29 +12,29 @@ export const ListPagehandlers = [
     http.get(`${API}`, ({ request }) => {
         const url = new URL(request.url);
         const page = url.searchParams.get('page');
-        let data = mockreturn1;
-        if (page === '1') {
-            data = mockreturn2;
-        } else if (page === '2') {
-            data = mockreturn3;
-        }
-
-        return HttpResponse.json(data);
-    }),
-    http.get(`${API}/search`, ({ request }) => {
-        const url = new URL(request.url);
         const keyword = url.searchParams.get('keyword');
+        if (page) {
+            let data = mockreturn1;
+            if (page === '2') {
+                data = mockreturn2;
+            } else if (page === '3') {
+                data = mockreturn3;
+            }
 
-        let data = {
-            webtoons: [],
-        };
-
-        if (keyword === '백련') {
-            data = searchmockreturn1;
-        } else if (keyword === '무련') {
-            data = searchmockreturn2;
+            return HttpResponse.json(data);
         }
+        if (keyword) {
+            let data = {
+                webtoons: [],
+            };
 
-        return HttpResponse.json(data);
+            if (keyword === '백련') {
+                data = searchmockreturn1;
+            } else if (keyword === '무련') {
+                data = searchmockreturn2;
+            }
+
+            return HttpResponse.json(data);
+        }
     }),
 ];

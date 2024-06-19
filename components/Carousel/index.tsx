@@ -5,6 +5,7 @@ import styles from '@/style/carousel.module.css';
 import Card from '../Card';
 import { FaArrowRight } from 'react-icons/fa';
 import { FaArrowLeft } from 'react-icons/fa';
+import { WebtoonInfo } from '@/types/type';
 
 const Carousel = ({ list }: { list: any[] }) => {
     const [current, setCurrent] = useState(0); //현재 페이지
@@ -77,16 +78,17 @@ const Carousel = ({ list }: { list: any[] }) => {
             <div className={styles.innercarousel}>
                 {list
                     ?.slice(current, current + depth)
-                    .map((item: any, index: number) => (
+                    .map((webtoon: WebtoonInfo, index: number) => (
                         <Card
                             key={index}
-                            _id={item._id}
-                            img={item.img}
-                            title={item.title}
-                            author={item.author}
-                            service={item.service}
-                            fanCount={item.fanCount}
-                            updateDays={item.updateDays}
+                            id={webtoon.id}
+                            thumbnail={webtoon.thumbnail}
+                            title={webtoon.title}
+                            authors={webtoon.authors}
+                            provider={webtoon.provider}
+                            fanCount={webtoon.fanCount}
+                            updateDays={webtoon.updateDays}
+                            isEnd={webtoon.isEnd}
                         />
                     ))}
             </div>

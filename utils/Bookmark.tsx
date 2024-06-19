@@ -6,7 +6,7 @@ export const CheckBookMark = (webtoon: WebtoonInfo): boolean => {
     if (prev) {
         //null이 아닐 경우 BookMark가 있다는 뜻
         const current: any[] = JSON.parse(prev);
-        const number = current.findIndex((item) => item._id === webtoon._id); //_id가 있는지 확인
+        const number = current.findIndex((item) => item.id === webtoon.id); //_id가 있는지 확인
         if (number > -1) {
             //-1보다 크다면 북마크에 등록되어 있다는 것
             return true;
@@ -49,7 +49,7 @@ export const RemoveBookMark = (webtoon: WebtoonInfo, setWebtoons?: any) => {
     const prev = window.localStorage.getItem('bookmark');
     if (prev) {
         const current: any[] = JSON.parse(prev);
-        const next = current.filter((item) => item._id !== webtoon._id);
+        const next = current.filter((item) => item.id !== webtoon.id);
         if (setWebtoons) {
             setWebtoons(next);
         }
@@ -60,34 +60,37 @@ export const RemoveBookMark = (webtoon: WebtoonInfo, setWebtoons?: any) => {
 
 export const getServiceName = (service: string) => {
     switch (service) {
-        case 'naver':
+        case 'NAVER':
             return '네이버 웹툰';
             break;
-        case 'kakao':
+        case 'KAKAO':
             return '카카오 웹툰';
             break;
-        case 'kakaoPage':
+        case 'KAKAO_PAGE':
             return '카카오페이지 웹툰';
             break;
     }
 };
 
-export const getSerialDay = (updateDays: string[]) => {
+export const getSerialDay = (updateDays: string[], isEnd: boolean) => {
+    if (isEnd) {
+        return <div>완결</div>;
+    }
+
+    if (updateDays.length === 0) {
+        return;
+    }
+
     const converter: any = {
-        mon: '월',
-        tue: '화',
-        wed: '수',
-        thu: '목',
-        fri: '금',
-        sat: '토',
-        sun: '일',
-        naverDaily: '네이버 Daily+',
-        finished: '완결',
+        MON: '월',
+        TUE: '화',
+        WED: '수',
+        THU: '목',
+        FRI: '금',
+        SAT: '토',
+        SUN: '일',
     };
 
-    if (updateDays[0] === 'finished' || updateDays[0] === 'naverDaily') {
-        return <div>{converter[updateDays[0]]}</div>;
-    }
     return (
         <div>
             {updateDays.map((item: string, index: number) =>
@@ -98,6 +101,18 @@ export const getSerialDay = (updateDays: string[]) => {
                 )
             )}
             &nbsp;연재
+        </div>
+    );
+};
+
+export const getAuthors = (authors: string[]) => {
+    return (
+        <div>
+            {authors.map((author: string, index: number) => (
+                <span key={index}>
+                    {index + 1 === authors.length ? author : author + ', '}
+                </span>
+            ))}
         </div>
     );
 };

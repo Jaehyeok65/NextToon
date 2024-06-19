@@ -42,15 +42,16 @@ export default function ClientComponent() {
             <div className={styles.container}>
                 {webtoons?.map((webtoon: WebtoonInfo) => (
                     <Card
-                        key={webtoon._id}
-                        _id={webtoon._id}
-                        img={webtoon.img}
+                        key={webtoon.id}
+                        id={webtoon.id}
+                        thumbnail={webtoon.thumbnail}
                         title={webtoon.title}
-                        author={webtoon.author}
-                        service={webtoon.service}
+                        authors={webtoon.authors}
+                        provider={webtoon.provider}
                         setWebtoons={setWebtoons}
                         updateDays={webtoon.updateDays}
                         fanCount={webtoon.fanCount}
+                        isEnd={webtoon.isEnd}
                     />
                 ))}
             </div>

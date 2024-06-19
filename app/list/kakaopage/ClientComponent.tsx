@@ -23,17 +23,17 @@ export default function Client2() {
         refetch,
     } = useInfiniteQuery({
         queryKey: ['kakaopagewebtoon'],
-        queryFn: ({ pageParam = 0 }) => {
-            return getServiceWebtoonList(pageParam, 'kakaoPage');
+        queryFn: ({ pageParam = 1 }) => {
+            return getServiceWebtoonList(pageParam, 'KAKAO_PAGE');
         },
         getNextPageParam: (lastPage, allPages) => {
             if (lastPage?.webtoons?.length < 12) {
                 return undefined;
             } else {
-                return allPages.length;
+                return allPages.length + 1;
             }
         },
-        initialPageParam: 0,
+        initialPageParam: 1,
         refetchOnWindowFocus: false,
         refetchIntervalInBackground: false,
         retry: false,
@@ -75,15 +75,15 @@ export default function Client2() {
                     {data?.pages.map((page: any) =>
                         page?.webtoons?.map((webtoon: WebtoonInfo) => (
                             <Card
-                                key={webtoon._id}
-                                _id={webtoon._id}
-                                img={webtoon.img}
+                                key={webtoon.id}
+                                id={webtoon.id}
+                                thumbnail={webtoon.thumbnail}
                                 title={webtoon.title}
-                                author={webtoon.author}
-                                service={webtoon.service}
+                                authors={webtoon.authors}
+                                provider={webtoon.provider}
                                 updateDays={webtoon.updateDays}
                                 fanCount={webtoon.fanCount}
-                                kakaopage={true}
+                                isEnd={webtoon.isEnd}
                             />
                         ))
                     )}

@@ -13,7 +13,7 @@ describe('Detail Component Test', () => {
         render(
             await DetailPage({
                 params: {
-                    title: ['무련', '카카오페이지'],
+                    title: ['무련', 'KAKAO_PAGE'],
                 },
             })
         );
@@ -53,7 +53,7 @@ describe('Detail Component Test', () => {
         render(
             await DetailPage({
                 params: {
-                    title: ['무련', '카카오페이지'],
+                    title: ['무련', 'KAKAO_PAGE'],
                 },
             })
         );

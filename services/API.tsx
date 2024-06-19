@@ -3,7 +3,7 @@ export const API = process.env.NEXT_PUBLIC_API;
 
 export const getWebtoonList = async (page: number) => {
     try {
-        const res = await fetch(`${API}/?perPage=12&page=${page}`, {
+        const res = await fetch(`${API}?perPage=12&page=${page}`, {
             method: 'get',
         });
 
@@ -18,10 +18,10 @@ export const getWebtoonList = async (page: number) => {
     }
 };
 
-export const getServiceWebtoonList = async (page: number, service: string) => {
+export const getServiceWebtoonList = async (page: number, provider: string) => {
     try {
         const res = await fetch(
-            `${API}/?perPage=12&page=${page}&service=${service}`
+            `${API}?perPage=12&page=${page}&provider=${provider}`
         );
 
         if (!res.ok) {
@@ -36,7 +36,8 @@ export const getServiceWebtoonList = async (page: number, service: string) => {
 
 export const getTotalList = async (page: number, perPage: number) => {
     try {
-        const res = await fetch(`${API}/?perPage=${perPage}&page=${page}`);
+        const res = await fetch(`${API}?perPage=${perPage}&page=${page}`);
+        console.log(res.status);
         if (!res.ok) {
             throw new Error('Something went wrong');
         }
@@ -54,7 +55,7 @@ export const getServiceTotalList = async (
 ) => {
     try {
         const res = await fetch(
-            `${API}/?perPage=${perPage}&page=${page}&service=${service}`
+            `${API}?perPage=${perPage}&page=${page}&provider=${service}`
         );
         if (!res.ok) {
             throw new Error('Something went wrong');

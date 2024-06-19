@@ -10,21 +10,22 @@ import {
     AddBookMark,
     RemoveBookMark,
     getFanCount,
+    getAuthors,
 } from '@/utils/Bookmark';
 import { useRouter } from 'next/navigation';
 import { getServiceName } from '@/utils/Bookmark';
 import { getSerialDay } from '@/utils/Bookmark';
-import Image from 'next/image';
 
 const Card: React.FC<WebtoonInfo> = ({
-    img,
+    thumbnail,
     title,
-    author,
-    service,
-    _id,
+    authors,
+    provider,
+    id,
     setWebtoons,
     updateDays,
     fanCount,
+    isEnd,
 }) => {
     const [isBookMark, setIsBookMark] = useState<boolean>(false); //카드가 북마크에 등록되어 있는지 확인
     const router = useRouter();
@@ -32,16 +33,17 @@ const Card: React.FC<WebtoonInfo> = ({
     useEffect(() => {
         setIsBookMark(
             CheckBookMark({
-                _id,
+                id,
                 title,
-                author,
-                service,
-                img,
+                authors,
+                provider,
+                thumbnail,
                 updateDays,
                 fanCount,
+                isEnd,
             })
         );
-    }, [img, title, author, service, _id, fanCount, updateDays]); //초기 렌더링시 북마크에 등록되어있는지 확인하는 용도
+    }, [thumbnail, title, authors, provider, id, fanCount, updateDays, isEnd]); //초기 렌더링시 북마크에 등록되어있는지 확인하는 용도
 
     const onDetailNavigation = (title: string, service: string) => {
         router.push(`/detail/${title}/${service}`);
@@ -50,13 +52,14 @@ const Card: React.FC<WebtoonInfo> = ({
     const onAddClick = (event: React.MouseEvent) => {
         event.stopPropagation();
         AddBookMark({
-            _id,
+            id,
             title,
-            author,
-            service,
-            img,
+            authors,
+            provider,
+            thumbnail,
             updateDays,
             fanCount,
+            isEnd,
         });
         setIsBookMark((prev) => !prev);
     };
@@ -65,13 +68,14 @@ const Card: React.FC<WebtoonInfo> = ({
         event.stopPropagation();
         RemoveBookMark(
             {
-                _id,
+                id,
                 title,
-                author,
-                service,
-                img,
+                authors,
+                provider,
+                thumbnail,
                 fanCount,
                 updateDays,
+                isEnd,
             },
             setWebtoons
         );
@@ -81,9 +85,9 @@ const Card: React.FC<WebtoonInfo> = ({
     return (
         <div
             className={styles.card}
-            onClick={() => onDetailNavigation(title, service)}
+            onClick={() => onDetailNavigation(title, provider)}
         >
-            <img src={img} alt={title} />
+            <img src={thumbnail[0]} alt={title} />
             <div className={styles.textoverlay}>
                 <div>
                     {isBookMark ? (
@@ -100,10 +104,10 @@ const Card: React.FC<WebtoonInfo> = ({
                         />
                     )}
                 </div>
-                <div>{updateDays && getSerialDay(updateDays)}</div>
+                <div>{updateDays && getSerialDay(updateDays, isEnd)}</div>
                 <h4>{title}</h4>
-                <div>{author}</div>
-                <div>{getServiceName(service)}</div>
+                <div>{getAuthors(authors)}</div>
+                <div>{getServiceName(provider)}</div>
                 <div>{fanCount && getFanCount(fanCount)}</div>
             </div>
         </div>

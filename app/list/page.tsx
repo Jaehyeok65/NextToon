@@ -14,7 +14,7 @@ export default async function page() {
         queryFn: ({ pageParam }) => {
             return getWebtoonList(pageParam);
         },
-        initialPageParam: 0,
+        initialPageParam: 1,
     });
     const dehydratedState = JSON.parse(JSON.stringify(dehydrate(queryClient)));
 
