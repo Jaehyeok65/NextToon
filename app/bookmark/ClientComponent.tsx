@@ -12,7 +12,43 @@ export default function ClientComponent() {
         const prev = window.localStorage.getItem('bookmark');
         if (prev) {
             //prev가 null이 아니라는 것은 데이터가 있다는 것
-            setWebtoons(JSON.parse(prev));
+            let parsedData = JSON.parse(prev);
+            // 데이터가 이미 변환된 구조인지 확인
+            const needsTransformation = parsedData.some(
+                (webtoon: any) =>
+                    !webtoon.id ||
+                    !Array.isArray(webtoon.thumbnail) ||
+                    !Array.isArray(webtoon.authors)
+            );
+
+            if (needsTransformation) {
+                // 데이터 변환 로직
+                const updatedData = parsedData.map((webtoon: any) => ({
+                    id: webtoon._id,
+                    thumbnail: Array.isArray(webtoon.img)
+                        ? webtoon.img
+                        : [webtoon.img], // thumbnail은 배열로 변환
+                    title: webtoon.title,
+                    authors: Array.isArray(webtoon.author)
+                        ? webtoon.author
+                        : [webtoon.author], // authors는 배열로 변환
+                    provider: webtoon.service,
+                    updateDays: webtoon.updateDays,
+                    fanCount: webtoon.fanCount ?? null,
+                    kakaopage: webtoon.kakaopage ?? false,
+                    url: webtoon.url ?? '',
+                    isEnd: webtoon.isEnd ?? false,
+                }));
+                setWebtoons(updatedData);
+                // 변환된 데이터로 LocalStorage 업데이트
+                window.localStorage.setItem(
+                    'bookmark',
+                    JSON.stringify(updatedData)
+                );
+            } else {
+                // 변환이 필요하지 않다면 그대로 사용
+                setWebtoons(parsedData);
+            }
         } else {
             //prev가 null이라면 빈 배열을 렌더링
             setWebtoons([]);
