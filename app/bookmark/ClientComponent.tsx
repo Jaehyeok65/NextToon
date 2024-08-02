@@ -1,12 +1,27 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Card from '@/components/Card';
 import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
 
+const SelectedCategory = [
+    '전체보기',
+    '월요웹툰',
+    '화요웹툰',
+    '수요웹툰',
+    '목요웹툰',
+    '금요웹툰',
+    '토요웹툰',
+    '일요웹툰',
+    '완결',
+    '정보없음',
+];
+
 export default function ClientComponent() {
     const [webtoons, setWebtoons] = useState<WebtoonInfo[]>();
+    const [category, setCategory] = useState<string>('전체보기');
+    const initialWebtoons = useRef<WebtoonInfo[]>([]); // 초기 전체 웹툰 목록을 저장
 
     useEffect(() => {
         const prev = window.localStorage.getItem('bookmark');
@@ -33,7 +48,9 @@ export default function ClientComponent() {
                         ? webtoon.author
                         : [webtoon.author], // authors는 배열로 변환
                     provider: webtoon.service,
-                    updateDays: webtoon.updateDays.map((day: string) => day.toUpperCase()), // updateDays를 대문자로 변환
+                    updateDays: webtoon.updateDays.map((day: string) =>
+                        day.toUpperCase()
+                    ), // updateDays를 대문자로 변환
                     fanCount: webtoon.fanCount ?? null,
                     kakaopage: webtoon.kakaopage ?? false,
                     url: webtoon.url ?? '',
@@ -41,6 +58,7 @@ export default function ClientComponent() {
                 }));
                 setWebtoons(updatedData);
                 // 변환된 데이터로 LocalStorage 업데이트
+                initialWebtoons.current = updatedData; // 초기 데이터 저장
                 window.localStorage.setItem(
                     'bookmark',
                     JSON.stringify(updatedData)
@@ -48,12 +66,42 @@ export default function ClientComponent() {
             } else {
                 // 변환이 필요하지 않다면 그대로 사용
                 setWebtoons(parsedData);
+                initialWebtoons.current = parsedData; // 초기 데이터 저장
             }
         } else {
             //prev가 null이라면 빈 배열을 렌더링
             setWebtoons([]);
+            initialWebtoons.current = []; // 초기 데이터 저장
         }
     }, []);
+
+    useEffect(() => {
+        if (initialWebtoons.current) {
+            setWebtoons(setCategoryWebtoon(initialWebtoons.current, category));
+        }
+    }, [category]);
+
+    const setCategoryWebtoon = (
+        webtoons: WebtoonInfo[],
+        category: string
+    ): WebtoonInfo[] => {
+        const filters: { [key: string]: (item: WebtoonInfo) => boolean } = {
+            전체보기: () => true,
+            정보없음: (item) =>
+                item.isEnd === false && item.updateDays.length === 0,
+            완결: (item) => item.isEnd === true,
+            월요웹툰: (item) => item.updateDays.includes('MON'),
+            화요웹툰: (item) => item.updateDays.includes('TUE'),
+            수요웹툰: (item) => item.updateDays.includes('WED'),
+            목요웹툰: (item) => item.updateDays.includes('THU'),
+            금요웹툰: (item) => item.updateDays.includes('FRI'),
+            토요웹툰: (item) => item.updateDays.includes('SAT'),
+            일요웹툰: (item) => item.updateDays.includes('SUN'),
+        };
+
+        const filterFunction = filters[category];
+        return filterFunction ? webtoons.filter(filterFunction) : [];
+    };
 
     if (!webtoons) {
         return (
@@ -66,6 +114,13 @@ export default function ClientComponent() {
     if (webtoons?.length === 0) {
         return (
             <div className={styles.background}>
+                <div className={styles.bookmarknavigate}>
+                    {SelectedCategory.map((item: string) => (
+                        <button key={item} onClick={() => setCategory(item)}>
+                            {item}
+                        </button>
+                    ))}
+                </div>
                 <h2 className={styles.searchcontent}>
                     북마크에 등록된 작품이 없습니다.
                 </h2>
@@ -75,6 +130,13 @@ export default function ClientComponent() {
 
     return (
         <div className={styles.background}>
+            <div className={styles.bookmarknavigate}>
+                {SelectedCategory.map((item: string) => (
+                    <button key={item} onClick={() => setCategory(item)}>
+                        {item}
+                    </button>
+                ))}
+            </div>
             <div className={styles.container}>
                 {webtoons?.map((webtoon: WebtoonInfo) => (
                     <Card
