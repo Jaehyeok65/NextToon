@@ -105,6 +105,7 @@ export default function ClientComponent({
                         updateDays={webtoon.updateDays}
                         fanCount={webtoon.fanCount}
                         isEnd={webtoon.isEnd}
+                        isUpdated={webtoon.isUpdated}
                     />
                 ))}
             </div>

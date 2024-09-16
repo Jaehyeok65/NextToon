@@ -31,7 +31,10 @@ export default function ClientComponent({
                 <div>{data?.title}</div>
                 <div>{data?.authors[0]}</div>
                 <div>{data && getServiceName(data.provider)}</div>
-                <div>{data?.updateDays && getSerialDay(data.updateDays, data?.isEnd)}</div>
+                <div>
+                    {data?.updateDays &&
+                        getSerialDay(data.updateDays, data?.isEnd)}
+                </div>
                 <div>
                     {data?.url && (
                         <Link href={data?.url} target="_blank">

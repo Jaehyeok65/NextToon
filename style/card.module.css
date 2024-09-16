@@ -1,10 +1,10 @@
 @keyframes fadeIn {
-  from {
-      opacity: 0;
-  }
-  to {
-      opacity: 1;
-  }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .card {
@@ -13,29 +13,27 @@
     border-radius: 8px;
     overflow: hidden;
     width: 100%;
-    height : 100%;
+    height: 100%;
     min-height: 300px;
-    max-height : 300px;
+    max-height: 300px;
     max-width: 300px;
-  }
-  
-  .card > img {
+}
+
+.card > img {
     width: 100%;
     height: 100%;
-  }
-  
-  .card:hover {
+}
+
+.card:hover {
     transform: translateY(-4px);
     cursor: pointer;
-  }
+}
 
-  .card:hover .textoverlay {
+.card:hover .textoverlay {
     opacity: 1;
-  }
+}
 
-
-
-  .textoverlay {
+.textoverlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -49,36 +47,52 @@
     background-color: rgba(0, 0, 0, 0.7); /* 배경 색상 및 투명도 조절 */
     opacity: 0; /* 기본적으로는 투명하게 설정 */
     transition: opacity 0.3s ease; /* 부드러운 효과를 위한 트랜지션 속성 */
-  }
+}
 
-  .textoverlay > div {
-    margin : 0% 10% 0% 10%;
+.textoverlay > div {
+    margin: 0% 10% 0% 10%;
     line-height: 2;
     font-size: 12px;
-  }
+}
 
-  .textoverlay > div:nth-child(1) {
+.textoverlay > div:nth-child(1) {
     position: absolute;
-    top : 0;
-    right : 0;
-    color : red;
-    margin : 3% 3% 0% 0%;
+    top: 0;
+    right: 0;
+    color: red;
+    margin: 3% 3% 0% 0%;
     z-index: 9999;
     cursor: pointer;
-  }
+}
 
-  .textoverlay > div:nth-child(2) {
-    position : absolute;
-    top : 0;
-    left : 0;
-    color : white;
+.textoverlay > div:nth-child(2) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
     font-size: 13px;
     font-weight: bold;
-    margin : 4% 0% 0% 4%;
+    margin: 4% 0% 0% 4%;
     z-index: 9999;
-  }
+}
 
-  .textoverlay > h4 {
-    margin : 10%
-  }
+.textoverlay > h4 {
+    margin: 10%;
+}
 
+.update {
+    position: absolute;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 12px;
+    top: 3%;
+    right: 5%;
+    font-size: 14px;
+    transition: opacity 0.5s ease-out; /* 부드러운 효과를 위한 트랜지션 속성 */
+}
+
+.card:hover .update {
+  opacity: 0;
+}

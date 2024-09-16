@@ -11,21 +11,20 @@ export const metadata = {
 async function getWebtoonTitle(title: string) {
     try {
         const res = await fetch(`${API}?keyword=${title}`);
-        if(!res.ok) {
+        if (!res.ok) {
             throw new Error('Something went wrong');
         }
         return res.json();
-    }
-    catch(error) {
-        return "에러 발생";
+    } catch (error) {
+        return '에러 발생';
     }
 }
 
 export default async function Page({ params }: { params: { title: string } }) {
     const data = await getWebtoonTitle(params.title);
-    if(data === "에러 발생") {
-        return <ErrorComponent  />
-    };
+    if (data === '에러 발생') {
+        return <ErrorComponent />;
+    }
 
     if (data?.webtoons.length === 0) {
         return (
@@ -56,6 +55,7 @@ export default async function Page({ params }: { params: { title: string } }) {
                         updateDays={webtoon.updateDays}
                         fanCount={webtoon.fanCount}
                         isEnd={webtoon.isEnd}
+                        isUpdated={webtoon.isUpdated}
                     />
                 ))}
             </div>

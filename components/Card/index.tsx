@@ -26,6 +26,7 @@ const Card: React.FC<WebtoonInfo> = ({
     updateDays,
     fanCount,
     isEnd,
+    isUpdated,
 }) => {
     const [isBookMark, setIsBookMark] = useState<boolean>(false); //카드가 북마크에 등록되어 있는지 확인
     const router = useRouter();
@@ -60,6 +61,7 @@ const Card: React.FC<WebtoonInfo> = ({
             updateDays,
             fanCount,
             isEnd,
+            isUpdated,
         });
         setIsBookMark((prev) => !prev);
     };
@@ -76,6 +78,7 @@ const Card: React.FC<WebtoonInfo> = ({
                 fanCount,
                 updateDays,
                 isEnd,
+                isUpdated,
             },
             setWebtoons
         );
@@ -110,6 +113,7 @@ const Card: React.FC<WebtoonInfo> = ({
                 <div>{getServiceName(provider)}</div>
                 <div>{fanCount && getFanCount(fanCount)}</div>
             </div>
+            {isUpdated && <div className={styles.update}>UP</div>}
         </div>
     );
 };

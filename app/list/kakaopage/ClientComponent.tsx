@@ -84,6 +84,7 @@ export default function Client2() {
                                 updateDays={webtoon.updateDays}
                                 fanCount={webtoon.fanCount}
                                 isEnd={webtoon.isEnd}
+                                isUpdated={webtoon.isUpdated}
                             />
                         ))
                     )}

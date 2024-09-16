@@ -10,4 +10,5 @@ export interface WebtoonInfo {
     kakaopage?:boolean;
     url?:string;
     isEnd : boolean;
+    isUpdated? : boolean;
 }
