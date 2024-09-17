@@ -60,29 +60,15 @@ const getKakaoPageDataFetch = async () => {
     }
 };
 
-const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-// API Route를 통해 User-Agent 기반 depth 값 가져오기
-const getDepth = async (): Promise<number> => {
-
-    try {
-        const res = await fetch(`http://localhost:3000/api`, {
-            cache: 'no-store', // 매 요청마다 새로 데이터 가져오기
-        });
-        const data = await res.json();
-        return data.depth;
-    } catch (error) {
-        return 0; // 기본값 반환
-    }
-};
 
 const Page = async () => {
     const entire = await getEntireDataFetch();
     const naver = await getNaverDataFetch();
     const kakao = await getKakaoDataFetch();
     const kakaoPage = await getKakaoPageDataFetch();
-    const initialdetph = await getDepth();
-    console.log(initialdetph);
+
+    const initialdepth = 1;
 
     if (
         entire === '에러 발생' ||
@@ -99,25 +85,25 @@ const Page = async () => {
                 list={entire?.webtoons}
                 title="전체 웹툰"
                 address="/list"
-                initialdepth={initialdetph}
+                initialdepth={initialdepth}
             />
             <MainCarousel
                 list={naver?.webtoons}
                 title="네이버 웹툰"
                 address="/list/naver"
-                initialdepth={initialdetph}
+                initialdepth={initialdepth}
             />
             <MainCarousel
                 list={kakao?.webtoons}
                 title="카카오 웹툰"
                 address="/list/kakao"
-                initialdepth={initialdetph}
+                initialdepth={initialdepth}
             />
             <MainCarousel
                 list={kakaoPage?.webtoons}
                 title="카카오페이지 웹툰"
                 address="/list/kakaopage"
-                initialdepth={initialdetph}
+                initialdepth={initialdepth}
             />
         </>
     );
