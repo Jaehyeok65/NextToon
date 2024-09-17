@@ -9,10 +9,12 @@ const MainCarousel = ({
     list,
     title,
     address,
+    initialdepth,
 }: {
     list: any;
     title: string;
     address: string;
+    initialdepth: number;
 }) => {
     return (
         <div className={styles.maincarousel}>
@@ -22,7 +24,7 @@ const MainCarousel = ({
                     <h4>바로가기</h4>
                 </Link>
             </div>
-            <Carousel list={list} />
+            <Carousel list={list} initialdepth={initialdepth} />
         </div>
     );
 };

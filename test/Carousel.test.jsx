@@ -83,7 +83,7 @@ describe('캐러셀 컴포넌트 테스트', () => {
     ];
 
     it('캐러셀 컴포넌트가 정상적으로 렌더링된다.', () => {
-        render(<Carousel list={testlist} />);
+        render(<Carousel list={testlist} initialdepth={4} />);
 
         // 이미지 요소를 찾습니다.
         const imageElement = screen.getByAltText('제목1');
@@ -99,7 +99,7 @@ describe('캐러셀 컴포넌트 테스트', () => {
     it('브라우저의 크기가 600미만일때는 하나의 카드만 렌더링된다.', () => {
         global.innerWidth = 599;
 
-        render(<Carousel list={testlist} />);
+        render(<Carousel list={testlist} initialdepth={1} />);
 
         const titleElement = screen.getByText('제목1');
 
@@ -113,7 +113,7 @@ describe('캐러셀 컴포넌트 테스트', () => {
     it('브라우저의 크기가 600이상 1000미만일때는 두 개의 카드가 렌더링된다.', () => {
         global.innerWidth = 700;
 
-        render(<Carousel list={testlist} />);
+        render(<Carousel list={testlist} initialdepth={2} />);
 
         const titleElement = screen.getByText('제목1');
 
@@ -131,7 +131,7 @@ describe('캐러셀 컴포넌트 테스트', () => {
     it('브라우저의 크기가 1000이상 1400미만일때는 세 개의 카드가 렌더링된다.', () => {
         global.innerWidth = 1100;
 
-        render(<Carousel list={testlist} />);
+        render(<Carousel list={testlist} initialdepth={3} />);
 
         const titleElement = screen.getByText('제목1');
 
@@ -153,7 +153,7 @@ describe('캐러셀 컴포넌트 테스트', () => {
     it('브라우저의 크기가 1400이상 일때는 네 개의 카드가 렌더링된다.', () => {
         global.innerWidth = 1500;
 
-        render(<Carousel list={testlist} />);
+        render(<Carousel list={testlist} initialdepth={4} />);
 
         const titleElement = screen.getByText('제목1');
 
@@ -179,7 +179,7 @@ describe('캐러셀 컴포넌트 테스트', () => {
     it('브라우저의 크기가 600미만일때는 하나의 카드만 렌더링된다.', () => {
         global.innerWidth = 599;
 
-        render(<Carousel list={testlist} />);
+        render(<Carousel list={testlist} initialdepth={1} />);
 
         const titleElement = screen.getByText('제목1');
 
@@ -193,7 +193,7 @@ describe('캐러셀 컴포넌트 테스트', () => {
     it('left 화살표를 클릭하면 캐러셀 컴포넌트의 데이터가 왼쪽으로 한 칸 이동한다.', async () => {
         global.innerWidth = 599;
 
-        render(<Carousel list={testlist} />);
+        render(<Carousel list={testlist} initialdepth={1} />);
 
         const titleElement = screen.getByText('제목1');
 
@@ -213,7 +213,7 @@ describe('캐러셀 컴포넌트 테스트', () => {
     it('right 화살표를 클릭하면 캐러셀 컴포넌트의 데이터가 오른쪽으로 한 칸 이동한다.', async () => {
         global.innerWidth = 599;
 
-        render(<Carousel list={testlist} />);
+        render(<Carousel list={testlist} initialdepth={1} />);
 
         const titleElement = screen.getByText('제목1');
 
@@ -231,7 +231,7 @@ describe('캐러셀 컴포넌트 테스트', () => {
     });
 
     it('handleResize 함수가 windowWidth를 올바르게 설정하는지 확인하며 올바른 depth가 설정되는지 확인한다.', async () => {
-        render(<Carousel list={testlist} />);
+        render(<Carousel list={testlist} initialdepth={1} />);
 
         // window.innerWidth 값을 변경하여 handleResize 함수가 호출되는지 확인
         act(() => {

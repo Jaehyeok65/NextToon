@@ -7,39 +7,38 @@ import { FaArrowRight } from 'react-icons/fa';
 import { FaArrowLeft } from 'react-icons/fa';
 import { WebtoonInfo } from '@/types/type';
 
-const Carousel = ({ list }: { list: any[] }) => {
+const Carousel = ({
+    list,
+    initialdepth,
+}: {
+    list: any[];
+    initialdepth: number;
+}) => {
     const [current, setCurrent] = useState(0); //현재 페이지
-    const [windowWidth, setWindowWidth] = useState(
-        typeof window !== 'undefined' ? window.innerWidth : 0
-    );
-    const [depth, setDepth] = useState(1); //default값을 1
+    const [depth, setDepth] = useState(initialdepth); //default값을 1
     const end = list?.length - 1;
     const lastindex = end - depth + 1;
 
-    const handleResize = () => {
-        setWindowWidth(window.innerWidth);
-    };
-
     useEffect(() => {
-        window.addEventListener('resize', handleResize);
-
-        // 컴포넌트가 언마운트되면 이벤트 리스너를 제거합니다.
-        return () => {
-            window.removeEventListener('resize', handleResize);
+        const handleResize = () => {
+            if (window.innerWidth < 600) {
+                setDepth(1);
+            } else if (window.innerWidth < 1000) {
+                setDepth(2);
+            } else if (window.innerWidth < 1400) {
+                setDepth(3);
+            } else {
+                setDepth(4);
+            }
         };
-    }, []); // 빈 배열을 전달하여 컴포넌트가 처음 마운트될 때만 이펙트가 실행되도록 합니다.
+
+        handleResize(); // 초기 렌더링 시 한 번 실행
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
-        if (windowWidth < 600) {
-            setDepth(1);
-        } else if (windowWidth < 1000) {
-            setDepth(2);
-        } else if (windowWidth < 1400) {
-            setDepth(3);
-        } else {
-            setDepth(4);
-        }
-
         // 5초마다 getNextPage 함수 호출
         const intervalId = setInterval(() => {
             const nextPage = getNextPage(current);
@@ -50,7 +49,7 @@ const Carousel = ({ list }: { list: any[] }) => {
         return () => {
             clearInterval(intervalId);
         };
-    }, [windowWidth, current]);
+    }, [current]);
 
     const getNextPage = (page: number) => {
         return page + depth > lastindex ? 0 : page + depth;
@@ -72,7 +71,11 @@ const Carousel = ({ list }: { list: any[] }) => {
 
     return (
         <div className={styles.carousel}>
-            <button className={styles.button} onClick={handlePrevClick} data-testid="left">
+            <button
+                className={styles.button}
+                onClick={handlePrevClick}
+                data-testid="left"
+            >
                 <FaArrowLeft />
             </button>
             <div className={styles.innercarousel}>
@@ -92,7 +95,11 @@ const Carousel = ({ list }: { list: any[] }) => {
                         />
                     ))}
             </div>
-            <button className={styles.button2} onClick={handleNextClick} data-testid="right">
+            <button
+                className={styles.button2}
+                onClick={handleNextClick}
+                data-testid="right"
+            >
                 <FaArrowRight />
             </button>
         </div>

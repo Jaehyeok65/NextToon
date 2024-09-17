@@ -86,7 +86,7 @@ describe('MainCarousel 컴포넌트 테스트', () => {
     });
     it('MainCarousel 컴포넌트에서 Carousel 컴포넌트가 정상적으로 렌더링된다', () => {
         render(
-            <MainCarousel list={testlist} title="전체 웹툰" address="/list" />
+            <MainCarousel list={testlist} title="전체 웹툰" address="/list" initialdepth={4} />
         );
 
         // 이미지 요소를 찾습니다.
@@ -103,7 +103,7 @@ describe('MainCarousel 컴포넌트 테스트', () => {
 
     it('MainCarousel 컴포넌트를 렌더링할 때 title로 넘겨준 Props가 제대로 렌더링된다.', () => {
         render(
-            <MainCarousel list={testlist} title="전체 웹툰" address="/list" />
+            <MainCarousel list={testlist} title="전체 웹툰" address="/list" initialdepth={4}/>
         );
 
         const titleElement = screen.getByText('전체 웹툰');
@@ -113,7 +113,7 @@ describe('MainCarousel 컴포넌트 테스트', () => {
 
     it('MainCarousel 컴포넌트를 렌더링할 때 address로 넘겨준 Props가 제대로 렌더링된다.', () => {
         render(
-            <MainCarousel list={testlist} title="전체 웹툰" address="/list" />
+            <MainCarousel list={testlist} title="전체 웹툰" address="/list" initialdepth={4}/>
         );
 
         const addressElement = screen.getByRole('link', { name: '바로가기' });
