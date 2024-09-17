@@ -1,4 +1,5 @@
 import { WebtoonInfo } from '@/types/type';
+import { getWebtoonTitle } from '@/app/search/[title]/page';
 
 export const CheckBookMark = (webtoon: WebtoonInfo): boolean => {
     //북마크에 등록되어있는지 확인함
@@ -127,4 +128,31 @@ export const getFanCount = (fanCount: number) => {
     } else {
         return fanCount + '만++';
     }
+};
+
+export const getBookMarkDataUpdate = async (list: WebtoonInfo[]) => {
+    const newList = await Promise.all(
+        list?.map(async (item: WebtoonInfo) => {
+            const data = await getWebtoonTitle(item.title);
+            return data;
+        })
+    );
+
+    const updatedList = list.map((item: WebtoonInfo) => {
+        return {
+            ...item,
+            isUpdated: getisUpdateCheck(item, newList),
+        };
+    });
+
+    return updatedList;
+};
+
+export const getisUpdateCheck = (target: WebtoonInfo, newList: any[]) => {
+    const data = newList.map((item) => item.webtoons).flat();
+    const newdata = data.filter(
+        (item: any) =>
+            item.title === target.title && item.provider === target.provider
+    );
+    return newdata[0]?.isUpdated;
 };

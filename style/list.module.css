@@ -20,15 +20,30 @@
     margin-bottom: 25px;
 }
 
-.bookmarknavigate button {
+.navigatebtn {
     background-color: black; /* 검정색 배경에 잘 어울리는 녹색 버튼 */
     color: white; /* 텍스트 색상 흰색 */
     border: none; /* 테두리 제거 */
     padding: 4px;
     border-radius: 8px; /* 테두리 반경 설정 */
     cursor: pointer; /* 커서 스타일
-     설정 */
+         설정 */
     font-size: 12px; /* 폰트 크기 설정 */
+    width: 100%;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5); /* 흰색 배경에 대비되는 외곽선 추가 */
+    transition: background-color 0.3s, transform 0.3s; /* 부드러운 색상 변경 및 애니메이션 */
+}
+
+.selectedbtn {
+    background-color: blue; /* 검정색 배경에 잘 어울리는 녹색 버튼 */
+    color: white; /* 텍스트 색상 흰색 */
+    border: none; /* 테두리 제거 */
+    padding: 4px;
+    border-radius: 8px; /* 테두리 반경 설정 */
+    cursor: pointer; /* 커서 스타일
+         설정 */
+    font-size: 12px; /* 폰트 크기 설정 */
+    width: 100%;
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5); /* 흰색 배경에 대비되는 외곽선 추가 */
     transition: background-color 0.3s, transform 0.3s; /* 부드러운 색상 변경 및 애니메이션 */
 }
@@ -37,12 +52,6 @@
 .bookmarknavigate button:hover {
     background-color: red; /* 호버 상태에서 배경색 변경 */
     transform: scale(1.05); /* 버튼 크기 확대 효과 */
-}
-
-/* 버튼에 포커스 되었을 때 스타일 추가 */
-.bookmarknavigate button:focus {
-    outline: none; /* 기본 포커스 아웃라인 제거 */
-    background-color: blue; /* 호버 상태에서 배경색 변경 */
 }
 
 .selectbox {

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Card from '@/components/Card';
 import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
+import { getBookMarkDataUpdate } from '@/utils/Bookmark';
 
 const SelectedCategory = [
     '전체보기',
@@ -18,9 +19,19 @@ const SelectedCategory = [
     '정보없음',
 ];
 
+const day: any = {
+    0: '일요웹툰',
+    1: '월요웹툰',
+    2: '화요웹툰',
+    3: '수요웹툰',
+    4: '목요웹툰',
+    5: '금요웹툰',
+    6: '토요웹툰',
+};
+
 export default function ClientComponent() {
     const [webtoons, setWebtoons] = useState<WebtoonInfo[]>();
-    const [category, setCategory] = useState<string>('전체보기');
+    const [category, setCategory] = useState<string>(day[new Date().getDay()]);
     const initialWebtoons = useRef<WebtoonInfo[]>([]); // 초기 전체 웹툰 목록을 저장
 
     useEffect(() => {
@@ -56,7 +67,7 @@ export default function ClientComponent() {
                     url: webtoon.url ?? '',
                     isEnd: webtoon.isEnd ?? false,
                 }));
-                setWebtoons(updatedData);
+                setWebtoons(setCategoryWebtoon(updatedData, category));
                 // 변환된 데이터로 LocalStorage 업데이트
                 initialWebtoons.current = updatedData; // 초기 데이터 저장
                 window.localStorage.setItem(
@@ -65,7 +76,7 @@ export default function ClientComponent() {
                 );
             } else {
                 // 변환이 필요하지 않다면 그대로 사용
-                setWebtoons(parsedData);
+                setWebtoons(setCategoryWebtoon(parsedData, category));
                 initialWebtoons.current = parsedData; // 초기 데이터 저장
             }
         } else {
@@ -77,9 +88,22 @@ export default function ClientComponent() {
 
     useEffect(() => {
         if (initialWebtoons.current) {
-            setWebtoons(setCategoryWebtoon(initialWebtoons.current, category));
+            const fetchData = async () => {
+                await getUpdateData();
+            };
+
+            fetchData();
         }
     }, [category]);
+
+    const getUpdateData = async () => {
+        if (initialWebtoons.current) {
+            const newWebtoons = await getBookMarkDataUpdate(
+                initialWebtoons.current
+            );
+            setWebtoons(setCategoryWebtoon(newWebtoons, category));
+        }
+    };
 
     const setCategoryWebtoon = (
         webtoons: WebtoonInfo[],
@@ -116,9 +140,23 @@ export default function ClientComponent() {
             <div className={styles.background}>
                 <div className={styles.bookmarknavigate}>
                     {SelectedCategory.map((item: string) => (
-                        <button key={item} onClick={() => setCategory(item)}>
-                            {item}
-                        </button>
+                        <div key={item}>
+                            {category === item ? (
+                                <button
+                                    onClick={() => setCategory(item)}
+                                    className={styles.selectedbtn}
+                                >
+                                    {item}
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => setCategory(item)}
+                                    className={styles.navigatebtn}
+                                >
+                                    {item}
+                                </button>
+                            )}
+                        </div>
                     ))}
                 </div>
                 <h2 className={styles.searchcontent}>
@@ -132,9 +170,23 @@ export default function ClientComponent() {
         <div className={styles.background}>
             <div className={styles.bookmarknavigate}>
                 {SelectedCategory.map((item: string) => (
-                    <button key={item} onClick={() => setCategory(item)}>
-                        {item}
-                    </button>
+                    <div key={item}>
+                        {category === item ? (
+                            <button
+                                onClick={() => setCategory(item)}
+                                className={styles.selectedbtn}
+                            >
+                                {item}
+                            </button>
+                        ) : (
+                            <button
+                                onClick={() => setCategory(item)}
+                                className={styles.navigatebtn}
+                            >
+                                {item}
+                            </button>
+                        )}
+                    </div>
                 ))}
             </div>
             <div className={styles.container}>

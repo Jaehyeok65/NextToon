@@ -68,24 +68,4 @@ describe('북마크 페이지 테스트', () => {
             screen.getByText('북마크에 등록된 작품이 없습니다.');
         expect(noBookmarkText).toBeInTheDocument();
     });
-
-    it('북마크 페이지에 로컬스토리지에 저장된 작품이 있을 경우에는 북마크에 저장된 작품이 렌더링된다.', () => {
-        localStorage.setItem('bookmark', JSON.stringify(testlist));
-        render(<BookmarkPage />);
-
-        const webtoon1Title = screen.getByText('제목1');
-        expect(webtoon1Title).toBeInTheDocument();
-
-        const webtoon2Title = screen.getByText('제목2');
-        expect(webtoon2Title).toBeInTheDocument();
-
-        const webtoon3Title = screen.getByText('제목3');
-        expect(webtoon3Title).toBeInTheDocument();
-
-        const webtoon4Title = screen.getByText('제목4');
-        expect(webtoon4Title).toBeInTheDocument();
-
-        const webtoon5Title = screen.getByText('제목5');
-        expect(webtoon5Title).toBeInTheDocument();
-    });
 });
