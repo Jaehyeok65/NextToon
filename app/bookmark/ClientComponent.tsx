@@ -39,48 +39,8 @@ export default function ClientComponent() {
         if (prev) {
             //prev가 null이 아니라는 것은 데이터가 있다는 것
             let parsedData = JSON.parse(prev);
-            // 데이터가 이미 변환된 구조인지 확인
-            const needsTransformation = parsedData.some(
-                (webtoon: any) =>
-                    !webtoon.id ||
-                    !Array.isArray(webtoon.thumbnail) ||
-                    !Array.isArray(webtoon.authors) ||
-                    !webtoon.isUpdated
-            );
-
-            if (needsTransformation) {
-                // 데이터 변환 로직
-                const updatedData = parsedData.map((webtoon: any) => ({
-                    id: webtoon._id,
-                    thumbnail: Array.isArray(webtoon.img)
-                        ? webtoon.img
-                        : [webtoon.img], // thumbnail은 배열로 변환
-                    title: webtoon.title,
-                    authors: Array.isArray(webtoon.author)
-                        ? webtoon.author
-                        : [webtoon.author], // authors는 배열로 변환
-                    provider: webtoon.service,
-                    updateDays: webtoon.updateDays.map((day: string) =>
-                        day.toUpperCase()
-                    ), // updateDays를 대문자로 변환
-                    fanCount: webtoon.fanCount ?? null,
-                    kakaopage: webtoon.kakaopage ?? false,
-                    url: webtoon.url ?? '',
-                    isEnd: webtoon.isEnd ?? false,
-                    isUpdated: webtoon.isUpdated ?? false,
-                }));
-                setWebtoons(setCategoryWebtoon(updatedData, category));
-                // 변환된 데이터로 LocalStorage 업데이트
-                initialWebtoons.current = updatedData; // 초기 데이터 저장
-                window.localStorage.setItem(
-                    'bookmark',
-                    JSON.stringify(updatedData)
-                );
-            } else {
-                // 변환이 필요하지 않다면 그대로 사용
-                setWebtoons(setCategoryWebtoon(parsedData, category));
-                initialWebtoons.current = parsedData; // 초기 데이터 저장
-            }
+            setWebtoons(setCategoryWebtoon(parsedData, category));
+            initialWebtoons.current = parsedData; // 초기 데이터 저장
         } else {
             //prev가 null이라면 빈 배열을 렌더링
             setWebtoons([]);
@@ -99,6 +59,7 @@ export default function ClientComponent() {
     }, [category]);
 
     const getUpdateData = async () => {
+        //북마크에 있는 데이터들을 서버에서 최신화
         if (initialWebtoons.current) {
             const newWebtoons = await getBookMarkDataUpdate(
                 initialWebtoons.current
@@ -108,10 +69,10 @@ export default function ClientComponent() {
     };
 
     const setCategoryWebtoon = (
+        //요일별로 정렬
         webtoons: WebtoonInfo[],
         category: string
     ): WebtoonInfo[] => {
-        console.log(webtoons);
         const filters: { [key: string]: (item: WebtoonInfo) => boolean } = {
             전체보기: () => true,
             정보없음: (item) =>

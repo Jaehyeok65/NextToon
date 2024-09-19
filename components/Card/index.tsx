@@ -50,6 +50,8 @@ const Card: React.FC<WebtoonInfo> = ({
         router.push(`/detail/${title}/${service}`);
     };
 
+    
+
     const onAddClick = (event: React.MouseEvent) => {
         event.stopPropagation();
         AddBookMark({
