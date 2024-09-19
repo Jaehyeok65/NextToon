@@ -1,5 +1,5 @@
 import { WebtoonInfo } from '@/types/type';
-import { getWebtoonTitle } from '@/app/search/[title]/page';
+import { API } from '@/services/API';
 
 export const CheckBookMark = (webtoon: WebtoonInfo): boolean => {
     //북마크에 등록되어있는지 확인함
@@ -129,6 +129,18 @@ export const getFanCount = (fanCount: number) => {
         return fanCount + '만++';
     }
 };
+
+async function getWebtoonTitle(title: string) {
+    try {
+        const res = await fetch(`${API}?keyword=${title}`);
+        if (!res.ok) {
+            throw new Error('Something went wrong');
+        }
+        return res.json();
+    } catch (error) {
+        return '에러 발생';
+    }
+}
 
 export const getBookMarkDataUpdate = async (list: WebtoonInfo[]) => {
     const newList = await Promise.all(

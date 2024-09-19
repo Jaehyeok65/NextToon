@@ -6,7 +6,7 @@ import ErrorComponent from '@/utils/ErrorComponent';
 
 
 
-export async function getWebtoonTitle(title: string) {
+async function getWebtoonTitle(title: string) {
     try {
         const res = await fetch(`${API}?keyword=${title}`);
         if (!res.ok) {
