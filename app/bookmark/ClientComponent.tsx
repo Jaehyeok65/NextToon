@@ -109,18 +109,19 @@ export default function ClientComponent() {
         webtoons: WebtoonInfo[],
         category: string
     ): WebtoonInfo[] => {
+        console.log(webtoons);
         const filters: { [key: string]: (item: WebtoonInfo) => boolean } = {
             전체보기: () => true,
             정보없음: (item) =>
                 item.isEnd === false && item.updateDays.length === 0,
             완결: (item) => item.isEnd === true,
-            월요웹툰: (item) => item.updateDays.includes('MON'),
-            화요웹툰: (item) => item.updateDays.includes('TUE'),
-            수요웹툰: (item) => item.updateDays.includes('WED'),
-            목요웹툰: (item) => item.updateDays.includes('THU'),
-            금요웹툰: (item) => item.updateDays.includes('FRI'),
-            토요웹툰: (item) => item.updateDays.includes('SAT'),
-            일요웹툰: (item) => item.updateDays.includes('SUN'),
+            월요웹툰: (item) => item?.updateDays?.includes('MON'),
+            화요웹툰: (item) => item?.updateDays?.includes('TUE'),
+            수요웹툰: (item) => item?.updateDays?.includes('WED'),
+            목요웹툰: (item) => item?.updateDays?.includes('THU'),
+            금요웹툰: (item) => item?.updateDays?.includes('FRI'),
+            토요웹툰: (item) => item?.updateDays?.includes('SAT'),
+            일요웹툰: (item) => item?.updateDays?.includes('SUN'),
         };
 
         const filterFunction = filters[category];
