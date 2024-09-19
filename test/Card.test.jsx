@@ -31,6 +31,10 @@ window.alert = jest.fn();
 
 const MockSetWebtoons = jest.fn();
 
+const MocksetCategoryWebtoons = jest.fn();
+
+const category = '목요웹툰';
+
 describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 렌더링된다.', () => {
     beforeEach(() => {
         jest.clearAllMocks(); // 모든 Mock 초기화
@@ -117,6 +121,8 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                setCategoryWebtoons={MocksetCategoryWebtoons}
+                category={category}
                 isEnd={false}
             />
         );
@@ -144,6 +150,8 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                setCategoryWebtoons={MocksetCategoryWebtoons}
+                category={category}
                 isEnd={false}
             />
         );
@@ -179,6 +187,8 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                setCategoryWebtoons={MocksetCategoryWebtoons}
+                category={category}
                 isEnd={false}
             />
         );
@@ -209,6 +219,8 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                setCategoryWebtoons={MocksetCategoryWebtoons}
+                category={category}
                 isEnd={false}
             />
         );
@@ -218,7 +230,9 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
         fireEvent.click(TextElement);
 
         await waitFor(() => {
-            expect(pushMock).toHaveBeenCalledWith('/detail/백련성신/KAKAO_PAGE');
+            expect(pushMock).toHaveBeenCalledWith(
+                '/detail/백련성신/KAKAO_PAGE'
+            );
         });
     });
 
@@ -233,6 +247,8 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                setCategoryWebtoons={MocksetCategoryWebtoons}
+                category={category}
                 isEnd={false}
             />
         );
@@ -251,6 +267,8 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                setCategoryWebtoons={MocksetCategoryWebtoons}
+                category={category}
                 isEnd={false}
             />
         );
@@ -269,6 +287,8 @@ describe('카드 컴포넌트에 이미지와 텍스트들이 정상적으로 �
                 fanCount={1234}
                 updateDays={['월']}
                 setWebtoons={MockSetWebtoons}
+                setCategoryWebtoons={MocksetCategoryWebtoons}
+                category={category}
                 isEnd={false}
             />
         );
