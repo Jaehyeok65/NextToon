@@ -60,8 +60,6 @@ const getKakaoPageDataFetch = async () => {
     }
 };
 
-
-
 const Page = async () => {
     const entire = await getEntireDataFetch();
     const naver = await getNaverDataFetch();

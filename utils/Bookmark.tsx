@@ -45,14 +45,19 @@ export const AddBookMark = (webtoon: WebtoonInfo) => {
     }
 };
 
-export const RemoveBookMark = (webtoon: WebtoonInfo, setWebtoons?: any) => {
+export const RemoveBookMark = (
+    webtoon: WebtoonInfo,
+    setWebtoons?: any,
+    setCategoryWebtoons?: any,
+    category?: string
+) => {
     //북마크에서 제거함
     const prev = window.localStorage.getItem('bookmark');
     if (prev) {
         const current: any[] = JSON.parse(prev);
         const next = current.filter((item) => item.id !== webtoon.id);
-        if (setWebtoons) {
-            setWebtoons(next);
+        if (setWebtoons && category && setCategoryWebtoons) {
+            setWebtoons(setCategoryWebtoons(next, category));
         }
         window.localStorage.setItem('bookmark', JSON.stringify(next));
         window.alert('북마크에서 제거되었습니다.');

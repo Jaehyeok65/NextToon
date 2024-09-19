@@ -4,8 +4,6 @@ import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
 import ErrorComponent from '@/utils/ErrorComponent';
 
-
-
 async function getWebtoonTitle(title: string) {
     try {
         const res = await fetch(`${API}?keyword=${title}`);
@@ -20,7 +18,7 @@ async function getWebtoonTitle(title: string) {
 
 export default async function Page({ params }: { params: { title: string } }) {
     const data = await getWebtoonTitle(params.title);
-    
+
     if (data === '에러 발생') {
         return <ErrorComponent />;
     }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import styles from '@/style/card.module.css';
-import { WebtoonInfo } from '@/types/type';
+import { CardInfo } from '@/types/type';
 import { FaRegHeart } from 'react-icons/fa6';
 import { FaHeart } from 'react-icons/fa6';
 import {
@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation';
 import { getServiceName } from '@/utils/Bookmark';
 import { getSerialDay } from '@/utils/Bookmark';
 
-const Card: React.FC<WebtoonInfo> = ({
+const Card: React.FC<CardInfo> = ({
     thumbnail,
     title,
     authors,
@@ -27,6 +27,8 @@ const Card: React.FC<WebtoonInfo> = ({
     fanCount,
     isEnd,
     isUpdated,
+    category,
+    setCategoryWebtoons,
 }) => {
     const [isBookMark, setIsBookMark] = useState<boolean>(false); //카드가 북마크에 등록되어 있는지 확인
     const router = useRouter();
@@ -49,8 +51,6 @@ const Card: React.FC<WebtoonInfo> = ({
     const onDetailNavigation = (title: string, service: string) => {
         router.push(`/detail/${title}/${service}`);
     };
-
-    
 
     const onAddClick = (event: React.MouseEvent) => {
         event.stopPropagation();
@@ -82,7 +82,9 @@ const Card: React.FC<WebtoonInfo> = ({
                 isEnd,
                 isUpdated,
             },
-            setWebtoons
+            setWebtoons,
+            setCategoryWebtoons,
+            category
         );
         setIsBookMark((prev) => !prev);
     };

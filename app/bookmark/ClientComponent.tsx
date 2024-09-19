@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Card from '@/components/Card';
 import styles from '@/style/list.module.css';
-import { WebtoonInfo } from '@/types/type';
+import { CardInfo } from '@/types/type';
 import { getBookMarkDataUpdate } from '@/utils/Bookmark';
 
 const SelectedCategory = [
@@ -30,50 +30,44 @@ const day: any = {
 };
 
 export default function ClientComponent() {
-    const [webtoons, setWebtoons] = useState<WebtoonInfo[]>();
+    const [webtoons, setWebtoons] = useState<CardInfo[]>();
     const [category, setCategory] = useState<string>(day[new Date().getDay()]);
-    const initialWebtoons = useRef<WebtoonInfo[]>([]); // 초기 전체 웹툰 목록을 저장
+    const initialWebtoons = useRef<CardInfo[]>([]); // 초기 전체 웹툰 목록을 저장
 
     useEffect(() => {
-        const prev = window.localStorage.getItem('bookmark');
-        if (prev) {
-            //prev가 null이 아니라는 것은 데이터가 있다는 것
-            let parsedData = JSON.parse(prev);
-            setWebtoons(setCategoryWebtoon(parsedData, category));
-            initialWebtoons.current = parsedData; // 초기 데이터 저장
-        } else {
-            //prev가 null이라면 빈 배열을 렌더링
-            setWebtoons([]);
-            initialWebtoons.current = []; // 초기 데이터 저장
-        }
-    }, []);
+        const fetchData = async () => {
+            const prev = window.localStorage.getItem('bookmark');
+            let parsedData = [];
 
-    useEffect(() => {
-        if (initialWebtoons.current) {
-            const fetchData = async () => {
-                await getUpdateData();
-            };
+            if (prev) {
+                // prev가 null이 아니라는 것은 데이터가 있다는 것
+                parsedData = JSON.parse(prev);
+                initialWebtoons.current = parsedData; // 초기 데이터 저장
+            } else {
+                // prev가 null이라면 빈 배열로 처리
+                initialWebtoons.current = []; // 초기 데이터 저장
+            }
 
-            fetchData();
-        }
+            // 서버에서 최신 데이터 가져오기
+            if (initialWebtoons.current?.length > 0) {
+                const newWebtoons = await getBookMarkDataUpdate(
+                    initialWebtoons.current
+                );
+                setWebtoons(setCategoryWebtoons(newWebtoons, category));
+            } else {
+                setWebtoons([]); // 데이터가 없는 경우 빈 배열 설정
+            }
+        };
+
+        fetchData();
     }, [category]);
 
-    const getUpdateData = async () => {
-        //북마크에 있는 데이터들을 서버에서 최신화
-        if (initialWebtoons.current) {
-            const newWebtoons = await getBookMarkDataUpdate(
-                initialWebtoons.current
-            );
-            setWebtoons(setCategoryWebtoon(newWebtoons, category));
-        }
-    };
-
-    const setCategoryWebtoon = (
+    const setCategoryWebtoons = (
         //요일별로 정렬
-        webtoons: WebtoonInfo[],
+        webtoons: CardInfo[],
         category: string
-    ): WebtoonInfo[] => {
-        const filters: { [key: string]: (item: WebtoonInfo) => boolean } = {
+    ): CardInfo[] => {
+        const filters: { [key: string]: (item: CardInfo) => boolean } = {
             전체보기: () => true,
             정보없음: (item) =>
                 item.isEnd === false && item.updateDays.length === 0,
@@ -154,7 +148,7 @@ export default function ClientComponent() {
                 ))}
             </div>
             <div className={styles.container}>
-                {webtoons?.map((webtoon: WebtoonInfo) => (
+                {webtoons?.map((webtoon: CardInfo) => (
                     <Card
                         key={webtoon.id}
                         id={webtoon.id}
@@ -163,6 +157,8 @@ export default function ClientComponent() {
                         authors={webtoon.authors}
                         provider={webtoon.provider}
                         setWebtoons={setWebtoons}
+                        setCategoryWebtoons={setCategoryWebtoons}
+                        category={category}
                         updateDays={webtoon.updateDays}
                         fanCount={webtoon.fanCount}
                         isEnd={webtoon.isEnd}
