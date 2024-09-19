@@ -44,7 +44,8 @@ export default function ClientComponent() {
                 (webtoon: any) =>
                     !webtoon.id ||
                     !Array.isArray(webtoon.thumbnail) ||
-                    !Array.isArray(webtoon.authors)
+                    !Array.isArray(webtoon.authors) ||
+                    !webtoon.isUpdated
             );
 
             if (needsTransformation) {
@@ -66,6 +67,7 @@ export default function ClientComponent() {
                     kakaopage: webtoon.kakaopage ?? false,
                     url: webtoon.url ?? '',
                     isEnd: webtoon.isEnd ?? false,
+                    isUpdated: webtoon.isUpdated ?? false,
                 }));
                 setWebtoons(setCategoryWebtoon(updatedData, category));
                 // 변환된 데이터로 LocalStorage 업데이트
