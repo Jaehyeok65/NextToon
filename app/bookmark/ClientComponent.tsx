@@ -5,6 +5,17 @@ import Card from '@/components/Card';
 import styles from '@/style/list.module.css';
 import { CardInfo } from '@/types/type';
 import { getBookMarkDataUpdate } from '@/utils/Bookmark';
+import Navigate from '@/components/Navigate';
+
+const day: any = {
+    0: '일요웹툰',
+    1: '월요웹툰',
+    2: '화요웹툰',
+    3: '수요웹툰',
+    4: '목요웹툰',
+    5: '금요웹툰',
+    6: '토요웹툰',
+};
 
 const SelectedCategory = [
     '전체보기',
@@ -18,16 +29,6 @@ const SelectedCategory = [
     '완결',
     '정보없음',
 ];
-
-const day: any = {
-    0: '일요웹툰',
-    1: '월요웹툰',
-    2: '화요웹툰',
-    3: '수요웹툰',
-    4: '목요웹툰',
-    5: '금요웹툰',
-    6: '토요웹툰',
-};
 
 export default function ClientComponent() {
     const [webtoons, setWebtoons] = useState<CardInfo[]>();
@@ -96,27 +97,12 @@ export default function ClientComponent() {
     if (webtoons?.length === 0) {
         return (
             <div className={styles.background}>
-                <div className={styles.bookmarknavigate}>
-                    {SelectedCategory.map((item: string) => (
-                        <div key={item}>
-                            {category === item ? (
-                                <button
-                                    onClick={() => setCategory(item)}
-                                    className={styles.selectedbtn}
-                                >
-                                    {item}
-                                </button>
-                            ) : (
-                                <button
-                                    onClick={() => setCategory(item)}
-                                    className={styles.navigatebtn}
-                                >
-                                    {item}
-                                </button>
-                            )}
-                        </div>
-                    ))}
-                </div>
+                <Navigate
+                    category={category}
+                    setCategory={setCategory}
+                    SelectedCategory={SelectedCategory}
+                    bookmark={true}
+                />
                 <h2 className={styles.searchcontent}>
                     북마크에 등록된 작품이 없습니다.
                 </h2>
@@ -126,27 +112,12 @@ export default function ClientComponent() {
 
     return (
         <div className={styles.background}>
-            <div className={styles.bookmarknavigate}>
-                {SelectedCategory.map((item: string) => (
-                    <div key={item}>
-                        {category === item ? (
-                            <button
-                                onClick={() => setCategory(item)}
-                                className={styles.selectedbtn}
-                            >
-                                {item}
-                            </button>
-                        ) : (
-                            <button
-                                onClick={() => setCategory(item)}
-                                className={styles.navigatebtn}
-                            >
-                                {item}
-                            </button>
-                        )}
-                    </div>
-                ))}
-            </div>
+            <Navigate
+                category={category}
+                setCategory={setCategory}
+                SelectedCategory={SelectedCategory}
+                bookmark={true}
+            />
             <div className={styles.container}>
                 {webtoons?.map((webtoon: CardInfo) => (
                     <Card

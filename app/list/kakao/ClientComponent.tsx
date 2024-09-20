@@ -10,8 +10,32 @@ import { WebtoonInfo } from '@/types/type';
 import useScroll from '@/hooks/useScroll';
 import { usePathname } from 'next/navigation';
 import Error from '@/utils/ErrorComponent';
+import Navigate from '@/components/Navigate';
+
+const day: any = {
+    0: '일요웹툰',
+    1: '월요웹툰',
+    2: '화요웹툰',
+    3: '수요웹툰',
+    4: '목요웹툰',
+    5: '금요웹툰',
+    6: '토요웹툰',
+};
+
+const SelectedCategory = [
+    '전체보기',
+    '월요웹툰',
+    '화요웹툰',
+    '수요웹툰',
+    '목요웹툰',
+    '금요웹툰',
+    '토요웹툰',
+    '일요웹툰',
+];
 
 export default function Client2() {
+    const [category, setCategory] = useState<string>(day[new Date().getDay()]);
+
     const {
         fetchNextPage,
         hasNextPage,
@@ -22,9 +46,9 @@ export default function Client2() {
         error,
         refetch,
     } = useInfiniteQuery({
-        queryKey: ['kakaowebtoon'],
+        queryKey: ['kakaowebtoon', category],
         queryFn: ({ pageParam = 1 }) => {
-            return getServiceWebtoonList(pageParam, 'KAKAO');
+            return getServiceWebtoonList(pageParam, 'KAKAO', category);
         },
         getNextPageParam: (lastPage, allPages) => {
             if (lastPage?.webtoons?.length < 12) {
@@ -70,6 +94,11 @@ export default function Client2() {
     return (
         <>
             <div className={styles.background}>
+                <Navigate
+                    category={category}
+                    setCategory={setCategory}
+                    SelectedCategory={SelectedCategory}
+                />
                 <div className={styles.container}>
                     {data?.pages.map((page: any) =>
                         page?.webtoons?.map((webtoon: WebtoonInfo) => (
