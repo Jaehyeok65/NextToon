@@ -1,13 +1,13 @@
 .navigate {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    grid-template-columns: repeat(8, 1fr);
     gap: 20px;
     margin-bottom: 25px;
 }
 
 .bookmarknavigate {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    grid-template-columns: repeat(10, 1fr);
     gap: 20px;
     margin-bottom: 25px;
 }
@@ -46,8 +46,17 @@
     transform: scale(1.05); /* 버튼 크기 확대 효과 */
 }
 
+.navigate button:hover {
+    background-color: red; /* 호버 상태에서 배경색 변경 */
+    transform: scale(1.05); /* 버튼 크기 확대 효과 */
+}
+
 @media screen and (max-width: 1000px) {
     .bookmarknavigate {
-        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .navigate {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
