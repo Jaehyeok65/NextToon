@@ -64,6 +64,51 @@ export const RemoveBookMark = (
     }
 };
 
+export const onResetBookmark = () => {
+    const prev = localStorage.getItem('bookmark');
+
+    if (prev) {
+        const current = JSON.parse(prev); //파싱
+        if (Array.isArray(current) && current.length > 0) {
+            //배열이며 길이가 0이상이라면
+            const propertyCheck = current.every(
+                //모든 조건을 만족해야만 true를 반환 즉 하나라도 만족하지 못한다면 false 반환
+                (item: any) =>
+                    item.id &&
+                    item.authors &&
+                    item.provider &&
+                    item.title &&
+                    item.updateDays &&
+                    item.thumbnail &&
+                    item.isEnd !== undefined &&
+                    item.isEnd !== null &&
+                    item.isUpdated !== undefined &&
+                    item.isUpdated !== null
+            );
+
+            if (!propertyCheck) {
+                // 속성을 만족하지 못함
+                const newArray = current.filter(
+                    //유효한 속성을 가진 함수들만 필터링
+                    (item: any) =>
+                        item.id &&
+                        item.authors &&
+                        item.provider &&
+                        item.title &&
+                        item.updateDays &&
+                        item.thumbnail &&
+                        item.isEnd !== undefined &&
+                        item.isEnd !== null &&
+                        item.isUpdated !== undefined &&
+                        item.isUpdated !== null
+                );
+
+                localStorage.setItem('bookmark', JSON.stringify(newArray));
+            }
+        }
+    }
+};
+
 export const getServiceName = (service: string) => {
     switch (service) {
         case 'NAVER':

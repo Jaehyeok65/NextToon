@@ -70,7 +70,7 @@ export default function ClientComponent() {
         const filters: { [key: string]: (item: CardInfo) => boolean } = {
             전체보기: () => true,
             정보없음: (item) =>
-                item.isEnd === false && item.updateDays.length === 0,
+                item?.isEnd === false && item?.updateDays?.length === 0,
             완결: (item) => item.isEnd === true,
             월요웹툰: (item) => item?.updateDays?.includes('MON'),
             화요웹툰: (item) => item?.updateDays?.includes('TUE'),
@@ -82,7 +82,7 @@ export default function ClientComponent() {
         };
 
         const filterFunction = filters[category];
-        return filterFunction ? webtoons.filter(filterFunction) : [];
+        return filterFunction ? webtoons?.filter(filterFunction) : [];
     };
 
     if (!webtoons) {
