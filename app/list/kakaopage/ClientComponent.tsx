@@ -31,12 +31,12 @@ const SelectedCategory = [
     '금요웹툰',
     '토요웹툰',
     '일요웹툰',
-    '완결',
-    '정보없음',
 ];
 
 export default function Client2() {
     const [category, setCategory] = useState<string>(day[new Date().getDay()]);
+
+    console.log(category);
 
     const {
         fetchNextPage,
