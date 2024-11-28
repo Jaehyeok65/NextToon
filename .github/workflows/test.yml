@@ -1,9 +1,9 @@
-name: CI and Deploy
+name: CI and Create PR
 
 on:
   push:
     branches:
-      - main
+      - develop  # develop 브랜치에 푸시가 발생할 때 실행
 
 jobs:
   test:
@@ -18,29 +18,31 @@ jobs:
           node-version: '18.2'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Run tests
         run: npm test
 
-  deploy:
-    needs: test
+  create-pr:
+    needs: test  # 테스트가 성공해야만 실행
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'  # develop 브랜치에서만 실행
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
         with:
-          node-version: '18.2'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Deploy to Vercel
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: npx vercel --token $VERCEL_TOKEN --prod
+          ref: main
+      - name: Reset master branch
+        run: |
+          git fetch origin develop:develop
+          git reset --hard develop
+        
+      - name: Create Pull Request to main
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.PULL_REQUEST }}
+          commit-message: "Merge develop into main"
+          branch: temp
+          delete-branch: true
+          title: "Auto-PR: Merge develop into main"
+          body: "This PR was automatically created by GitHub Actions after a successful test run on the develop branch."
