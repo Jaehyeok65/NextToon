@@ -11,6 +11,12 @@ const CategoryToEng: any = {
     일요웹툰: 'SUN',
 };
 
+const Provider : any = {
+    kakao : 'KAKAO',
+    naver : 'NAVER',
+    kakaopage : 'KAKAO_PAGE'
+};
+
 export const getWebtoonList = async (page: number, updateDays?: string) => {
     if (updateDays) {
         updateDays = CategoryToEng[updateDays];
@@ -45,6 +51,9 @@ export const getServiceWebtoonList = async (
 ) => {
     if (updateDays) {
         updateDays = CategoryToEng[updateDays];
+    }
+    if (provider) {
+        provider = Provider[provider];
     }
     try {
         const res = updateDays
