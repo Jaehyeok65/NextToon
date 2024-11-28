@@ -1,14 +1,17 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getServiceWebtoonList } from '@/services/API';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import useObserver from '@/hooks/useObserver';
 import Card from '@/components/Card';
 import Skeleton from '@/utils/Skeleton';
 import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
 import useScroll from '@/hooks/useScroll';
+import { usePathname } from 'next/navigation';
 import Error from '@/utils/ErrorComponent';
 import Navigate from '@/components/Navigate';
-import { useWebtoonList } from './hooks/useWebtoosList';
+import { useWebtoonList } from '../../hooks/useWebtoosList';
 
 const day: any = {
     0: '일요웹툰',
@@ -31,22 +34,21 @@ const SelectedCategory = [
     '일요웹툰',
 ];
 
-export default function Client2() {
+export default function Client2({ service }: { service: string }) {
     const [category, setCategory] = useState<string>(day[new Date().getDay()]);
 
     const {
         webtoons,
         hasNextPage,
         fetchNextPage,
-        isError,
         isFetchingNextPage,
         isPending,
-        refetch,
+        isError,
         error,
-    } = useWebtoonList({ category });
+        refetch,
+    } = useWebtoonList({ service, category });
 
     const ref = useObserver(hasNextPage, fetchNextPage);
-
     useScroll();
 
     if (isError) {
