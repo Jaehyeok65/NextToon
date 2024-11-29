@@ -104,8 +104,12 @@ describe('List Page 테스트', () => {
             </RenderWithQuery>
         );
 
+        jest.useFakeTimers();
+
         // fireEvent로 사용자 이벤트를 트리거합니다
         fireEvent.scroll(window, { target: { scrollY: 200 } });
+
+        jest.runAllTimers();
 
         await waitFor(() => {
             expect(JSON.parse(sessionStorage.getItem('list_scroll'))).toEqual(

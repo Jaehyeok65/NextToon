@@ -1,14 +1,11 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { getServiceWebtoonList } from '@/services/API';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import useObserver from '@/hooks/useObserver';
 import Card from '@/components/Card';
 import Skeleton from '@/utils/Skeleton';
 import styles from '@/style/list.module.css';
 import { WebtoonInfo } from '@/types/type';
 import useScroll from '@/hooks/useScroll';
-import { usePathname } from 'next/navigation';
 import Error from '@/utils/ErrorComponent';
 import Navigate from '@/components/Navigate';
 import { useWebtoonList } from '../../hooks/useWebtoosList';
@@ -34,7 +31,7 @@ const SelectedCategory = [
     '일요웹툰',
 ];
 
-export default function Client2({ service }: { service: string }) {
+export default function ClientComponent({ service }: { service: string }) {
     const [category, setCategory] = useState<string>(day[new Date().getDay()]);
 
     const {
