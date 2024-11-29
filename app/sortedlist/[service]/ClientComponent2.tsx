@@ -33,15 +33,6 @@ export default function ClientComponent({
         }
     }, [data]);
 
-    useEffect(() => {
-        if (scroll) {
-            //scrorll이 0임을 방지
-            window.sessionStorage.setItem(
-                `sortedlist/${service}_scroll`,
-                scroll.toString()
-            );
-        }
-    }, [scroll, service]);
 
     useEffect(() => {
         const scrolly = window.sessionStorage.getItem(
