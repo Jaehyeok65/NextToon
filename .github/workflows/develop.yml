@@ -1,14 +1,10 @@
-name: CI and PR Creation & Deploy
+name: CI and PR Creation
 
 on:
   push:
     branches:
       - develop  # develop 브랜치에 푸시가 발생할 때 실행
-  pull_request:
-    branches:
-      - main  # main 브랜치에 PR이 병합될 때 실행
-    types:
-      - closed  # PR이 병합되거나 닫힐 때 트리거
+
 
 jobs:
   test:
@@ -54,25 +50,3 @@ jobs:
           title: "Auto-PR: Merge develop into main"
           body: "This PR was automatically created by GitHub Actions after a successful test run on the develop branch."
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: create-pr  # PR이 생성되어야만 실행
-    if: github.event.pull_request.merged == true  # PR이 병합되고, base 브랜치가 main일 때만 실행
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.2'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Deploy to Vercel
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: npx vercel --token $VERCEL_TOKEN --prod
