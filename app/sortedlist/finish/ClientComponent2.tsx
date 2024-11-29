@@ -24,15 +24,6 @@ export default function ClientComponent({
         }
     }, [data]);
 
-    useEffect(() => {
-        if (scroll) {
-            //scrorll이 0임을 방지
-            window.sessionStorage.setItem(
-                `sortedlist/finish_scroll`,
-                scroll.toString()
-            );
-        }
-    }, [scroll]);
 
     useEffect(() => {
         const scrolly = window.sessionStorage.getItem(
