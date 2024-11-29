@@ -1,5 +1,5 @@
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import ClientComponent from '@/app/list/kakaopage/ClientComponent';
+import ClientComponent from '@/app/list/[service]/components/ClientComponent';
 import { RenderWithQuery } from '../utils/RenderWithQuery';
 import { usePathname } from 'next/navigation';
 
@@ -29,12 +29,13 @@ describe('List Page 테스트', () => {
             disconnect,
         });
         window.IntersectionObserver = mockIntersectionObserver;
+        usePathname.mockReturnValue('/list/kakaopage');
     });
 
     it('List Page 초기 렌더링 및 모킹 테스트', async () => {
         render(
             <RenderWithQuery>
-                <ClientComponent />
+                <ClientComponent service="kakaopage" />
             </RenderWithQuery>
         );
 
@@ -46,7 +47,7 @@ describe('List Page 테스트', () => {
     it('InterSection Observer API를 사용해 관찰자를 등록하여 임계점에 도달하면 다음 API 호출이 이루어진다.', async () => {
         render(
             <RenderWithQuery>
-                <ClientComponent />
+                <ClientComponent service="kakaopage" />
             </RenderWithQuery>
         );
 
@@ -67,7 +68,7 @@ describe('List Page 테스트', () => {
     it('클라이언트 컴포넌트에서 마지막으로 리턴된 배열의 길이가 12미만이라면 더 이상 추가적인 호출이 이루어지지 않는다.', async () => {
         render(
             <RenderWithQuery>
-                <ClientComponent />
+                <ClientComponent service="kakaopage" />
             </RenderWithQuery>
         );
 
@@ -92,37 +93,36 @@ describe('List Page 테스트', () => {
     });
 
     it('브라우저 환경에서 스크롤시 세션 스토리지에 스크롤 위치가 저장된다.', async () => {
-        usePathname.mockReturnValue('kakaoPagelist');
         render(
             <RenderWithQuery>
-                <ClientComponent />
+                <ClientComponent service="kakaopage" />
             </RenderWithQuery>
         );
+        jest.useFakeTimers();
 
         // fireEvent로 사용자 이벤트를 트리거합니다
         fireEvent.scroll(window, { target: { scrollY: 200 } });
 
-        await waitFor(() => {
-            expect(
-                JSON.parse(sessionStorage.getItem('kakaoPagelist_scroll'))
-            ).toEqual(200);
-        });
+        jest.runAllTimers();
+
+        expect(
+            JSON.parse(sessionStorage.getItem('/list/kakaopage_scroll'))
+        ).toEqual(200);
     });
 
     it('세션 스토리지에 저장된 스크롤 위치가 있을 시 렌더링 시에 스크롤 위치가 복원된다.', () => {
-        usePathname.mockReturnValue('kakaoPagelist');
-        sessionStorage.setItem('kakaoPagelist_scroll', '200');
+        sessionStorage.setItem('/list/kakaopage_scroll', '200');
 
         render(
             <RenderWithQuery>
-                <ClientComponent />
+                <ClientComponent service="kakaopage" />
             </RenderWithQuery>
         );
 
         expect(window.scrollTo).toHaveBeenCalled();
 
         expect(
-            JSON.parse(sessionStorage.getItem('kakaoPagelist_scroll'))
+            JSON.parse(sessionStorage.getItem('/list/kakaopage_scroll'))
         ).toEqual(200);
     });
 });
