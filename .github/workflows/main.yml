@@ -1,16 +1,13 @@
 name: CI and Deploy
 
 on:
-  pull_request:
+  push:
     branches:
-      - main  # main 브랜치에 PR이 병합될 때 실행
-    types:
-      - closed  # PR이 병합되거나 닫힐 때 트리거
+      - main  # main 브랜치에 푸시가 발생할 때 실행
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true  # PR이 병합되었을 때만 실행
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
