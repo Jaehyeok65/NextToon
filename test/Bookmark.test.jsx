@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import BookmarkPage from '@/app/bookmark/page'; // 북마크 페이지 파일 경로
 
-
 // useRouter 모의 설정
 jest.mock('next/navigation', () => ({
     useRouter: jest.fn(),
@@ -58,7 +57,7 @@ const testlist = [
         updateDays: ['월'],
         isEnd: false,
     },
-]
+];
 
 describe('북마크 페이지 테스트', () => {
     it('북마크 페이지에 로컬스토리지에 저장된 작품이 없을 때는 "북마크에 등록된 작품이 없습니다." 텍스트가 렌더링된다.', () => {
