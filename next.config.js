@@ -32,6 +32,7 @@ const nextConfig = {
                 : process.env.NODE_ENV === 'test'
                 ? 'http://localhost:9090'
                 : 'https://korea-webtoon-api-cc7dda2f0d77.herokuapp.com/webtoons',
+        TZ: 'Asia/Seoul',
     },
 };
 
