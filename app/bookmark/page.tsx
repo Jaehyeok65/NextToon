@@ -1,4 +1,4 @@
-import ClientComponent from './ClientComponent';
+import ClientComponent from './components/ClientComponent';
 
 export const metadata = {
     title: 'NextToon | 북마크',

@@ -4,9 +4,8 @@ import Card from '@/components/Card';
 import styles from '@/style/list.module.css';
 import { CardInfo } from '@/types/type';
 import Navigate from '@/components/Navigate';
-import { useBookmarkWebtoons } from './hooks/useBookmarkWebtoons';
-import { useBookmarkCategory } from './hooks/useBookmarkCategory';
-
+import { useBookmarkWebtoons } from '../hooks/useBookmarkWebtoons';
+import { useBookmarkCategory } from '../hooks/useBookmarkCategory';
 
 export default function ClientComponent() {
     const { category, setCategory, setCategoryWebtoons, SelectedCategory } =
