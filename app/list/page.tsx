@@ -18,11 +18,12 @@ const day: any = {
 
 export default async function page() {
     const category = day[new Date().getDay()];
+    const timeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone;
     const dehydratedState = await preFetchData({ category });
 
     return (
         <HydrationBoundary state={dehydratedState}>
-            <ClientComponent />
+            <ClientComponent timezone={timeZone}/>
         </HydrationBoundary>
     );
 }
