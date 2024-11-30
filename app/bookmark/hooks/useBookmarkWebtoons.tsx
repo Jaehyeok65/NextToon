@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { CardInfo } from '@/types/type';
-import { useBookmarkCategory } from './useBookmarkCategory';
 import { getBookMarkDataUpdate } from '@/utils/Bookmark';
 
 interface useBookmarkWebtoonsProps {
