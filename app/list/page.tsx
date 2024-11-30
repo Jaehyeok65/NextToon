@@ -1,6 +1,7 @@
 import { HydrationBoundary } from '@tanstack/react-query';
 import ClientComponent from './ClientComponent';
 import { preFetchData } from './util/preFetchData';
+import { preFetchCategory } from './util/preFetchCategory';
 
 export const metadata = {
     title: 'NextToon | 전체보기',
@@ -17,13 +18,12 @@ const day: any = {
 };
 
 export default async function page() {
-    const category = day[new Date().getDay()];
-    const timeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const category = preFetchCategory();
     const dehydratedState = await preFetchData({ category });
 
     return (
         <HydrationBoundary state={dehydratedState}>
-            <ClientComponent timezone={timeZone}/>
+            <ClientComponent />
         </HydrationBoundary>
     );
 }
