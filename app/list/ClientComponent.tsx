@@ -12,8 +12,9 @@ import { useWebtoonList } from './hooks/useWebtoosList';
 import { useCategory } from './hooks/useCategory';
 
 
-export default function Client2() {
+export default function Client2( { timezone} : { timezone : string}) {
     const { category, setCategory, SelectedCategory } = useCategory();
+    console.log(timezone);
 
     const {
         webtoons,
