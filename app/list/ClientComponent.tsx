@@ -15,6 +15,8 @@ import { useCategory } from './hooks/useCategory';
 export default function Client2() {
     const { category, setCategory, SelectedCategory } = useCategory();
 
+    console.log(category);
+
     const {
         webtoons,
         hasNextPage,

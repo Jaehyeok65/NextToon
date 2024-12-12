@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import moment from 'moment-timezone';
 
 const day: any = {
     0: '일요웹툰',
@@ -22,7 +23,6 @@ const SelectedCategory = [
 ];
 
 export const useCategory = () => {
-    const [category, setCategory] = useState<string>(day[new Date().getDay()]);
-
+    const [category, setCategory] = useState<string>(day[moment.tz('Asia/Seoul').day()]);
     return { category, setCategory, SelectedCategory };
 };
